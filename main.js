@@ -1,6 +1,9 @@
 console.log("Helloooo")
+let activities = []
 
 const results = document.getElementById("results");
+const provinceFilter = document.getElementById("provincefilter")
+const priceFilter = document.getElementById("pricefilter")
 
 async function searchActivities () {
   const params = new URLSearchParams({
@@ -21,13 +24,13 @@ async function searchActivities () {
   return response.json();
 }
 
-const data = await searchActivities ()
-console.log(data)
+//const data = await searchActivities ()
+//console.log(data)
 
 
 
 function showResult (activities) {
-    //results.innerHTML = ""
+    results.innerHTML = ""
     if (activities.length === 0) {
             results.innerHTML ="<p>inget hittat</p>"
             return
@@ -50,7 +53,28 @@ function showResult (activities) {
 
 }
 
-showResult(data.payload)
 
-console.log(data.payload[0])
+
+try {
+  const data = await searchActivities ()
+  console.log(data.payload);
+  showResult(data.payload);
+  console.log(data.payload[0])
+
+} catch(error) {
+  console.error(error);
+  results.innerHTML = `<p>${error.message}</p>`
+}
+
+
+provinceFilter.addEventListener("change", ()=> {
+  const value = provinceFilter.value;
+
+  if (value === "Alla") {
+    showResult(activities);
+  } else {
+    const filtered = activities.filter(a => a.province === value);
+    showResult(filtered)
+  }
+});
 
