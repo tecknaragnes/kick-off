@@ -2,7 +2,7 @@ console.log("Helloooo")
 
 const results = document.getElementById("results");
 
-async function searchActivities() {
+async function searchActivities () {
   const params = new URLSearchParams({
     controller: "establishment",
     method: "getall",
@@ -26,14 +26,14 @@ console.log(data)
 
 
 
-function showResult (searchActivities) {
+function showResult (activities) {
     //results.innerHTML = ""
-    if (searchActivities.length === 0) {
+    if (activities.length === 0) {
             results.innerHTML ="<p>inget hittat</p>"
             return
     } 
 
-    for (const activity of searchActivities) {
+    for (const activity of activities) {
         const article = document.createElement("article");
 
         article.innerHTML = `
@@ -51,3 +51,6 @@ function showResult (searchActivities) {
 }
 
 showResult(data.payload)
+
+console.log(data.payload[0])
+
