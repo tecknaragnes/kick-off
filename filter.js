@@ -19,7 +19,7 @@ async function fetchActivities () {
   const params = new URLSearchParams({
     controller: "establishment",
     method: "getall",
-    api_key: "2rJ8Mq3V",
+    api_key: window.APIKEY,
     types: types.join(","),
     descriptions: descriptions.join(","),
     //provinces: provinces.join(","),
