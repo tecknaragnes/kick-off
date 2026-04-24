@@ -2,12 +2,14 @@
 console.log("Helloooo")
 let allActivities = []
 
-const results = document.getElementById("results");
+const results = document.querySelector(".results");
+const search = document.querySelector(".search")
 const provinceFilter = document.getElementById("provincefilter");
 const priceFilter = document.getElementById("pricefilter");
 const bowlingCheckbox = document.getElementById("Bowling");
 const GokartCheckbox = document.getElementById("Gokart");
 const GolfCheckbox = document.getElementById("Golf");
+const searchBtn = document.querySelector(".search-btn")
 
 
 
@@ -137,3 +139,42 @@ GokartCheckbox.addEventListener("change", () => {
 GolfCheckbox.addEventListener("change", () => {
   filterByCheckboxes();
 });
+
+
+//sök för name, description och city endast, får fylla på resten
+
+function applyFilters () {
+  const searchText = search.value.trim().toLowerCase();
+
+  if(searchText === "") {      
+    renderActivities(allActivities);
+    return;
+    }
+
+    const filteredActivities = allActivities.filter((activity) => {
+      const name = (activity.name ?? "").toLowerCase();
+      const description = (activity.description ?? "").toLowerCase();
+      const city = (activity.city ?? "").toLowerCase();
+
+      const matchesSearch = 
+      name.includes(searchText) ||
+      description.includes(searchText) ||
+      city.includes(searchText);
+
+      return matchesSearch;
+    });
+
+    renderActivities(filteredActivities);
+
+    
+  }
+
+  search.addEventListener("input", applyFilters);
+  searchBtn.addEventListener("click", applyFilters);
+  
+  
+
+
+//search.addEventListener("search", (e) => {
+  
+//})
