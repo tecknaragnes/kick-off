@@ -1,14 +1,20 @@
+//Lowkey filter.js
 console.log("Helloooo")
 let allActivities = []
 
 const results = document.getElementById("results");
-const provinceFilter = document.getElementById("provincefilter")
-const priceFilter = document.getElementById("pricefilter")
+const provinceFilter = document.getElementById("provincefilter");
+const priceFilter = document.getElementById("pricefilter");
+const bowlingCheckbox = document.getElementById("Bowling");
+const GokartCheckbox = document.getElementById("Gokart");
+const GolfCheckbox = document.getElementById("Golf");
+
+
 
 async function fetchActivities () {
 
   const types = ["activity"];
-  const descriptions = ["Bowlinghall", "Gokart"];
+  const descriptions = ["Bowlinghall", "Gokart", "Golfbana"];
   const provinces = ["Småland", "Öland"]
   const params = new URLSearchParams({
     controller: "establishment",
@@ -16,7 +22,8 @@ async function fetchActivities () {
     api_key: "2rJ8Mq3V",
     types: types.join(","),
     descriptions: descriptions.join(","),
-    provinces: provinces.join(","),
+    //provinces: provinces.join(","),
+
   });
 
   const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
@@ -33,7 +40,7 @@ async function fetchActivities () {
 
 
 
-function showResult (activities) {
+function renderActivities (activities) {
     results.innerHTML = ""
     if (activities.length === 0) {
             results.innerHTML ="<p>inget hittat</p>"
@@ -65,7 +72,7 @@ try {
   const data = await fetchActivities ()
   console.log(data.payload);
   allActivities = data.payload;
-  showResult(allActivities)
+  renderActivities(allActivities)
   console.log(data.payload[0])
 
 } catch(error) {
@@ -78,10 +85,10 @@ provinceFilter.addEventListener("change", ()=> {
   const value = provinceFilter.value;
 
   if (value === "Alla") {
-    showResult(allActivities);
+    renderActivities(allActivities);
   } else {
     const filtered = allActivities.filter(a => a.province === value);
-    showResult(filtered)
+    renderActivities(filtered)
   }
 });
 
@@ -91,10 +98,42 @@ priceFilter.addEventListener("change", ()=> {
   const value = priceFilter.value;
 
   if(value === "Alla") {
-    showResult(allActivities)
+    renderActivities(allActivities)
   } else {
     const filtered = allActivities.filter(a => a.price_range === value);
-    showResult(filtered)
+    renderActivities(filtered)
   }
 
 })
+
+
+function filterByCheckboxes() {
+  const selectedDescriptions = [];
+
+  if (bowlingCheckbox.checked) {
+    selectedDescriptions.push("Bowlinghall");
+  }
+
+  if (GokartCheckbox.checked) {
+    selectedDescriptions.push("Gokart");
+  }
+
+  if (GolfCheckbox.checked) {
+    selectedDescriptions.push("Golfbana")
+  }
+
+  const filtered = allActivities.filter(activity => selectedDescriptions.includes(activity.description))
+
+  renderActivities(filtered)
+}
+bowlingCheckbox.addEventListener("change", () => {
+  filterByCheckboxes();
+});
+
+GokartCheckbox.addEventListener("change", () => {
+  filterByCheckboxes();
+});
+
+GolfCheckbox.addEventListener("change", () => {
+  filterByCheckboxes();
+});
