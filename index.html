@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="global.css">
-    <script type="module" src="main.js"></script>
+    <script type="module" src="filter.js"></script>
 
     <title>Kick-off</title>
 </head>
@@ -41,11 +41,25 @@
 
             <label for="pricefilter">Pris</label>
             <select id="pricefilter">
-  <option value="Alla">Alla</option>
-  <option value="100-250">100-250 kr</option>
-  <option value="250-500">250-500 kr</option>
-  <option value="500-1000">500-1000 kr</option>
-</select>
+                <option value="Alla">Alla</option>
+                <option value="100-250">100-250 kr</option>
+                <option value="250-500">250-500 kr</option>
+                <option value="500-1000">500-1000 kr</option>
+            </select>
+
+            <fieldset>
+                <legend>Filtrera aktiviteter</legend>
+
+                <input type="checkbox" name="" id="Bowling" name="aktiviteter" value="Bowling"> 
+                <label for="Bowling">Bowling</label>
+
+                <input type="checkbox" name="" id="Gokart" name="aktiviteter" value="Gokart">
+                <label for="Gokart">Gokart</label>
+
+                <input type="checkbox" name="" id="Golf" name="aktiviteter" value="Golf">
+                <label for="Golf">Golf</label>
+
+            </fieldset>
 
 
         </div>
