@@ -1,3 +1,8 @@
+html {
+    --background-color: rgb(48, 51, 51);
+}
+
+
 body {
     margin: 0;
     /* display: grid;
@@ -10,26 +15,112 @@ body {
         "footer footer footer"; */
 }
 
+
+
+/* ---------- nav ---------- */
 nav {
     /* grid-area: nav; */
     margin: 0;
-    background-color: cadetblue;
-    display: flex;
-    flex-flow: row wrap;
+    background-color: var(--background-color);
+    color: #fff;
 }
 
+nav ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 1em;
+    list-style: none;
+}
+
+nav li {
+    margin: 0 1em;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+nav li #h-logo {
+    margin: 0 auto 0 0;
+    /* denna funkar inte riktigt nu */
+}
+
+nav li #current-page {
+    background-color: khaki;
+}
+
+
+
+/* ---------- header ---------- */
 header {
     /* grid-area: header; */
     margin: 0;
+    height: 7em;
+    align-content: center;
     background-color: burlywood;
 }
 
+
+
+/* ---------- main ---------- */
 main {
     /* grid-area: main; */
     margin: 0;
-    background-color: darkcyan;
+    padding-bottom: 0.5em;
+    color: #fff;
+    background-color: rgb(29, 28, 28);
 }
 
+/* ---------- activity card ---------- */
+.activity-card {
+    background-color: var(--background-color);
+    color: #fff;
+    margin: 1em;
+    border-radius: 0.5em;
+    box-shadow: 6px 6px 5px black;
+}
+
+.activity-card .act-flex {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 1em;
+}
+
+.activity-card .act-img {
+    height: 100%;
+    width: 5em;
+    background-color: #fff;
+}
+
+.activity-card a {
+    text-decoration: none;
+    /* color: #fff; */
+    background-color: #fff;
+    border-radius: 1em;
+    padding: 0.5em;
+    margin: 0 1em 1em 1em;
+}
+
+.activity-card p img {
+    height: 100%;
+    display: inline;
+}
+
+.activity-card .act-symbols {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    gap: 0.75em;
+}
+
+
+
+/* ---------- footer ---------- */
 footer {
     /* grid-area: footer; */
     margin: 0;
