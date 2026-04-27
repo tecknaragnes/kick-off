@@ -156,3 +156,6 @@ function applyFilters () {
 //})
 
 renderActivities (allActivities)
+
+
+//pris och rating sortera efter det

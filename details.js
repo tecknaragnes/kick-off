@@ -1,0 +1,1 @@
+//Details.js, för detaljsidan ska oxå importeras länka med htmlen, mycket importer

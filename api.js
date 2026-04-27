@@ -1,9 +1,8 @@
 // Vi kanske kan ha allt smapi och api relaterat här
-import  { renderActivities } from "./render.js"
 
-const results = document.querySelector(".results");
+//const results = document.querySelector(".results");
 
-let allActivities = []
+//let allActivities = []
 
  export async function fetchActivities () {
 
@@ -29,11 +28,8 @@ let allActivities = []
   return response.json();
 }
 
-//const data = await fetchActivities ()
-//console.log(data)
 
-
-
+///ta med review oxå
 
 
 // try {
@@ -48,4 +44,3 @@ let allActivities = []
 //   results.innerHTML = `<p>${error.message}</p>`
 // }
 
-renderActivities (allActivities)

@@ -1,1 +1,1 @@
-//ksk för aatt koppla ihop allt
+//ksk för att koppla ihop allt

@@ -1,5 +1,4 @@
 //endast rendering här, här kan vi nog använda klass
-// import { fetchActivities } from "./api.js"
 const results = document.querySelector(".results");
 
 export function renderActivities (activities) {
@@ -31,4 +30,3 @@ export function renderActivities (activities) {
 
 }
 
-//fetchActivities ()
