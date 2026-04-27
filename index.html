@@ -13,9 +13,16 @@
 
 <body>
     <nav>
-        <h1 id="h-logo">Namn</h1>
-        <p>Aktiviteter</p>
-        <p>Om oss</p>
+        <ul>
+            <li>
+                <h1 id="h-logo">Namn</h1>
+            </li>
+            <li><a href="index.html">Hem</a></li>
+            <li><a href="activities.html">Aktiviteter</a></li>
+            <li>
+                <p>Om oss</p>
+            </li>
+        </ul>
     </nav>
 
     <header>
@@ -34,21 +41,52 @@
 
         <div id="examples">
             <h2>Förslag på aktiviteter</h2>
-            <div class="activity">
-                <h3>Aktivitet</h3>
-                <p>Stad, Landskap</p>
-                <button>Läs mer</button>
-            </div>
-        </div>
 
-         <div class="results">
+            <div class="activity-card">
+                <div class="act-flex">
+                    <div class="act-img">i</div>
+                    <div>
+                        <h3>Aktivitet</h3>
+                        <img src="SVG/location.svg" alt="">
+                        <p>Stad, Landskap (X km bort)</p>
+                        <p>Pris</p>
+                    </div>
+                </div>
+                <div class="act-symbols">
+                    <p>pris</p>
+                    <p>tid</p>
+                    <p>antal pers</p>
+                    <p>rating</p>
+                    <a href="details.html?id=">Läs mer</a>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <div class="act-flex">
+                    <div class="act-img">i</div>
+                    <div>
+                        <h3>Aktivitet</h3>
+                        <p>Stad, Landskap (X km bort)</p>
+                        <p>Pris</p>
+                    </div>
+                </div>
+                <div class="act-symbols">
+                    <p>pris</p>
+                    <p>tid</p>
+                    <p>antal pers</p>
+                    <p>rating</p>
+                    <a href="details.html?id=">Läs mer</a>
+                </div>
+            </div>
+
+            <!-- <div class="results">
             <div class="activity">
                 <h3>Aktivitet</h3>
                 <p>Stad, Landskap</p>
                 <p>Pris</p>
                 <button>Läs mer</button>
             </div>
-        </div>
+        </div> -->
     </main>
 
     <footer>
