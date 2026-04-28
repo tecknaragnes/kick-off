@@ -159,3 +159,4 @@ renderActivities (allActivities)
 
 
 //pris och rating sortera efter det
+//yes
