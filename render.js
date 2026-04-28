@@ -1,5 +1,5 @@
 //endast rendering här, här kan vi nog använda klass
-// import { fetchActivities } from "./api.js"
+
 const results = document.querySelector(".results");
 
 export function renderActivities(activities) {
@@ -30,14 +30,52 @@ export function renderActivities(activities) {
                     <p>tid</p>
                     <p>antal pers</p>
                     <p>rating</p>
-                    <a href="details.html?id=">Läs mer</a>
+                    <a href="details.html?id=${activity.id}">Läs mer</a>
                 </div>
             </div>
         `;
         results.append(article);
     }
-
-
 }
 
-//fetchActivities ()
+
+export const renderDetailsPage = (activity) => {
+    const detailsPage = document.getElementById("activity-details");
+    const header = document.querySelector("header");
+
+    header.innerHTML = `<h2>${activity.name}</h2>`;
+
+    detailsPage.innerHTML = `
+        <p>${activity.city}, ${activity.province}</p>
+        <div class="details-flex-symbols">
+            <span>betyg</span>
+            <span>pris</span>
+            <span>tid</span>
+            <span>antal pers</span>
+            <span>mat/dryck</span>
+        </div>
+        <p>${activity.text}</p>
+        <div class="det-img">i</div>
+        <p>Öppettider: (finns inga i smapi)</p>
+        <section>
+            <h3>Kontakt:</h3>
+            <ul>
+                <li>Telefon: ${activity.phone_number ?? "saknas"}</li>
+                <li>Email: (finns inte i smapi)</li>
+                <li>Webbplats: ${activity.website ?? "saknas"}</li>
+                <li>Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${city}</li>
+            </ul>
+            <a href="booking">Boka nu<a/>
+        </section>
+        <div id="map"></div>
+        <section id="food-section">
+            <h3>Matförslag:</h3>
+        </section>
+        <section id="review-section">
+            <h3>Recensioner:</h3>
+        </section>
+        <section id="activities-section">
+            <h3>Aktivitetsförslag:</h3>
+        </section>
+    `;
+}
