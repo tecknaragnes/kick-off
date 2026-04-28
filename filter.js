@@ -12,6 +12,7 @@ const bowlingCheckbox = document.getElementById("Bowling");
 const GokartCheckbox = document.getElementById("Gokart");
 const GolfCheckbox = document.getElementById("Golf");
 const searchBtn = document.querySelector(".search-btn")
+const sortFilter = document.getElementById("sortfilter")
 
 
 
@@ -47,7 +48,11 @@ const searchBtn = document.querySelector(".search-btn")
 
 
 try {
-  const data = await fetchActivities ()
+  //const data = await fetchActivities ()
+const data = await fetchActivities({
+  sort: sortFilter.value
+});
+
   console.log(data.payload);
   allActivities = data.payload;
   renderActivities(allActivities)
@@ -99,7 +104,7 @@ function filterByCheckboxes() {
   if (GolfCheckbox.checked) {
     selectedDescriptions.push("Golfbana")
   }
-
+//buggigt när ingen checkbox är vald.., så fixar det
   const filtered = allActivities.filter(activity => selectedDescriptions.includes(activity.description))
 
   renderActivities(filtered)
@@ -155,8 +160,24 @@ function applyFilters () {
   
 //})
 
-renderActivities (allActivities)
+// renderActivities (allActivities)
 
 
 //pris och rating sortera efter det
 //yes
+
+
+async function sortActivities() {
+const data = await fetchActivities({
+  sort: sortFilter.value,
+  //price: priceFilter.value jag fyller bara på här och i api.js
+});
+  allActivities = data.payload;
+  renderActivities(allActivities);
+}
+
+sortFilter.addEventListener("change", () => {
+  sortActivities();
+});
+
+
