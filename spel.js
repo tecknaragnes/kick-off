@@ -1,0 +1,1 @@
+//spelet här, här hade nog klass passat, ksk 3 olika val som spel och if användaren klickar ex inomhus eller afterwork så kan man === med hjälper av activity.filter retur bowlinghall eller liknande

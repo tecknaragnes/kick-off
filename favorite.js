@@ -1,0 +1,1 @@
+// Localstorage, man kan spara sina favorit aktiviteter 
