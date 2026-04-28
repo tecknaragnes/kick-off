@@ -4,7 +4,11 @@
 
 //let allActivities = []
 
- export async function fetchActivities () {
+export async function fetchActivities(filters) {
+
+  if (!filters) {
+    filters = {};
+  }
 
   const types = ["activity"];
   const descriptions = ["Bowlinghall", "Gokart", "Golfbana"];
@@ -14,10 +18,55 @@
     method: "getall",
     api_key: window.APIKEY,
     types: types.join(","),
+
     descriptions: descriptions.join(","),
-    //provinces: provinces.join(","),
+    provinces: provinces.join(","),
 
   });
+
+  if (filters.sort === "rating-high") {
+    params.set("order_by", "rating");
+    params.set("sort_in", "DESC");
+  }
+
+  if (filters.sort === "rating-low") {
+    params.set("order_by", "rating");
+    params.set("sort_in", "ASC");
+  }
+
+   if (filters.sort === "price-low") {
+    params.set("order_by", "price_range");
+    params.set("sort_in", "ASC")
+  }
+
+
+
+   if (filters.sort === "price-high") {
+    params.set("order_by", "price_range");
+    params.set("sort_in", "DESC");
+
+
+
+  }
+console.log("visar allt efter ? teckenet,", params.toString())
+
+console.log("visar full URL,", `https://smapi.lnu.se/api/?${params}`);
+
+console.log("Sorteringss val från dropdownet", filters.sort);
+
+  if (params.get("order_by")) {
+  console.log("SMAPI kommer sortera på:", params.get("order_by"));
+  console.log("Sorteringsriktning:", params.get("sort_in"));
+} else {
+  console.log("Ingen SMAPI sortering vald så standardläge");
+}
+
+console.log("URL som skickas:", `https://smapi.lnu.se/api/?${params}`);
+
+
+
+
+
 
   const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
 
