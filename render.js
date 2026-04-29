@@ -42,11 +42,14 @@ export function renderActivities(activities) {
 export const renderDetailsPage = (activity) => {
     const main = document.querySelector("main");
     const header = document.querySelector("header");
+    const h2 = document.createElement("h2");
 
-    header.innerHTML = `<h2>${activity.name}</h2>`;
+    h2.textContent = activity.name;
+    header.append(h2);
 
     main.innerHTML = "";
     const detailsPage = document.createElement("div");
+    detailsPage.classList.add("details-page");
     detailsPage.innerHTML = `
         <p>${activity.city}, ${activity.province}</p>
         <div class="details-flex-symbols">
@@ -54,20 +57,21 @@ export const renderDetailsPage = (activity) => {
             <span>pris</span>
             <span>tid</span>
             <span>antal pers</span>
-            <span>mat/dryck</span>
+            <span><img src="SVG/food.svg" alt="Mat finns"><p>Mat</p></span>
+            <span><img src="SVG/drink.svg" alt="Dryck finns"><p>Dryck</p></span>
         </div>
-        <p>${activity.text}</p>
+        <p>${activity.text ?? activity.abstract}</p>
         <div class="det-img">i</div>
         <p>Öppettider: (finns inga i smapi)</p>
-        <section>
+        <section id="contact-section">
             <h3>Kontakt:</h3>
             <ul>
-                <li>Telefon: ${activity.phone_number ?? "saknas"}</li>
-                <li>Email: (finns inte i smapi)</li>
-                <li>Webbplats: ${activity.website ?? "saknas"}</li>
-                <li>Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</li>
+                <li class="li-icon phone">Telefon: ${activity.phone_number ?? "saknas"}</li>
+                <li class="li-icon email">Email: (finns inte i smapi)</li>
+                <li class="li-icon web">Webbplats: ${activity.website ?? "saknas"}</li>
+                <li class="li-icon adress">Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</li>
             </ul>
-            <a href="booking">Boka nu<a/>
+            <a href="booking">Boka nu</a>
         </section>
         <div id="map"></div>
         <section id="food-section">
