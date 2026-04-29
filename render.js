@@ -40,11 +40,13 @@ export function renderActivities(activities) {
 
 
 export const renderDetailsPage = (activity) => {
-    const detailsPage = document.getElementById("activity-details");
+    const main = document.querySelector("main");
     const header = document.querySelector("header");
 
     header.innerHTML = `<h2>${activity.name}</h2>`;
 
+    main.innerHTML = "";
+    const detailsPage = document.createElement("div");
     detailsPage.innerHTML = `
         <p>${activity.city}, ${activity.province}</p>
         <div class="details-flex-symbols">
@@ -63,7 +65,7 @@ export const renderDetailsPage = (activity) => {
                 <li>Telefon: ${activity.phone_number ?? "saknas"}</li>
                 <li>Email: (finns inte i smapi)</li>
                 <li>Webbplats: ${activity.website ?? "saknas"}</li>
-                <li>Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${city}</li>
+                <li>Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</li>
             </ul>
             <a href="booking">Boka nu<a/>
         </section>
@@ -78,4 +80,6 @@ export const renderDetailsPage = (activity) => {
             <h3>Aktivitetsförslag:</h3>
         </section>
     `;
+    main.append(detailsPage);
+
 }
