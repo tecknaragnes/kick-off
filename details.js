@@ -1,5 +1,5 @@
 //Details.js, för detaljsidan ska oxå importeras länka med htmlen, mycket importer
-import { renderDetailsPage } from "./render.js";
+import { renderDetailsPage, renderReviews } from "./render.js";
 
 // let activityID;
 // try {
@@ -51,3 +51,36 @@ let payload = [
     }];
 
 renderDetailsPage(payload[0]);
+
+
+let info = [
+    {
+        "rating": "3.0",
+        "name": "Pia Nilsson",
+        "email": "pia.g.nilsson@mymail.com",
+        "comment": "Dyrt men barnen gillar det.",
+        "timestamp": "2018-02-02 07:39:01",
+        "unix_time": "1517557141",
+        "relative_time": "8 years ago"
+    },
+    {
+        "rating": "1.0",
+        "name": "Ulla-Britt Johansson",
+        "email": "ulla-britt.johansson@livemail.se",
+        "comment": "Vi v\u00e4ntade l\u00e4nge f\u00f6r att se tigrarna. Inga syntes till och barnen blev extremt besvikna. D\u00e5ligt v\u00e4der var det ocks\u00e5. Ingen toppendag direkt.",
+        "timestamp": "2018-01-30 10:58:53",
+        "unix_time": "1517309933",
+        "relative_time": "8 years ago"
+    },
+    {
+        "rating": "1.0",
+        "name": "Godzilla H\u00e5rddisksson",
+        "email": "godzilla.harddisksson@lnu.se",
+        "comment": "Dyrt, l\u00e5nga k\u00f6er och usel service.",
+        "timestamp": "2018-01-28 10:58:53",
+        "unix_time": "1517137133",
+        "relative_time": "8 years ago"
+    }
+]
+
+renderReviews(info);
