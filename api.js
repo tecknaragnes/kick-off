@@ -48,6 +48,16 @@ export async function fetchActivities(filters) {
 
 
   }
+
+  if (filters.outdoors === "Y" || filters.outdoors === "N") {
+    params.set("outdoors", filters.outdoors);
+  }
+
+
+
+
+
+
 console.log("visar allt efter ? teckenet,", params.toString())
 
 console.log("visar full URL,", `https://smapi.lnu.se/api/?${params}`);
@@ -62,7 +72,6 @@ console.log("Sorteringss val från dropdownet", filters.sort);
 }
 
 console.log("URL som skickas:", `https://smapi.lnu.se/api/?${params}`);
-
 
 
 

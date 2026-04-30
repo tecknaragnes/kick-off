@@ -1,94 +1,57 @@
-//Lowkey filter.js
-import  { renderActivities } from "./render.js"
+import { renderActivities } from "./render.js";
 import { fetchActivities } from "./api.js";
-console.log("Helloooo")
-let allActivities = []
+
+console.log("Helloooo");
+
+let allActivities = [];
 
 const results = document.querySelector(".results");
-const search = document.querySelector(".search")
+const search = document.querySelector(".search");
 const provinceFilter = document.getElementById("provincefilter");
 const priceFilter = document.getElementById("pricefilter");
 const bowlingCheckbox = document.getElementById("Bowling");
 const GokartCheckbox = document.getElementById("Gokart");
 const GolfCheckbox = document.getElementById("Golf");
-const searchBtn = document.querySelector(".search-btn")
-const sortFilter = document.getElementById("sortfilter")
-
-
-
-// async function fetchActivities () {
-
-//   const types = ["activity"];
-//   const descriptions = ["Bowlinghall", "Gokart", "Golfbana"];
-//   const provinces = ["Småland", "Öland"]
-//   const params = new URLSearchParams({
-//     controller: "establishment",
-//     method: "getall",
-//     api_key: window.APIKEY,
-//     types: types.join(","),
-//     descriptions: descriptions.join(","),
-//     //provinces: provinces.join(","),
-
-//   });
-
-//   const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
-
-//   if (!response.ok) {
-//     throw new Error("Sökningen misslyckades");
-//   }
-
-//   return response.json();
-// }
-
-// //const data = await fetchActivities ()
-// //console.log(data)
-
-
-
-
+const searchBtn = document.querySelector(".search-btn");
+const sortFilter = document.getElementById("sortfilter");
+const outdoorFilter = document.getElementById("outdoorfilter");
 
 try {
-  //const data = await fetchActivities ()
-const data = await fetchActivities({
-  sort: sortFilter.value
-});
+  const data = await fetchActivities({
+    sort: sortFilter.value,
+    outdoors: outdoorFilter.value
+  });
 
   console.log(data.payload);
   allActivities = data.payload;
-  renderActivities(allActivities)
-  console.log(data.payload[0])
-
-} catch(error) {
+  renderActivities(allActivities);
+  console.log(data.payload[0]);
+} catch (error) {
   console.error(error);
-  results.innerHTML = `<p>${error.message}</p>`
+  results.innerHTML = `<p>${error.message}</p>`;
 }
 
-
-provinceFilter.addEventListener("change", ()=> {
+provinceFilter.addEventListener("change", () => {
   const value = provinceFilter.value;
 
   if (value === "Alla") {
     renderActivities(allActivities);
   } else {
-    const filtered = allActivities.filter(a => a.province === value);
-    renderActivities(filtered)
+    const filtered = allActivities.filter((a) => a.province === value);
+    renderActivities(filtered);
   }
 });
 
-//lite hårkodat, fattig filter, funkar lite konstigt också
-priceFilter.addEventListener("change", ()=> {
-
+priceFilter.addEventListener("change", () => {
   const value = priceFilter.value;
 
-  if(value === "Alla") {
-    renderActivities(allActivities)
+  if (value === "Alla") {
+    renderActivities(allActivities);
   } else {
-    const filtered = allActivities.filter(a => a.price_range === value);
-    renderActivities(filtered)
+    const filtered = allActivities.filter((a) => a.price_range === value);
+    renderActivities(filtered);
   }
-
-})
-
+});
 
 function filterByCheckboxes() {
   const selectedDescriptions = [];
@@ -102,13 +65,16 @@ function filterByCheckboxes() {
   }
 
   if (GolfCheckbox.checked) {
-    selectedDescriptions.push("Golfbana")
+    selectedDescriptions.push("Golfbana");
   }
-//buggigt när ingen checkbox är vald.., så fixar det
-  const filtered = allActivities.filter(activity => selectedDescriptions.includes(activity.description))
 
-  renderActivities(filtered)
+  const filtered = allActivities.filter((activity) =>
+    selectedDescriptions.includes(activity.description)
+  );
+
+  renderActivities(filtered);
 }
+
 bowlingCheckbox.addEventListener("change", () => {
   filterByCheckboxes();
 });
@@ -121,63 +87,47 @@ GolfCheckbox.addEventListener("change", () => {
   filterByCheckboxes();
 });
 
-
-//sök för name, description och city endast, får fylla på resten
-
-function applyFilters () {
+function applyFilters() {
   const searchText = search.value.trim().toLowerCase();
 
-  if(searchText === "") {      
+  if (searchText === "") {
     renderActivities(allActivities);
     return;
-    }
+  }
 
-    const filteredActivities = allActivities.filter((activity) => {
-      const name = (activity.name ?? "").toLowerCase();
-      const description = (activity.description ?? "").toLowerCase();
-      const city = (activity.city ?? "").toLowerCase();
+  const filteredActivities = allActivities.filter((activity) => {
+    const name = (activity.name ?? "").toLowerCase();
+    const description = (activity.description ?? "").toLowerCase();
+    const city = (activity.city ?? "").toLowerCase();
 
-      const matchesSearch = 
+    const matchesSearch =
       name.includes(searchText) ||
       description.includes(searchText) ||
       city.includes(searchText);
 
-      return matchesSearch;
-    });
+    return matchesSearch;
+  });
 
-    renderActivities(filteredActivities);
+  renderActivities(filteredActivities);
+}
 
-    
-  }
+search.addEventListener("input", applyFilters);
+searchBtn.addEventListener("click", applyFilters);
 
-  search.addEventListener("input", applyFilters);
-  searchBtn.addEventListener("click", applyFilters);
-  
-  
+async function filterFromSmapi() {
+  const data = await fetchActivities({
+    sort: sortFilter.value,
+    outdoors: outdoorFilter.value
+  });
 
-
-//search.addEventListener("search", (e) => {
-  
-//})
-
-// renderActivities (allActivities)
-
-
-//pris och rating sortera efter det
-//yes
-
-
-async function sortActivities() {
-const data = await fetchActivities({
-  sort: sortFilter.value,
-  //price: priceFilter.value jag fyller bara på här och i api.js
-});
   allActivities = data.payload;
   renderActivities(allActivities);
 }
 
 sortFilter.addEventListener("change", () => {
-  sortActivities();
+  filterFromSmapi();
 });
 
-
+outdoorFilter.addEventListener("change", () => {
+  filterFromSmapi();
+});
