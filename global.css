@@ -1,5 +1,7 @@
 html {
-    --background-color: rgb(51, 48, 48);
+    --background-color: rgb(29, 28, 28);
+    --accentColor1: rgb(51, 48, 48);
+    --accentColor2: rgb(85, 90, 138);
 }
 
 
@@ -78,13 +80,12 @@ main {
     margin: 0;
     padding-bottom: 0.5em;
     color: #fff;
-    background-color: rgb(29, 28, 28);
+    background-color: var(--background-color);
 }
 
 /* ---------- activity card ---------- */
 .activity-card {
-    background-color: var(--background-color);
-    color: #fff;
+    background-color: var(--accentColor1);
     margin: 1em;
     border-radius: 0.5em;
     box-shadow: 6px 6px 5px black;
@@ -160,7 +161,7 @@ main {
 }
 
 #contact-section ul {
-    background-color: rgb(85, 90, 138);
+    background-color: var(--accentColor2);
 }
 
 .phone {
@@ -169,15 +170,43 @@ main {
 
 .adress {
     list-style-image: url(SVG/location.svg);
+    /* nu är de ju jättesmå??? går de att göra större? */
 }
 
-/* nu är de ju jättesmå??? går de att göra större? */
+/* ---------- recensioner ---------- */
+.review-card {
+    background-color: var(--accentColor1);
+    margin: 0.75em 0.5em;
+    border-radius: 0.5em;
+    border: 0.2em solid rgb(6, 8, 24);
+    box-shadow: 6px 6px 5px black;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.rev-flex-header {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background-color: var(--accentColor2);
+    border-radius: 0.3em 0.3em 0 0;
+    padding: 0.5em;
+}
+
+.rev-flex-header h4 {
+    display: inline-block;
+    margin: 0.75em auto 1em 0;
+}
+
+.rev-flex-header~p {
+    padding: 0 0.5em;
+}
 
 
 
 /* ---------- footer ---------- */
 footer {
-    /* grid-area: footer; */
     margin: 0;
+    padding: 0.2em;
     background-color: darkolivegreen;
 }

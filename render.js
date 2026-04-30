@@ -53,14 +53,15 @@ export const renderDetailsPage = (activity) => {
     detailsPage.innerHTML = `
         <p>${activity.city}, ${activity.province}</p>
         <div class="details-flex-symbols">
-            <span>betyg</span>
-            <span>pris</span>
-            <span>tid</span>
-            <span>antal pers</span>
-            <span><img src="SVG/food.svg" alt="Mat finns"><p>Mat</p></span>
-            <span><img src="SVG/drink.svg" alt="Dryck finns"><p>Dryck</p></span>
+            <span id="icon-rating"><p>${activity.rating}</p></span>
+            <span id="icon-price"><p>${activity.price_range}</p></span>
+            <span id="icon-time"><p>tid</p></span>
+            <span id="icon-ppl"><p>antal pers</p></span>
+            <span id="icon-food"><img src="SVG/food.svg" alt="Mat finns"><p>Mat</p></span>
+            <span id="icon-drink"><img src="SVG/drink.svg" alt="Dryck finns"><p>Dryck</p></span>
         </div>
-        <p>${activity.text ?? activity.abstract}</p>
+        <p>${activity.text}</p>
+        <p>${activity.abstract}</p>
         <div class="det-img">i</div>
         <p>Öppettider: (finns inga i smapi)</p>
         <section id="contact-section">
@@ -68,7 +69,7 @@ export const renderDetailsPage = (activity) => {
             <ul>
                 <li class="li-icon phone">Telefon: ${activity.phone_number ?? "saknas"}</li>
                 <li class="li-icon email">Email: (finns inte i smapi)</li>
-                <li class="li-icon web">Webbplats: ${activity.website ?? "saknas"}</li>
+                <li class="li-icon web">Webbplats: <a href="${activity.website ?? "saknas"}">${activity.website}</a></li>
                 <li class="li-icon adress">Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</li>
             </ul>
             <a href="booking">Boka nu</a>
@@ -85,5 +86,31 @@ export const renderDetailsPage = (activity) => {
         </section>
     `;
     main.append(detailsPage);
+}
 
+
+export const renderReviews = (reviews) => {
+    const reviewSection = document.querySelector("#review-section");
+
+    for (const review of reviews) {
+        const reviewCard = document.createElement("div");
+        reviewCard.classList.add("review-card");
+        reviewCard.innerHTML = `
+            <div class="rev-flex-header">
+                <h4>${review.name}</h4>
+                <span>${review.rating}</span>
+            </div>
+            <p>${review.comment}</p>
+            <p>${review.timestamp}</p>
+        `;
+        reviewSection.append(reviewCard);
+    }
+
+
+    // for (let star of rating) {
+    //     const starIcon = document.createElement("img");
+    //     starIcon.src = "SVG/star.svg";
+    //     starIcon.alt = "stjärna";
+    //     reviewCard.querySelector(".rev-flex-header span").append(starIcon);
+    // }
 }
