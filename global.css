@@ -63,7 +63,7 @@ nav li #current-page {
 
 
 /* ---------- header ---------- */
-header {
+#hero {
     /* grid-area: header; */
     margin: 0;
     height: 7em;
@@ -146,6 +146,18 @@ main {
 
 
 /* ---------- detaljsida ---------- */
+#details-header {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    background-color: burlywood;
+    padding: 0.5em;
+}
+
+#details-header a {
+    align-self: flex-start;
+}
+
 .details-page {
     padding: 0.3em;
 }
@@ -198,7 +210,11 @@ main {
 
 .rev-flex-header h4 {
     display: inline-block;
-    margin: 0.75em auto 1em 0;
+    margin: 0.5em auto 0.5em 0;
+}
+
+.rev-flex-header .rev-rating img {
+    height: 1em;
 }
 
 .rev-flex-header~p {
