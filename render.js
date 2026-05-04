@@ -21,7 +21,7 @@ export function renderActivities(activities) {
 
         activityCard.innerHTML = `
                 <div class="act-flex-card">
-                    <div class="act-img">i</div>
+                    <div class="act-img"></div>
                     <div class="act-flex-info">
                         <h3>${activity.name}</h3><p>(${activity.description})</p>
                         <p>${activity.city}, ${activity.province}</p>
@@ -82,16 +82,14 @@ export const renderDetailsPage = (activity) => {
             <span id="icon-food"><img src="SVG/food.svg" alt="Mat finns"><p>Mat</p></span>
             <span id="icon-drink"><img src="SVG/drink.svg" alt="Dryck finns"><p>Dryck</p></span>
         </div>
-        <div class="det-img">i</div>
-        <p>Öppettider: (finns inga i smapi)</p>
+        <div class="det-img"></div>
         <section id="contact-section">
             <h3>Kontakt:</h3>
-            <ul>
-                <li class="li-icon phone">Telefon: ${activity.phone_number ?? "saknas"}</li>
-                <li class="li-icon email">Email: (finns inte i smapi)</li>
-                <li class="li-icon web">Webbplats: <a href="${activity.website ?? "saknas"}">${activity.website}</a></li>
-                <li class="li-icon adress">Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</li>
-            </ul>
+            <p class="li-icon phone"><img src="SVG/phone.svg" alt="">Telefon: ${activity.phone_number ?? "saknas"}</p>
+            <p class="li-icon email">Email: (finns inte i smapi)</p>
+            <p class="li-icon web">Webbplats: <a href="${activity.website ?? "saknas"}">${activity.website}</a></p>
+            <p>Öppettider: (finns inga i smapi)</p>
+            <p class="li-icon adress"><img src="SVG/location.svg" alt="">Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</p>
             <a href="booking">Boka nu</a>
         </section>
         <div id="map"></div>

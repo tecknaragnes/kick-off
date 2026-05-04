@@ -99,7 +99,7 @@ main {
 }
 
 .activity-card .act-img {
-    height: 100%;
+    height: 7em;
     width: 5em;
     background-color: #fff;
 }
@@ -175,17 +175,15 @@ main {
     height: 2em;
 }
 
-#contact-section ul {
-    background-color: var(--accentColor2);
+#contact-section img {
+    height: 1.2em;
+    padding: 0 0.25em;
 }
 
-.phone {
-    list-style-image: url(SVG/phone.svg);
-}
-
-.adress {
-    list-style-image: url(SVG/location.svg);
-    /* nu är de ju jättesmå??? går de att göra större? */
+.det-img {
+    background-color: wheat;
+    height: 15em;
+    margin: 1em;
 }
 
 /* ---------- recensioner ---------- */
@@ -193,7 +191,7 @@ main {
     background-color: var(--accentColor1);
     margin: 0.75em 0.5em;
     border-radius: 0.5em;
-    border: 0.2em solid rgb(6, 8, 24);
+    border: 0.15em solid rgb(6, 8, 24);
     box-shadow: 6px 6px 5px black;
     display: flex;
     flex-flow: column nowrap;
