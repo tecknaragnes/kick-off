@@ -1,5 +1,6 @@
 //endast rendering här, här kan vi nog använda klass
 
+// aktivitetskort ----------------------------------
 const results = document.querySelector(".results");
 
 export function renderActivities(activities) {
@@ -13,10 +14,12 @@ export function renderActivities(activities) {
     }
 
     for (const activity of activities) {
-        const article = document.createElement("article");
+        const activityCard = document.createElement("div");
+        activityCard.classList.add("activity-card");
 
-        article.innerHTML = `
-            <div class="activity-card">
+        let rating = Number.parseFloat(activity.rating).toFixed(1);
+
+        activityCard.innerHTML = `
                 <div class="act-flex-card">
                     <div class="act-img">i</div>
                     <div class="act-flex-info">
@@ -26,19 +29,33 @@ export function renderActivities(activities) {
                     </div>
                 </div>
                 <div class="act-symbols">
-                    <p>pris</p>
-                    <p>tid</p>
-                    <p>antal pers</p>
-                    <p>rating</p>
+                    <div>pris</div>
+                    <div>tid</div>
+                    <div>antal pers</div>
+                    <div class="icon act-card"></div>
                     <a href="details.html?id=${activity.id}">Läs mer</a>
                 </div>
-            </div>
         `;
-        results.append(article);
+        results.append(activityCard);
+
+        for (let i = 0; i < Math.floor(rating); i++) {
+            const starIcon = document.createElement("img");
+            starIcon.src = "SVG/star.svg";
+            starIcon.alt = "";
+            activityCard.querySelector(".icon.act-card").append(starIcon);
+        }
+        // Om det finns en decimal del i rating, lägg till en halv stjärna
+        if (rating - Math.floor(rating) >= 0.5) {
+            const halfStarIcon = document.createElement("img");
+            halfStarIcon.src = "SVG/half-star.svg";
+            halfStarIcon.alt = "";
+            activityCard.querySelector(".icon.act-card").append(halfStarIcon);
+        }
     }
 }
 
 
+// detaljsidan ----------------------------------
 export const renderDetailsPage = (activity) => {
     const main = document.querySelector("main");
     const header = document.querySelector("header");
@@ -88,7 +105,7 @@ export const renderDetailsPage = (activity) => {
     main.append(detailsPage);
 }
 
-
+// recensioner ----------------------------------
 export const renderReviews = (reviews) => {
     const reviewSection = document.querySelector("#review-section");
 
