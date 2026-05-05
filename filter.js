@@ -16,45 +16,119 @@ const searchBtn = document.querySelector(".search-btn");
 const sortFilter = document.getElementById("sortfilter");
 const outdoorFilter = document.getElementById("outdoorfilter");
 
-try {
-  const data = await fetchActivities({
-    sort: sortFilter.value,
-    outdoors: outdoorFilter.value
-  });
+// try {
+//   const data = await fetchActivities({
+//     sort: sortFilter.value,
+//     outdoors: outdoorFilter.value
+//   });
 
-  console.log(data.payload);
-  allActivities = data.payload;
-  renderActivities(allActivities);
-  console.log(data.payload[0]);
-} catch (error) {
-  console.error(error);
-  results.innerHTML = `<p>${error.message}</p>`;
+//   console.log(data.payload);
+//   allActivities = data.payload ?? [];
+//   renderActivities(allActivities);
+//   console.log(data.payload[0]);
+// } catch (error) {
+//   console.error(error);
+//   results.innerHTML = `<p>${error.message}</p>`;
+// }
+
+
+async function filterFromSmapi() {
+  try {
+    const data = await fetchActivities({
+      sort: sortFilter.value,
+      outdoors: outdoorFilter.value
+    });
+
+    console.log(data.payload);
+
+    allActivities = data.payload ?? [];
+
+    console.log("Första aktiviteten:", allActivities[0]);
+
+    filterActivities();
+
+  } catch (error) {
+    console.error(error);
+    results.innerHTML = `<p>${error.message}</p>`;
+  }
+  
 }
 
-provinceFilter.addEventListener("change", () => {
-  const value = provinceFilter.value;
+// provinceFilter.addEventListener("change", () => {
+//   const value = provinceFilter.value;
 
-  if (value === "Alla") {
-    renderActivities(allActivities);
-  } else {
-    const filtered = allActivities.filter((a) => a.province === value);
-    renderActivities(filtered);
+//   if (value === "Alla") {
+//     renderActivities(allActivities);
+//   } else {
+//     const filtered = allActivities.filter((a) => a.province === value);
+//     renderActivities(filtered);
+//   }
+// });
+
+// priceFilter.addEventListener("change", () => {
+//   const value = priceFilter.value;
+
+//   if (value === "Alla") {
+//     renderActivities(allActivities);
+//   } else {
+//     const filtered = allActivities.filter((a) => a.price_range === value);
+//     renderActivities(filtered);
+//   }
+// });
+
+// function filterByCheckboxes() {
+//   const selectedDescriptions = [];
+
+//   if (bowlingCheckbox.checked) {
+//     selectedDescriptions.push("Bowlinghall");
+//   }
+
+//   if (GokartCheckbox.checked) {
+//     selectedDescriptions.push("Gokart");
+//   }
+
+//   if (GolfCheckbox.checked) {
+//     selectedDescriptions.push("Golfbana");
+//   }
+
+//   const filtered = allActivities.filter((activity) =>
+//     selectedDescriptions.includes(activity.description)
+//   );
+
+//   renderActivities(filtered);
+// }
+
+// bowlingCheckbox.addEventListener("change", () => {
+//   filterByCheckboxes();
+// });
+
+// GokartCheckbox.addEventListener("change", () => {
+//   filterByCheckboxes();
+// });
+
+// GolfCheckbox.addEventListener("change", () => {
+//   filterByCheckboxes();
+// });
+
+function filterActivities() {
+
+  let filtered = allActivities;
+
+  const provinceValue = provinceFilter.value;
+  if (provinceValue !== "Alla") {
+    filtered = filtered.filter((activity) => {
+      return activity.province === provinceValue;
+    });
   }
-});
 
-priceFilter.addEventListener("change", () => {
-  const value = priceFilter.value;
-
-  if (value === "Alla") {
-    renderActivities(allActivities);
-  } else {
-    const filtered = allActivities.filter((a) => a.price_range === value);
-    renderActivities(filtered);
+  const priceValue = priceFilter.value;
+  if (priceValue !== "Alla") {
+    filtered = filtered.filter((activity) => {
+      return activity.price_range === priceValue;
+    });
   }
-});
 
-function filterByCheckboxes() {
-  const selectedDescriptions = [];
+   const selectedDescriptions = [];
 
   if (bowlingCheckbox.checked) {
     selectedDescriptions.push("Bowlinghall");
@@ -68,61 +142,56 @@ function filterByCheckboxes() {
     selectedDescriptions.push("Golfbana");
   }
 
-  const filtered = allActivities.filter((activity) =>
-    selectedDescriptions.includes(activity.description)
-  );
-
-  renderActivities(filtered);
-}
-
-bowlingCheckbox.addEventListener("change", () => {
-  filterByCheckboxes();
-});
-
-GokartCheckbox.addEventListener("change", () => {
-  filterByCheckboxes();
-});
-
-GolfCheckbox.addEventListener("change", () => {
-  filterByCheckboxes();
-});
-
-function applyFilters() {
-  const searchText = search.value.trim().toLowerCase();
-
-  if (searchText === "") {
-    renderActivities(allActivities);
-    return;
+  if (selectedDescriptions.length > 0) {
+    filtered = filtered.filter((activity) => {
+      return selectedDescriptions.includes(activity.description);
+    });
   }
 
-  const filteredActivities = allActivities.filter((activity) => {
-    const name = (activity.name ?? "").toLowerCase();
-    const description = (activity.description ?? "").toLowerCase();
-    const city = (activity.city ?? "").toLowerCase();
+  const searchText =search.value.trim().toLowerCase();
 
-    const matchesSearch =
-      name.includes(searchText) ||
-      description.includes(searchText) ||
-      city.includes(searchText);
+   if (searchText !== "") {
+    filtered = filtered.filter((activity) => {
+      const name = (activity.name ?? "").toLowerCase();
+      const description = (activity.description ?? "").toLowerCase();
+      const city = (activity.city ?? "").toLowerCase();
 
-    return matchesSearch;
-  });
+      return (
+        name.includes(searchText) ||
+        description.includes(searchText) ||
+        city.includes(searchText)
+      );
+    });
+  }
 
-  renderActivities(filteredActivities);
+  renderActivities(filtered);
+
+  
+ 
 }
 
-search.addEventListener("input", applyFilters);
-searchBtn.addEventListener("click", applyFilters);
+provinceFilter.addEventListener("change", filterActivities);
+priceFilter.addEventListener("change", filterActivities);
+bowlingCheckbox.addEventListener("change", filterActivities);
+GokartCheckbox.addEventListener("change", filterActivities);
+GolfCheckbox.addEventListener("change", filterActivities);
+search.addEventListener("input", filterActivities);
+//searchBtn.addEventListener("click", filterActivities);
 
-async function filterFromSmapi() {
-  const data = await fetchActivities({
-    sort: sortFilter.value,
-    outdoors: outdoorFilter.value
-  });
+searchBtn.addEventListener("click", (e)=> {
+  e.preventDefault();
+  filterActivities();
+})
 
-  allActivities = data.payload;
-  renderActivities(allActivities);
-}
+// async function filterFromSmapi() {
+//   const data = await fetchActivities({
+//     sort: sortFilter.value,
+//     outdoors: outdoorFilter.value
+//   });
+
+//   allActivities = data.payload ?? [];
+//   renderActivities(allActivities);
+// }
 
 sortFilter.addEventListener("change", () => {
   filterFromSmapi();
@@ -131,3 +200,8 @@ sortFilter.addEventListener("change", () => {
 outdoorFilter.addEventListener("change", () => {
   filterFromSmapi();
 });
+
+
+
+
+filterFromSmapi();
