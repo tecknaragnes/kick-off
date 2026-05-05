@@ -23,7 +23,7 @@ try {
   });
 
   console.log(data.payload);
-  allActivities = data.payload;
+  allActivities = data.payload ?? [];
   renderActivities(allActivities);
   console.log(data.payload[0]);
 } catch (error) {
@@ -120,7 +120,7 @@ async function filterFromSmapi() {
     outdoors: outdoorFilter.value
   });
 
-  allActivities = data.payload;
+  allActivities = data.payload ?? [];
   renderActivities(allActivities);
 }
 
