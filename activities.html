@@ -17,74 +17,79 @@
     <nav>
         <ul>
             <li>
-                <h1 id="h-logo">Namn</h1>
+                <p id="h-logo">Namn</p>
             </li>
             <li><a href="index.html">Hem</a></li>
-            <li><a href="activities.html">Aktiviteter</a></li>
+            <li id="current-page"><a href="activities.html">Aktiviteter</a></li>
             <li><a href="favorite.html">Favoriter</a></li>
-            <li>
-                <p>Om oss</p>
-            </li>
+            <li><a href="about.html">Om oss</a></li>
         </ul>
     </nav>
 
+    <header id="hero">
+        <h1>Aktiviteter</h1>
+    </header>
+
     <main>
         <div id="filters">
-            <p>Hitta en aktivitet för ett specifikt evenemang:</p>
-            <button>Svensexa / Möhippa</button>
-            <button>Teambuilding / AW</button>
-            <button>Kick-off</button>
+            <div id="event-flex">
+                <a href="activities.html" class="spec-event">Svensexa / Möhippa</a>
+                <a href="activities.html" class="spec-event">Teambuilding / AW</a>
+                <a href="activities.html" class="spec-event">Kick-off</a>
+            </div>
+
+            <div id="search-flex">
+                <input type="search" class="search" placeholder="Sök här">
+                <button class="search-btn">Sök</button>
+            </div>
+
+            <div id="top-fold-sec">
+                <label for="sortfilter">Sortera</label>
+                <select id="sortfilter">
+                    <option value="standard">Standard</option>
+                    <option value="rating-high">Högst betyg först</option>
+                    <option value="rating-low">Lägst betyg först</option>
+                    <option value="price-low">Lägst pris först</option>
+                    <option value="price-high">Högst pris först</option>
+                </select>
+            </div>
+            <div id="filter-fold-section">
+                <label for="provincefilter">Landskap</label>
+                <select id="provincefilter">
+                    <option value="Alla">Alla</option>
+                    <option value="Småland">Småland</option>
+                    <option value="Öland">Öland</option>
+                </select>
 
 
-            <input type="search" class="search" placeholder="Sök här">
-            <button class="search-btn">Sök</button>
-            <p>Sortera</p>
-            <p>Filter</p>
+                <label for="pricefilter">Pris</label>
+                <select id="pricefilter">
+                    <option value="Alla">Alla</option>
+                    <option value="100-250">100-250 kr</option>
+                    <option value="250-500">250-500 kr</option>
+                    <option value="500-1000">500-1000 kr</option>
+                </select>
 
-            <label for="provincefilter">Landskap</label>
-            <select id="provincefilter">
-                <option value="Alla">Alla</option>
-                <option value="Småland">Småland</option>
-                <option value="Öland">Öland</option>
-            </select>
+                <label for="outdoorfilter">Utomhus</label>
+                <select id="outdoorfilter">
+                    <option value="Alla">Inomhus/utomhus</option>
+                    <option value="Y">Utomhus</option>
+                    <option value="N">Inomhus</option>
+                </select>
 
+                <fieldset>
+                    <legend>Filtrera aktiviteter</legend>
 
-            <label for="pricefilter">Pris</label>
-            <select id="pricefilter">
-                <option value="Alla">Alla</option>
-                <option value="100-250">100-250 kr</option>
-                <option value="250-500">250-500 kr</option>
-                <option value="500-1000">500-1000 kr</option>
-            </select>
+                    <input type="checkbox" id="Bowling" name="aktiviteter" value="Bowling">
+                    <label for="Bowling">Bowling</label>
 
-            <label for="sortfilter">Sortera</label>
-            <select id="sortfilter">
-                <option value="standard">Standard</option>
-                <option value="rating-high">Högst betyg först</option>
-                <option value="rating-low">Lägst betyg först</option>
-                <option value="price-low">Lägst pris först</option>
-                <option value="price-high">Högst pris först</option>
-            </select>
+                    <input type="checkbox" id="Gokart" name="aktiviteter" value="Gokart">
+                    <label for="Gokart">Gokart</label>
 
-            <label for="outdoorfilter">Utomhus</label>
-            <select id="outdoorfilter">
-                <option value="Alla">Inomhus/utomhus</option>
-                <option value="Y">Utomhus</option>
-                <option value="N">Inomhus</option>
-            </select>
-
-            <fieldset>
-                <legend>Filtrera aktiviteter</legend>
-
-                <input type="checkbox" id="Bowling" name="aktiviteter" value="Bowling">
-                <label for="Bowling">Bowling</label>
-
-                <input type="checkbox" id="Gokart" name="aktiviteter" value="Gokart">
-                <label for="Gokart">Gokart</label>
-
-                <input type="checkbox" id="Golf" name="aktiviteter" value="Golf">
-                <label for="Golf">Golf</label>
-            </fieldset>
+                    <input type="checkbox" id="Golf" name="aktiviteter" value="Golf">
+                    <label for="Golf">Golf</label>
+                </fieldset>
+            </div>
         </div>
 
         <div class="results">
