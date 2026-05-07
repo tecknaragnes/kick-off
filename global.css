@@ -1,7 +1,8 @@
 html {
     --background-color: rgb(29, 28, 28);
-    --accentColor1: rgb(51, 48, 48);
-    --accentColor2: rgb(85, 90, 138);
+    --accentColor1: rgb(42, 49, 61);
+    --accentColor2: cadetblue;
+    --accentColor3: rgb(22, 32, 48);
 }
 
 
@@ -46,6 +47,7 @@ nav ul {
 
 nav li {
     margin: 0 1em;
+    padding: 0.5em;
 }
 
 nav li:hover {
@@ -73,12 +75,18 @@ nav li #current-page {
 #hero {
     /* grid-area: header; */
     margin: 0;
-    height: 7em;
+    padding: 2em;
+    display: flex;
+    flex-flow: column wrap;
     justify-content: center;
     align-content: center;
-    background-color: burlywood;
+    background-color: rgb(147, 195, 199);
 }
 
+#hero h1 {
+    margin: 0.25em;
+    align-self: center;
+}
 
 
 /* ---------- main ---------- */
@@ -88,6 +96,29 @@ main {
     padding-bottom: 0.5em;
     color: #fff;
     background-color: var(--background-color);
+}
+
+#categories {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+.spec-event {
+    background-color: var(--accentColor2);
+    display: inline-block;
+    padding: 0.75em;
+    margin: 0.1em;
+    border-radius: 0.5em;
+    font-family: "Federo", Roboto, san-serif;
+    font-size: 1.1em;
+}
+
+a.spec-event {
+    color: #fff;
+    text-decoration: none;
 }
 
 /* ---------- activity card ---------- */
@@ -141,7 +172,7 @@ main {
 }
 
 .activity-card .act-symbols div {
-    background-color: cadetblue;
+    background-color: var(--accentColor2);
     padding: 0.4em 0.6em;
     border-radius: 1em;
     margin: 0;
@@ -232,5 +263,6 @@ main {
 footer {
     margin: 0;
     padding: 0.2em;
-    background-color: darkolivegreen;
+    color: #fff;
+    background-color: var(--accentColor3);
 }
