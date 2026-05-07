@@ -18,78 +18,58 @@
     <nav>
         <ul>
             <li>
-                <h1 id="h-logo">Namn</h1>
+                <p id="h-logo">logga</p>
             </li>
             <li><a href="index.html">Hem</a></li>
             <li><a href="activities.html">Aktiviteter</a></li>
-            <li>
-                <p>Om oss</p>
-            </li>
+            <li><a href="favorite.html">Favoriter</a></li>
+            <li><a href="about.html">Om oss</a></li>
         </ul>
     </nav>
 
     <header id="hero">
-        <p>Hitta den perfekta aktiviteten till ditt evenemang!</p>
+        <h1>Namn</h1>
+        <p>Vi hjälper dig hitta den perfekta aktiviteten till ditt evenemang!</p>
         <button>Bläddra/Jag känner mig modig</button>
+        <!-- leda till quizet? -->
     </header>
 
     <main>
         <div id="categories">
             <p>Hitta en aktivitet för ett specifikt evenemang:</p>
-            <button>Svensexa / Möhippa</button>
-            <button>Teambuilding / AW</button>
-            <button>Kick-off</button>
-            <input type="text"> <button>Sök</button>
+            <div id="event-flex">
+                <a href="activities.html" class="spec-event">Svensexa / Möhippa</a>
+                <a href="activities.html" class="spec-event">Teambuilding / AW</a>
+                <a href="activities.html" class="spec-event">Kick-off</a>
+            </div>
+            <div id="search-flex">
+                <input type="text" id="search-act"> <button>Sök</button>
+            </div>
         </div>
 
-        <div id="examples">
+        <section id="examples">
             <h2>Förslag på aktiviteter</h2>
 
             <div class="activity-card">
-                <div class="act-flex">
-                    <div class="act-img">i</div>
-                    <div>
+                <div class="act-flex-card">
+                    <div class="act-img"></div>
+                    <div class="act-flex-info">
                         <h3>Aktivitet</h3>
+                        <p>("ex gokart")</p>
                         <!-- <img src="SVG/location.svg" alt=""> -->
                         <p>Stad, Landskap (X km bort)</p>
                         <p>Pris</p>
                     </div>
                 </div>
                 <div class="act-symbols">
-                    <p>pris</p>
-                    <p>tid</p>
-                    <p>antal pers</p>
-                    <p>rating</p>
+                    <div>pris</div>
+                    <div>tid</div>
+                    <div>antal pers</div>
+                    <div>rating</div>
                     <a href="details.html?id=">Läs mer</a>
                 </div>
             </div>
-
-            <div class="activity-card">
-                <div class="act-flex">
-                    <div class="act-img">i</div>
-                    <div>
-                        <h3>Aktivitet</h3>
-                        <p>Stad, Landskap (X km bort)</p>
-                        <p>Pris</p>
-                    </div>
-                </div>
-                <div class="act-symbols">
-                    <p>pris</p>
-                    <p>tid</p>
-                    <p>antal pers</p>
-                    <p>rating</p>
-                    <a href="details.html?id=">Läs mer</a>
-                </div>
-            </div>
-
-            <!-- <div class="results">
-            <div class="activity">
-                <h3>Aktivitet</h3>
-                <p>Stad, Landskap</p>
-                <p>Pris</p>
-                <button>Läs mer</button>
-            </div>
-        </div> -->
+        </section>
     </main>
 
     <footer>
