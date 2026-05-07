@@ -33,6 +33,7 @@ export function renderActivities(activities) {
                     <div>tid</div>
                     <div>antal pers</div>
                     <div class="icon act-card"></div>
+                    <button class="favorite-btn">Spara favorit</button>
                     <a href="details.html?id=${activity.id}">Läs mer</a>
                 </div>
         `;
