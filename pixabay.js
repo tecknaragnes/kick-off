@@ -1,3 +1,5 @@
+import { pixakey } from "./config.js";
+
 export const fetchPixabay = async (query) => {
     const params = new URLSearchParams({
         // api_key: ,
@@ -11,4 +13,6 @@ export const fetchPixabay = async (query) => {
 
 
 // const response = await fetch(`https://pixabay.com/api/?${params}`);
-// const data = await response.json(); 
+// const data = await response.json();
+
+// kolla efter description i datan för aktiviteten, och använd den som query i pixabay
