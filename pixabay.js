@@ -1,14 +1,12 @@
-import { pixakey } from "./config.js";
-
 export const fetchPixabay = async (query) => {
     const params = new URLSearchParams({
-        // api_key: ,
-        q = "",
+        key: pixakey,
+        q: query,
         image_type: "photo",
         orientation: ""
     });
 
-    console.log("full URL,", `https://pixabay.com/api/?${params}`);
+    console.log("Pixabay-sökning:", `https://pixabay.com/api/?${params}`);
 }
 
 

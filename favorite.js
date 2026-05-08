@@ -42,4 +42,4 @@ export function addFavorites(activity) {
 
 
 }
-
+//hej
