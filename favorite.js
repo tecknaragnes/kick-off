@@ -2,12 +2,6 @@
 import { renderActivities } from "./render.js";
 
 
-// if (favoritesText) {
-//     const favorites = JSON.parse(favoritesText);
-//     renderActivities(favorites);
-// } else {
-//     renderActivities([])
-// }
 
 const STORAGE_KEY = "favorites";
 
