@@ -24,7 +24,7 @@ export function renderActivities(activities) {
                     <div class="act-img"></div>
                     <div class="act-flex-info">
                         <h3>${activity.name}</h3><p>(${activity.description})</p>
-                        <p>${activity.city}, ${activity.province}</p>
+                        <p><img src="SVG/location.svg" alt="">${activity.city}, ${activity.province}</p>
                         <p>${activity.price_range ?? "Pris saknas"} kr</p>
                     </div>
                 </div>
