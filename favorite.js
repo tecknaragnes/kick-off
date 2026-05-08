@@ -5,10 +5,11 @@ import { renderActivities } from "./render.js";
 
 const STORAGE_KEY = "favorites";
 
+//hämtar från l storage och ger tbx array
 export function getFavorites() {
     const favoritesText =  localStorage.getItem(STORAGE_KEY);
 
-    if (favoritesText === null) {
+    if (!favoritesText) {
         return [];
     }
 //Göra det array istället för text
@@ -16,30 +17,68 @@ export function getFavorites() {
 
 }
 
+console.log(getFavorites());
+
+//tar en array och spaarar i Lstorage
 function saveFavorites(favorites) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
 }
 
-export function addFavorites(activity) {
-    const favorites = getFavorites()
-    
-    let foundFavorite = null;
+function isActivityFavorite (activity) {
+    const favorites = getFavorites();
 
     for (const favorite of favorites) {
         if (favorite.id === activity.id) {
-            foundFavorite = favorite;
-            break;
+            return true;
         }
     }
+    return false;
+    
+}
 
-    if (foundFavorite) {
-        console.log("finns redan som fav", activity.name)
-        return;
+
+
+
+function toggleFav (activity) {
+    const favorites = getFavorites();
+    const activityAlreadySaved = isActivityFavorite(activity);
+
+
+    if (activityAlreadySaved) {
+        const updatedFavorites =[];
+
+        for (const favorite of favorites) {
+            if (favorite.id !== activity.id) {
+                updatedFavorites.push(favorite);
+            }
+        }
+
+        saveFavorites(updatedFavorites);
+    } else {
+        favorites.push(activity)
+        saveFavorites(favorites)
     }
+}
 
-    favorites.push(activity);
+// export function addFavorites(activity) {
+//     const favorites = getFavorites()
+    
+//     let foundFavorite = null;
+
+//     for (const favorite of favorites) {
+//         if (favorite.id === activity.id) {
+//             foundFavorite = favorite;
+//             break;
+//         }
+//     }
+
+//     if (foundFavorite) {
+//         console.log("finns redan som fav", activity.name)
+//         return;
+//     }
+
+//     favorites.push(activity);
     
 
 
-}
-//hej
+// }
