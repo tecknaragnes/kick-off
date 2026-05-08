@@ -130,8 +130,13 @@ a.spec-event {
     padding-top: 0.5em;
 }
 
+#filter-fold-section {
+    color: #000;
+    background-color: var(--accentColor2);
+}
+
 #top-fold-sec {
-    border: 0.1em solid white;
+    border: 0.1em solid var(--accentColor3);
     padding: 0.5em;
     display: flex;
     flex-flow: row wrap;
@@ -145,13 +150,16 @@ a.spec-event {
 
 #top-fold-sec img {
     height: 1.5em;
+    cursor: pointer;
+    margin-right: auto;
 }
 
-
-#filter-fold-section {
-    background-color: burlywood;
-    padding: 0.3em;
+#bottom-fold-sec {
+    padding: 0.5em;
+    display: flex;
+    flex-flow: column wrap;
 }
+
 
 /* ---------- activity card ---------- */
 .activity-card {
