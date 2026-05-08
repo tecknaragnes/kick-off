@@ -131,9 +131,35 @@ a.spec-event {
 }
 
 #filter-fold-section {
-    /* background-color: burlywood; */
-    padding: 0.3em;
+    color: #000;
+    background-color: var(--accentColor2);
 }
+
+#top-fold-sec {
+    border: 0.1em solid var(--accentColor3);
+    padding: 0.5em;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 0.5em;
+}
+
+#top-fold-sec p {
+    margin: 0.5em 0;
+}
+
+#top-fold-sec img {
+    height: 1.5em;
+    cursor: pointer;
+    margin-right: auto;
+}
+
+#bottom-fold-sec {
+    padding: 0.5em;
+    display: flex;
+    flex-flow: column wrap;
+}
+
 
 /* ---------- activity card ---------- */
 .activity-card {
@@ -277,6 +303,6 @@ a.spec-event {
 footer {
     margin: 0;
     padding: 0.2em;
-    color: #fff;
+    color: #000;
     background-color: var(--accentColor2);
 }
