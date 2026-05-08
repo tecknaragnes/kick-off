@@ -196,9 +196,9 @@ a.spec-event {
     padding: 0.5em;
 }
 
-.activity-card img {
-    height: 100%;
-    display: inline;
+.activity-card .act-flex-info img {
+    height: 1.25em;
+    margin-right: 0.25em;
 }
 
 .activity-card .act-symbols {
