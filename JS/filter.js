@@ -26,20 +26,6 @@ const searchBtn = document.querySelector(".search-btn");
 const sortFilter = document.getElementById("sortfilter");
 const outdoorFilter = document.getElementById("outdoorfilter");
 
-// try {
-//   const data = await fetchActivities({
-//     sort: sortFilter.value,
-//     outdoors: outdoorFilter.value
-//   });
-
-//   console.log(data.payload);
-//   allActivities = data.payload ?? [];
-//   renderActivities(allActivities);
-//   console.log(data.payload[0]);
-// } catch (error) {
-//   console.error(error);
-//   results.innerHTML = `<p>${error.message}</p>`;
-// }
 
 
 async function filterFromSmapi() {
@@ -64,61 +50,6 @@ async function filterFromSmapi() {
   
 }
 
-// provinceFilter.addEventListener("change", () => {
-//   const value = provinceFilter.value;
-
-//   if (value === "Alla") {
-//     renderActivities(allActivities);
-//   } else {
-//     const filtered = allActivities.filter((a) => a.province === value);
-//     renderActivities(filtered);
-//   }
-// });
-
-// priceFilter.addEventListener("change", () => {
-//   const value = priceFilter.value;
-
-//   if (value === "Alla") {
-//     renderActivities(allActivities);
-//   } else {
-//     const filtered = allActivities.filter((a) => a.price_range === value);
-//     renderActivities(filtered);
-//   }
-// });
-
-// function filterByCheckboxes() {
-//   const selectedDescriptions = [];
-
-//   if (bowlingCheckbox.checked) {
-//     selectedDescriptions.push("Bowlinghall");
-//   }
-
-//   if (GokartCheckbox.checked) {
-//     selectedDescriptions.push("Gokart");
-//   }
-
-//   if (GolfCheckbox.checked) {
-//     selectedDescriptions.push("Golfbana");
-//   }
-
-//   const filtered = allActivities.filter((activity) =>
-//     selectedDescriptions.includes(activity.description)
-//   );
-
-//   renderActivities(filtered);
-// }
-
-// bowlingCheckbox.addEventListener("change", () => {
-//   filterByCheckboxes();
-// });
-
-// GokartCheckbox.addEventListener("change", () => {
-//   filterByCheckboxes();
-// });
-
-// GolfCheckbox.addEventListener("change", () => {
-//   filterByCheckboxes();
-// });
 
 function filterActivities() {
 
@@ -208,6 +139,7 @@ function filterActivities() {
  
 }
 
+export function listenerEvents () {
 provinceFilter.addEventListener("change", filterActivities);
 priceFilter.addEventListener("change", filterActivities);
 
@@ -224,22 +156,12 @@ cinemaCheckbox.addEventListener("change", filterActivities);
 
 
 search.addEventListener("input", filterActivities);
-//searchBtn.addEventListener("click", filterActivities);
 
 searchBtn.addEventListener("click", (e)=> {
   e.preventDefault();
   filterActivities();
 })
 
-// async function filterFromSmapi() {
-//   const data = await fetchActivities({
-//     sort: sortFilter.value,
-//     outdoors: outdoorFilter.value
-//   });
-
-//   allActivities = data.payload ?? [];
-//   renderActivities(allActivities);
-// }
 
 sortFilter.addEventListener("change", () => {
   filterFromSmapi();
@@ -250,6 +172,9 @@ outdoorFilter.addEventListener("change", () => {
 });
 
 
+}
 
 
+
+listenerEvents()
 filterFromSmapi();

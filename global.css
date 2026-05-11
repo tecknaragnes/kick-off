@@ -102,6 +102,7 @@ main {
 
 .spec-event {
     background-color: var(--accentColor2);
+    box-shadow: 6px 6px 5px black;
     display: inline-block;
     padding: 0.75em;
     margin: 0.1em;
@@ -131,9 +132,35 @@ a.spec-event {
 }
 
 #filter-fold-section {
-    /* background-color: burlywood; */
-    padding: 0.3em;
+    color: #000;
+    background-color: var(--accentColor2);
 }
+
+#top-fold-sec {
+    border: 0.1em solid var(--accentColor3);
+    padding: 0.5em;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 0.5em;
+}
+
+#top-fold-sec p {
+    margin: 0.5em 0;
+}
+
+#top-fold-sec img {
+    height: 1.5em;
+    cursor: pointer;
+    margin-right: auto;
+}
+
+#bottom-fold-sec {
+    padding: 0.5em;
+    display: flex;
+    flex-flow: column wrap;
+}
+
 
 /* ---------- activity card ---------- */
 .activity-card {
@@ -164,15 +191,25 @@ a.spec-event {
 
 .activity-card a {
     text-decoration: none;
-    color: var(--accentColor4);
+    color: #000;
     background-color: #fff;
     border-radius: 1em;
     padding: 0.5em;
+    box-shadow: 6px 6px 5px black;
+    transition: background-color 0.3s;
 }
 
-.activity-card img {
-    height: 100%;
-    display: inline;
+.activity-card a:hover {
+    background-color: var(--accentColor2);
+}
+
+.activity-card .act-flex-info img {
+    height: 1.25em;
+    margin-right: 0.25em;
+}
+
+.activity-card .act-flex-card button {
+    margin: 0.5em 0.5em auto auto;
 }
 
 .activity-card .act-symbols {
@@ -185,7 +222,7 @@ a.spec-event {
 }
 
 .activity-card .act-symbols div {
-    background-color: var(--accentColor2);
+    background-color: var(--accentColor3);
     color: #000;
     padding: 0.4em 0.6em;
     border-radius: 1em;
@@ -277,7 +314,7 @@ a.spec-event {
 footer {
     margin: 0;
     padding: 0.2em;
-    color: #fff;
+    color: #000;
     background-color: var(--accentColor2);
 }
 

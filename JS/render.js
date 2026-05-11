@@ -24,16 +24,16 @@ export function renderActivities(activities) {
                     <div class="act-img"></div>
                     <div class="act-flex-info">
                         <h3>${activity.name}</h3><p>(${activity.description})</p>
-                        <p>${activity.city}, ${activity.province}</p>
+                        <p><img src="../SVG/location.svg" alt="">${activity.city}, ${activity.province}</p>
                         <p>${activity.price_range ?? "Pris saknas"} kr</p>
                     </div>
+                    <button class="favorite-btn">Spara favorit</button>
                 </div>
                 <div class="act-symbols">
                     <div>pris</div>
                     <div>tid</div>
                     <div>antal pers</div>
                     <div class="icon act-card"></div>
-                    <button class="favorite-btn">Spara favorit</button>
                     <a href="details.html?id=${activity.id}">Läs mer</a>
                 </div>
         `;
@@ -41,14 +41,14 @@ export function renderActivities(activities) {
 
         for (let i = 0; i < Math.floor(rating); i++) {
             const starIcon = document.createElement("img");
-            starIcon.src = "SVG/star.svg";
+            starIcon.src = "../SVG/star.svg";
             starIcon.alt = "";
             activityCard.querySelector(".icon.act-card").append(starIcon);
         }
         // Om det finns en decimal del i rating, lägg till en halv stjärna
         if (rating - Math.floor(rating) >= 0.5) {
             const halfStarIcon = document.createElement("img");
-            halfStarIcon.src = "SVG/half-star.svg";
+            halfStarIcon.src = "../SVG/half-star.svg";
             halfStarIcon.alt = "";
             activityCard.querySelector(".icon.act-card").append(halfStarIcon);
         }
@@ -80,17 +80,17 @@ export const renderDetailsPage = (activity) => {
             <span id="icon-price"><p>${activity.price_range}</p></span>
             <span id="icon-time"><p>tid</p></span>
             <span id="icon-ppl"><p>antal pers</p></span>
-            <span id="icon-food"><img src="SVG/food.svg" alt="Mat finns"><p>Mat</p></span>
-            <span id="icon-drink"><img src="SVG/drink.svg" alt="Dryck finns"><p>Dryck</p></span>
+            <span id="icon-food"><img src="../SVG/food.svg" alt="Mat finns"><p>Mat</p></span>
+            <span id="icon-drink"><img src="../SVG/drink.svg" alt="Dryck finns"><p>Dryck</p></span>
         </div>
         <div class="det-img"></div>
         <section id="contact-section">
             <h3>Kontakt:</h3>
-            <p class="li-icon phone"><img src="SVG/phone.svg" alt="">Telefon: ${activity.phone_number ?? "saknas"}</p>
+            <p class="li-icon phone"><img src="../SVG/phone.svg" alt="">Telefon: ${activity.phone_number ?? "saknas"}</p>
             <p class="li-icon email">Email: (finns inte i smapi)</p>
             <p class="li-icon web">Webbplats: <a href="${activity.website ?? "saknas"}">${activity.website}</a></p>
             <p>Öppettider: (finns inga i smapi)</p>
-            <p class="li-icon adress"><img src="SVG/location.svg" alt="">Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</p>
+            <p class="li-icon adress"><img src="../SVG/location.svg" alt="">Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</p>
             <a href="booking">Boka nu</a>
         </section>
         <div id="map"></div>
@@ -108,14 +108,14 @@ export const renderDetailsPage = (activity) => {
 
     for (let i = 0; i < Math.floor(rating); i++) {
         const starIcon = document.createElement("img");
-        starIcon.src = "SVG/star.svg";
+        starIcon.src = "../SVG/star.svg";
         starIcon.alt = "";
         detailsPage.querySelector("#icon-rating").append(starIcon);
     }
     // Om det finns en decimal del i rating, lägg till en halv stjärna
     if (rating - Math.floor(rating) >= 0.5) {
         const halfStarIcon = document.createElement("img");
-        halfStarIcon.src = "SVG/half-star.svg";
+        halfStarIcon.src = "../SVG/half-star.svg";
         halfStarIcon.alt = "";
         detailsPage.querySelector("#icon-rating").append(halfStarIcon);
     }
@@ -141,14 +141,14 @@ export const renderReviews = (reviews) => {
 
         for (let i = 0; i < Math.floor(rating); i++) {
             const starIcon = document.createElement("img");
-            starIcon.src = "SVG/star.svg";
+            starIcon.src = "../SVG/star.svg";
             starIcon.alt = "";
             reviewCard.querySelector(".rev-rating").append(starIcon);
         }
         // Om det finns en decimal del i rating, lägg till en halv stjärna
         if (rating - Math.floor(rating) >= 0.5) {
             const halfStarIcon = document.createElement("img");
-            halfStarIcon.src = "SVG/half-star.svg";
+            halfStarIcon.src = "../SVG/half-star.svg";
             halfStarIcon.alt = "";
             reviewCard.querySelector(".rev-rating").append(halfStarIcon);
         }
@@ -156,7 +156,7 @@ export const renderReviews = (reviews) => {
         if (rating < 5) {
             for (let i = 0; i < 5 - Math.ceil(rating); i++) {
                 const emptyStarIcon = document.createElement("img");
-                emptyStarIcon.src = "SVG/empty-star.svg";
+                emptyStarIcon.src = "../SVG/empty-star.svg";
                 emptyStarIcon.alt = "";
                 reviewCard.querySelector(".rev-rating").append(emptyStarIcon);
             }
