@@ -61,7 +61,10 @@ function toggleFav (activity) {
 }
 
 
-export function listenToFavClick () {
+export function listenToFavClick (favoriteButton, activity) {
+    favoriteButton.addEventListener("click", ()=> {
+        toggleFav(activity)
+    })
     
 }
 // export function addFavorites(activity) {
