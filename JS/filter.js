@@ -28,7 +28,7 @@ const outdoorFilter = document.getElementById("outdoorfilter");
 
 
 
-async function filterFromSmapi() {
+export async function filterFromSmapi() {
   try {
     const data = await fetchActivities({
       sort: sortFilter.value,
@@ -176,5 +176,5 @@ outdoorFilter.addEventListener("change", () => {
 
 
 
-listenerEvents()
-filterFromSmapi();
+// listenerEvents()
+// filterFromSmapi();
