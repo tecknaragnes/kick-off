@@ -44,6 +44,7 @@
             </div>
 
             <div id="filter-fold-section">
+
                 <div id="top-fold-sec">
                     <label for="sortfilter">Sortera</label>
                     <select id="sortfilter">
@@ -53,12 +54,22 @@
                         <option value="price-low">Lägst pris först</option>
                         <option value="price-high">Högst pris först</option>
                     </select>
-                    <img src="../SVG/sort.svg" alt="Byt ordning på sortering">
+                    <img src="../SVG/sort.svg" alt="Byt ordning på sortering" id="sorting">
+
+                    <label for="max-price">Maxpris</label>
+                    <input type="range" id="max-price" min="0" max="10" value="10"><span id="price-span">Ej satt</span>
+
                     <p>Fäll ut</p>
                     <img src="../SVG/hamburger.svg" alt="Hamburgarmeny">
                 </div>
 
                 <div id="bottom-fold-sec" class="visible">
+
+                    <span>
+                        <label for="physical">Max fysisk ansträngning</label>
+                        <input type="range" id="physical" min="1" max="3" value="3"><span id="physical-span"><img src="../SVG/physical.svg" alt="Hög fysisk nivå"></span>
+                    </span>
+
                     <span>
                         <label for="provincefilter">Landskap</label>
                         <select id="provincefilter">
@@ -85,7 +96,7 @@
                         </select>
                     </span>
                     <fieldset>
-                        <legend>Filtrera aktiviteter</legend>
+                        <legend>Aktiviteter</legend>
 
                         <input type="checkbox" id="Bowling" name="aktiviteter" value="Bowling">
                         <label for="Bowling">Bowling</label>
@@ -95,6 +106,7 @@
 
                         <input type="checkbox" id="Golf" name="aktiviteter" value="Golf">
                         <label for="Golf">Golfbanor</label>
+                        <!-- Ska vi verkligen ha denna? -->
 
                         <input type="checkbox" id="Nöjespark" name="aktiviteter" value="Nöjespark">
                         <label for="Nöjespark">Nöjesparker</label>
