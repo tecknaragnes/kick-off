@@ -84,3 +84,9 @@ let info = [
 ]
 
 renderReviews(info);
+
+
+
+
+
+//klass för 

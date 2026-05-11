@@ -60,6 +60,10 @@ function toggleFav (activity) {
     }
 }
 
+
+export function listenToFavClick () {
+    
+}
 // export function addFavorites(activity) {
 //     const favorites = getFavorites()
     
