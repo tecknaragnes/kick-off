@@ -317,3 +317,5 @@ footer {
     color: #000;
     background-color: var(--accentColor2);
 }
+
+#map { height: 180px; }
