@@ -1,4 +1,5 @@
 //endast rendering här, här kan vi nog använda klass
+import { listenToFavoriteClick } from "./favorite.js"
 
 // aktivitetskort ----------------------------------
 const results = document.querySelector(".results");
@@ -38,6 +39,8 @@ export function renderActivities(activities) {
                 </div>
         `;
         results.append(activityCard);
+        const favoriteButton = activityCard.querySelector(".favorite-btn");
+        listenToFavoriteClick(favoriteButton, activity);
 
         for (let i = 0; i < Math.floor(rating); i++) {
             const starIcon = document.createElement("img");

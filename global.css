@@ -220,6 +220,18 @@ a.spec-event {
     margin: 0.5em 0.5em auto auto;
 }
 
+.favorite-btn {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.favorite-btn.favorite-active {
+    background-color: rgb(232, 117, 136);
+    color: white;
+    border-color:  rgb(232, 117, 136);
+}
+
 .activity-card .act-symbols {
     display: flex;
     flex-flow: row wrap;
