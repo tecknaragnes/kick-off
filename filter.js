@@ -9,9 +9,19 @@ const results = document.querySelector(".results");
 const search = document.querySelector(".search");
 const provinceFilter = document.getElementById("provincefilter");
 const priceFilter = document.getElementById("pricefilter");
+
 const bowlingCheckbox = document.getElementById("Bowling");
 const GokartCheckbox = document.getElementById("Gokart");
 const GolfCheckbox = document.getElementById("Golf");
+const entertainmentparkCheckbox = document.getElementById("Nöjespark");
+const themeparkCheckbox = document.getElementById("Temapark");
+const ziplineCheckbox = document.getElementById("Zipline");
+const entertainmentcenterCheckbox = document.getElementById("Nöjescenter");
+const paintballCheckbox = document.getElementById("Paintball");
+const healthCheckbox = document.getElementById("Hälso");
+const cinemaCheckbox = document.getElementById("Biograf");
+
+const activityContainer = document.getElementById("selectActivity");
 const searchBtn = document.querySelector(".search-btn");
 const sortFilter = document.getElementById("sortfilter");
 const outdoorFilter = document.getElementById("outdoorfilter");
@@ -142,6 +152,34 @@ function filterActivities() {
     selectedDescriptions.push("Golfbana");
   }
 
+  if (entertainmentparkCheckbox.checked) {
+    selectedDescriptions.push("Nöjescenter");
+  }
+
+  if (themeparkCheckbox.checked) {
+    selectedDescriptions.push("Temapark");
+  }
+
+  if (ziplineCheckbox.checked) {
+    selectedDescriptions.push("Zipline");
+  }
+
+  if (entertainmentcenterCheckbox.checked) {
+    selectedDescriptions.push("Nöjescenter");
+  }
+
+  if (paintballCheckbox.checked) {
+    selectedDescriptions.push("Paintballcenter");
+  }
+
+  if (healthCheckbox.checked) {
+    selectedDescriptions.push("Hälsocenter");
+  }
+
+  if (cinemaCheckbox.checked) {
+    selectedDescriptions.push("Biograf");
+  }
+
   if (selectedDescriptions.length > 0) {
     filtered = filtered.filter((activity) => {
       return selectedDescriptions.includes(activity.description);
@@ -172,9 +210,19 @@ function filterActivities() {
 
 provinceFilter.addEventListener("change", filterActivities);
 priceFilter.addEventListener("change", filterActivities);
+
 bowlingCheckbox.addEventListener("change", filterActivities);
 GokartCheckbox.addEventListener("change", filterActivities);
 GolfCheckbox.addEventListener("change", filterActivities);
+entertainmentparkCheckbox.addEventListener("change", filterActivities);
+themeparkCheckbox.addEventListener("change", filterActivities);
+ziplineCheckbox.addEventListener("change", filterActivities);
+entertainmentcenterCheckbox.addEventListener("change", filterActivities);
+paintballCheckbox.addEventListener("change", filterActivities);
+healthCheckbox.addEventListener("change", filterActivities);
+cinemaCheckbox.addEventListener("change", filterActivities);
+
+
 search.addEventListener("input", filterActivities);
 //searchBtn.addEventListener("click", filterActivities);
 

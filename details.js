@@ -83,4 +83,11 @@ let info = [
     }
 ]
 
+var map = L.map('map').setView([payload[0].lat, payload[0].lng], 13);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+
 renderReviews(info);
