@@ -27,13 +27,13 @@ export function renderActivities(activities) {
                         <p><img src="../SVG/location.svg" alt="">${activity.city}, ${activity.province}</p>
                         <p>${activity.price_range ?? "Pris saknas"} kr</p>
                     </div>
+                    <button class="favorite-btn">Spara favorit</button>
                 </div>
                 <div class="act-symbols">
                     <div>pris</div>
                     <div>tid</div>
                     <div>antal pers</div>
                     <div class="icon act-card"></div>
-                    <button class="favorite-btn">Spara favorit</button>
                     <a href="details.html?id=${activity.id}">Läs mer</a>
                 </div>
         `;
