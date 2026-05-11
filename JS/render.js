@@ -52,6 +52,15 @@ export function renderActivities(activities) {
             halfStarIcon.alt = "";
             activityCard.querySelector(".icon.act-card").append(halfStarIcon);
         }
+        // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
+        if (rating < 5) {
+            for (let i = 0; i < 5 - Math.ceil(rating); i++) {
+                const emptyStarIcon = document.createElement("img");
+                emptyStarIcon.src = "../SVG/empty-star.svg";
+                emptyStarIcon.alt = "";
+                activityCard.querySelector(".icon.act-card").append(emptyStarIcon);
+            }
+        }
     }
 }
 
@@ -118,6 +127,15 @@ export const renderDetailsPage = (activity) => {
         halfStarIcon.src = "../SVG/half-star.svg";
         halfStarIcon.alt = "";
         detailsPage.querySelector("#icon-rating").append(halfStarIcon);
+    }
+    // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
+    if (rating < 5) {
+        for (let i = 0; i < 5 - Math.ceil(rating); i++) {
+            const emptyStarIcon = document.createElement("img");
+            emptyStarIcon.src = "../SVG/empty-star.svg";
+            emptyStarIcon.alt = "";
+            detailsPage.querySelector("#icon-rating").append(emptyStarIcon);
+        }
     }
 }
 
