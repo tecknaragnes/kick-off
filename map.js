@@ -1,1 +1,0 @@
-//karta som det står

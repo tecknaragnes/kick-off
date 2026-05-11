@@ -11,7 +11,7 @@ export async function fetchActivities(filters) {
   }
 
   const types = ["activity"];
-  const descriptions = ["Bowlinghall", "Gokart", "Golfbana"];
+  const descriptions = ["Bowlinghall", "Gokart", "Golfbana", "Nöjespark", "Temapark", "Zipline", "Nöjescenter", "Paintballcenter", "Hälsocenter", "Biograf"];
   const provinces = ["Småland", "Öland"]
   const params = new URLSearchParams({
     controller: "establishment",
