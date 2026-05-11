@@ -152,13 +152,21 @@ a.spec-event {
 #top-fold-sec img {
     height: 1.5em;
     cursor: pointer;
-    margin-right: auto;
+    /* margin-right: auto; */
+}
+
+#top-fold-sec img#sorting {
+    height: 1.2em;
 }
 
 #bottom-fold-sec {
     padding: 0.5em;
     display: flex;
     flex-flow: column wrap;
+}
+
+#bottom-fold-sec img {
+    height: 1em;
 }
 
 
@@ -318,4 +326,6 @@ footer {
     background-color: var(--accentColor2);
 }
 
-#map { height: 180px; }
+#map {
+    height: 180px;
+}
