@@ -8,7 +8,7 @@ const currentPage = document.body.dataset.page;
 const STORAGE_KEY = "favorites";
 
 //hämtar från l storage och ger tbx array
-export function getFavorites() {
+export function getFavoritesFromLs() {
     const favoritesText = localStorage.getItem(STORAGE_KEY);
 
     if (!favoritesText) {
@@ -19,15 +19,15 @@ export function getFavorites() {
 
 }
 
-console.log(getFavorites());
+console.log(getFavoritesFromLs());
 
 //tar en array och spaarar i Lstorage
-function saveFavorites(favorites) {
+function saveFavoritesToLs(favorites) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
 }
 
 function isActivityFavorite(activity) {
-    const favorites = getFavorites();
+    const favorites = getFavoritesFromLs();
 
     for (const favorite of favorites) {
         if (favorite.id === activity.id) {
@@ -40,16 +40,16 @@ function isActivityFavorite(activity) {
 
 
 function addFavorite(activity) {
-    const favorites = getFavorites();
+    const favorites = getFavoritesFromLs();
 
     favorites.push(activity)
-    saveFavorites(favorites)
+    saveFavoritesToLs(favorites)
     console.log("sparade favorite,", activity.name);
 
 }
 
 function removeFavorite(activity) {
-    const favorites = getFavorites();
+    const favorites = getFavoritesFromLs();
     const updatedFavorites = [];
 
         for (const favorite of favorites) {
@@ -58,7 +58,7 @@ function removeFavorite(activity) {
             }
         }
 
-        saveFavorites(updatedFavorites);
+        saveFavoritesToLs(updatedFavorites);
         console.log("tog bort favorit,", activity.name);
 
         if (currentPage === "favoritespage") {
@@ -98,6 +98,6 @@ export function listenToFavoriteClick(favoriteButton, activity) {
 
 
 if (currentPage === "favoritespage") {
-    const favorites = getFavorites();
+    const favorites = getFavoritesFromLs();
     renderActivities(favorites);
 }
