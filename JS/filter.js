@@ -17,8 +17,8 @@ const entertainmentparkCheckbox = document.getElementById("Nöjespark");
 const themeparkCheckbox = document.getElementById("Temapark");
 const ziplineCheckbox = document.getElementById("Zipline");
 const entertainmentcenterCheckbox = document.getElementById("Nöjescenter");
-const paintballCheckbox = document.getElementById("Paintball");
-const healthCheckbox = document.getElementById("Hälso");
+const paintballCheckbox = document.getElementById("Paintballcenter");
+const healthCheckbox = document.getElementById("Hälsocenter");
 const cinemaCheckbox = document.getElementById("Biograf");
 
 const activityContainer = document.getElementById("selectActivity");
