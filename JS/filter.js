@@ -20,7 +20,6 @@ const entertainmentcenterCheckbox = document.getElementById("Nöjescenter");
 const paintballCheckbox = document.getElementById("Paintballcenter");
 const healthCheckbox = document.getElementById("Hälsocenter");
 const cinemaCheckbox = document.getElementById("Biograf");
-
 const activityContainer = document.getElementById("selectActivity");
 const searchBtn = document.querySelector(".search-btn");
 const sortFilter = document.getElementById("sortfilter");

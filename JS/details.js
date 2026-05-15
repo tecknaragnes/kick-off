@@ -5,9 +5,6 @@ const urlParams = new URLSearchParams(window.location.search);
 const activityId = urlParams.get("id");
 
 
-
-
-
 async function loadActivityDetails() {
 
     try {
@@ -26,34 +23,25 @@ async function loadActivityDetails() {
 
         const data = await response.json();
 
-        const activities = data.payload;
+        const activities = data.payload ?? [];
 
         const selectedActivity = activities.find ((a) => {
             return a.id ===activityId;
 
     });
 
-    renderDetailsPage(selectedActivity);
+    if (!selectedActivity) {
+        console.log("ingen aktivitet hittades")
+            return;
 
-    const reviewParams = new URLSearchParams ({
-        controller: "establishment", 
-        method:"getreviews",
-        api_key: window.APIKEY,
-        id: activityId,
-    });
-
-    const reviewResponse = await fetch(`https://smapi.lnu.se/api/?${reviewParams}`);
-
-    if (!reviewResponse.ok) {
-        throw new Error  ("Kunde inte hämta recensioner");
     }
 
-    const reviewData = await reviewResponse.json();
-    renderReviews(reviewData.payload)
+    renderDetailsPage(selectedActivity);
+    await loadReviews();
 
-
+    const lat = selectedActivity.lat;
+    const lng = selectedActivity.lng;
     
-
      const map = L.map("map").setView([selectedActivity.lat, selectedActivity.lng], 13);
 
         L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -71,4 +59,28 @@ async function loadActivityDetails() {
 loadActivityDetails()
 
 
-// renderReviews(info);
+
+async function loadReviews() {
+
+const reviewParams = new URLSearchParams ({
+        controller: "establishment", 
+        method:"getreviews",
+        api_key: window.APIKEY,
+        id: activityId,
+    });
+
+    const reviewResponse = await fetch(`https://smapi.lnu.se/api/?${reviewParams}`);
+
+    if (!reviewResponse.ok) {
+        throw new Error  ("Kunde inte hämta recensioner");
+    }
+
+    const reviewData = await reviewResponse.json();
+
+    const reviews = reviewData.payload ?? [];
+    renderReviews(reviews)
+
+    
+
+}
+
