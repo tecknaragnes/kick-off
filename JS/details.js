@@ -48,6 +48,10 @@ async function loadActivityDetails() {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
+
+        L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup(selectedActivity.name);
     } catch (error) {
         console.error(error);
 
