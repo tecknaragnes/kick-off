@@ -1,10 +1,11 @@
 //endast rendering här, här kan vi nog använda klass
 import { listenToFavoriteClick } from "./favorite.js"
+import { getImageForActivity } from "./pixabay.js";
 
 // aktivitetskort ----------------------------------
 const results = document.querySelector(".results");
 
-export function renderActivities(activities) {
+export async function renderActivities(activities) {
     if (!results) return;
 
     results.innerHTML = "";
@@ -20,9 +21,12 @@ export function renderActivities(activities) {
 
         let rating = Number.parseFloat(activity.rating).toFixed(1);
 
+        const imageUrl = await getImageForActivity(activity);
+        console.log("bildlänk i render", imageUrl)
+
         activityCard.innerHTML = `
                 <div class="act-flex-card">
-                    <div class="act-img"></div>
+                    <img class="act-img" src="${imageUrl}" alt="">
                     <div class="act-flex-info">
                         <h3>${activity.name}</h3><p>(${activity.description})</p>
                         <p><img src="../SVG/location.svg" alt="">${activity.city}, ${activity.province}</p>
