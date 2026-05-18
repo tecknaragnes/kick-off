@@ -238,6 +238,7 @@ a.spec-event {
     background-color: white;
     color: black;
     border: 1px solid black;
+    border-radius: 20px;
 }
 
 .favorite-btn.favorite-active {

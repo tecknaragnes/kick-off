@@ -11,7 +11,7 @@ export async function fetchActivities(filters) {
   }
 
   const types = ["activity"];
-  const descriptions = ["Bowlinghall", "Gokart", "Golfbana", "Nöjespark", "Temapark", "Zipline", "Nöjescenter", "Paintballcenter", "Hälsocenter", "Biograf"];
+  // const descriptions = ["Bowlinghall", "Gokart", "Golfbana", "Nöjespark", "Temapark", "Zipline", "Nöjescenter", "Paintballcenter", "Hälsocenter", "Biograf"];
   const provinces = ["Småland", "Öland"]
   const params = new URLSearchParams({
     controller: "establishment",
@@ -19,10 +19,14 @@ export async function fetchActivities(filters) {
     api_key: window.APIKEY,
     types: types.join(","),
 
-    descriptions: descriptions.join(","),
+    // descriptions: descriptions.join(","),
     provinces: provinces.join(","),
 
   });
+
+  if (filters.descriptions && filters.descriptions.length >0) {
+    params.set("descriptions", filters.descriptions.join(","))
+  }
 
   if (filters.sort === "rating-high") {
     params.set("order_by", "rating");
