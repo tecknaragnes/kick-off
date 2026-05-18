@@ -142,21 +142,35 @@ a.spec-event {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    gap: 0.5em;
+    justify-content: center;
+    gap: 1em;
+}
+
+#top-fold-sec span {
+    display: flex;
+    flex-flow: row;
+    gap: 0.2em;
+    justify-content: center;
+    align-items: center;
 }
 
 #top-fold-sec p {
     margin: 0.5em 0;
+    display: inline-block;
 }
 
 #top-fold-sec img {
     height: 1.5em;
     cursor: pointer;
-    /* margin-right: auto; */
+    margin: auto 0;
 }
 
 #top-fold-sec img#sorting {
     height: 1.2em;
+}
+
+#top-fold-sec #fold-btn {
+    margin-left: auto;
 }
 
 #bottom-fold-sec {
@@ -229,7 +243,7 @@ a.spec-event {
 .favorite-btn.favorite-active {
     background-color: rgb(232, 117, 136);
     color: white;
-    border-color:  rgb(232, 117, 136);
+    border-color: rgb(232, 117, 136);
 }
 
 .activity-card .act-symbols {
