@@ -14,12 +14,23 @@ export const getImageForActivity = async (activity) => {
             orientation: "vertical",
             lang: "sv",
         });
-        console.log(`https://pixabay.com/api/?${params}`);
+
+        if (activity.description === "Nöjescenter") {
+            params.set("q", "arcade+game");
+            params.set("lang", "en");
+        }
+        if (activity.description === "Paintballcenter") {
+            params.set("q", "paintball");
+        }
+        if (activity.description === "Hälsocenter") {
+            params.set("q", "dragkamp+män");
+        }
+
         const response = await fetch(`https://pixabay.com/api/?${params}`);
         const pixaPics = await response.json();
 
-        if (pixaPics.hits && pixaPics.hits.length > 0) {
-            const imageUrl = pixaPics.hits[0].webformatURL;
+        if (pixaPics.hits && pixaPics.hits.length > 0) { //om det finns bilder i svaret
+            const imageUrl = pixaPics.hits[activity.id % pixaPics.hits.length].webformatURL;
             //lägga in den i cache med aktivitetens id som nyckel
             imageCache.set(activity.id, imageUrl);
             return imageUrl;
@@ -27,6 +38,7 @@ export const getImageForActivity = async (activity) => {
         return null; // ingen bild hittades
     } catch (error) {
         console.error("Fel vid hämtning från Pixabay:", error);
+        console.log("url:", `https://pixabay.com/api/?${params}`);
         return null;
     }
 };

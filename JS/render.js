@@ -22,7 +22,6 @@ export async function renderActivities(activities) {
         let rating = Number.parseFloat(activity.rating).toFixed(1);
 
         const imageUrl = await getImageForActivity(activity);
-        console.log("bildlänk i render", imageUrl)
 
         activityCard.innerHTML = `
                 <div class="act-flex-card">
