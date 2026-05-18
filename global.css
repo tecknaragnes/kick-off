@@ -15,7 +15,7 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: "Federo", Roboto, san-serif;
+    font-family: "Federo", Roboto, sans-serif;
 }
 
 
@@ -100,6 +100,14 @@ main {
     align-items: center;
 }
 
+#event-flex {
+    margin: 0 0.5em;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 .spec-event {
     background-color: var(--accentColor2);
     box-shadow: 6px 6px 5px black;
@@ -107,7 +115,7 @@ main {
     padding: 0.75em;
     margin: 0.1em;
     border-radius: 0.5em;
-    font-family: "Federo", Roboto, san-serif;
+    font-family: "Federo", Roboto, sans-serif;
     font-size: 1.1em;
     transition: background-color 0.3s;
 }
@@ -121,6 +129,10 @@ a.spec-event {
     text-decoration: none;
 }
 
+#examples h2 {
+    margin: 1em;
+}
+
 /* ---------- filtrering ---------- */
 #filters {
     display: flex;
@@ -129,6 +141,10 @@ a.spec-event {
     justify-content: center;
     align-items: center;
     padding-top: 0.5em;
+}
+
+#search-flex img {
+    height: 1.2em;
 }
 
 #filter-fold-section {
@@ -203,6 +219,7 @@ a.spec-event {
     height: 7em;
     width: 5em;
     background-color: #fff;
+    /* Går det att placera denna längst upp i vänstra hörnet? */
 }
 
 .activity-card h3,
@@ -348,11 +365,35 @@ a.spec-event {
 /* ---------- footer ---------- */
 footer {
     margin: 0;
-    padding: 0.2em;
+    padding: 0.5em;
     color: #000;
     background-color: var(--accentColor2);
 }
 
 #map {
     height: 180px;
+}
+
+
+
+/* ---------- responsiv från mobil till desktop ---------- */
+@media screen and (min-width: 600px) {
+    main {
+        display: grid;
+        grid-template-columns: auto 600px auto;
+        grid-template-rows: 10em min-content;
+        grid-template-areas:
+            ". filter ."
+            ". results .";
+    }
+
+    #categories,
+    #filters {
+        grid-area: filter;
+    }
+
+    #examples,
+    .results {
+        grid-area: results;
+    }
 }
