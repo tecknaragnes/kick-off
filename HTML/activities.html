@@ -22,7 +22,6 @@
             <li><a href="index.html">Hem</a></li>
             <li id="current-page"><a href="activities.html">Aktiviteter</a></li>
             <li><a href="favorite.html">Favoriter</a></li>
-            <li><a href="about.html">Om oss</a></li>
         </ul>
     </nav>
 
@@ -46,21 +45,25 @@
             <div id="filter-fold-section">
 
                 <div id="top-fold-sec">
-                    <label for="sortfilter">Sortera</label>
-                    <select id="sortfilter">
-                        <option value="standard">Standard</option>
-                        <option value="rating-high">Högst betyg först</option>
-                        <option value="rating-low">Lägst betyg först</option>
-                        <option value="price-low">Lägst pris först</option>
-                        <option value="price-high">Högst pris först</option>
-                    </select>
-                    <img src="../SVG/sort.svg" alt="Byt ordning på sortering" id="sorting">
-
-                    <label for="max-price">Maxpris</label>
-                    <input type="range" id="max-price" min="0" max="10" value="10"><span id="price-span">Ej satt</span>
-
-                    <p>Fäll ut</p>
-                    <img src="../SVG/hamburger.svg" alt="Hamburgarmeny">
+                    <span>
+                        <label for="sortfilter">Sortera</label>
+                        <select id="sortfilter">
+                            <option value="standard">Standard</option>
+                            <option value="rating-high">Högst betyg först</option>
+                            <option value="rating-low">Lägst betyg först</option>
+                            <option value="price-low">Lägst pris först</option>
+                            <option value="price-high">Högst pris först</option>
+                        </select>
+                        <img src="../SVG/sort.svg" alt="Byt ordning på sortering" id="sorting">
+                    </span>
+                    <span>
+                        <label for="max-price">Maxpris</label>
+                        <input type="range" id="max-price" min="0" max="10" value="10"><span id="price-span">Ej satt</span>
+                    </span>
+                    <span id="fold-btn">
+                        <p>Fäll ut</p>
+                        <img src="../SVG/hamburger.svg" alt="Hamburgarmeny">
+                    </span>
                 </div>
 
                 <div id="bottom-fold-sec" class="visible">
