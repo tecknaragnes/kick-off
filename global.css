@@ -219,6 +219,7 @@ a.spec-event {
     height: 7em;
     width: 5em;
     background-color: #fff;
+    /* Går det att placera denna längst upp i vänstra hörnet? */
 }
 
 .activity-card h3,
@@ -386,11 +387,13 @@ footer {
             ". results .";
     }
 
-    #categories {
+    #categories,
+    #filters {
         grid-area: filter;
     }
 
-    #examples {
+    #examples,
+    .results {
         grid-area: results;
     }
 }
