@@ -4,11 +4,15 @@ html {
     --accentColor2: rgb(150, 207, 212);
     --accentColor3: rgb(91, 174, 177);
     --accentColor4: rgb(22, 32, 48);
+    height: 100%;
 }
 
 
 body {
     margin: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100vh;
 }
 
 h1,
@@ -90,6 +94,7 @@ main {
     padding-bottom: 0.5em;
     color: #fff;
     background-color: var(--backgroundColor);
+    flex: 1 0 auto;
 }
 
 #categories {
@@ -287,6 +292,16 @@ a.spec-event {
 
 
 
+/* ---------- favoriter ---------- */
+body[data-page="favoritespage"] main {
+    padding: 0.1em;
+}
+
+/* #favorites */
+
+
+
+
 /* ---------- detaljsida ---------- */
 #details-header {
     display: flex;
@@ -369,6 +384,7 @@ footer {
     padding: 0.5em;
     color: #000;
     background-color: var(--accentColor2);
+    flex-shrink: 0;
 }
 
 #map {
@@ -382,7 +398,7 @@ footer {
     main {
         display: grid;
         grid-template-columns: auto 600px auto;
-        grid-template-rows: min-content min-content;
+        grid-template-rows: min-content minmax(1em auto);
         grid-template-areas:
             ". filter ."
             ". results .";
@@ -395,6 +411,18 @@ footer {
 
     #examples,
     .results {
+        grid-area: results;
+    }
+
+    body[data-page="favoritespage"] main {
+        display: grid;
+        grid-template-columns: auto 600px auto;
+        grid-template-rows: min-content;
+        grid-template-areas:
+            ". results .";
+    }
+
+    body[data-page="favoritespage"] .results {
         grid-area: results;
     }
 }
@@ -414,11 +442,13 @@ footer {
             ". results . filter .";
     }
 
-    #filters {
+    #filters,
+    #categories {
         justify-content: start;
         position: sticky;
         top: 1em;
         /* den vill inte vara sticky... Tänker att man vill att den förljer med när man skrollar */
+        /* ev lägga till en bild under #categories när den är delad på skärmen */
     }
 
     #bottom-fold-sec {

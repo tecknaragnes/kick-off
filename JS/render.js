@@ -11,7 +11,7 @@ export async function renderActivities(activities) {
     results.innerHTML = "";
 
     if (!activities || activities.length === 0) {
-        results.innerHTML = "<p>inget hittat</p>";
+        results.innerHTML = "<p>Inga aktiviteter hittades</p>";
         return;
     }
 
