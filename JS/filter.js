@@ -8,7 +8,7 @@ let allActivities = [];
 const results = document.querySelector(".results");
 const search = document.querySelector(".search");
 // const provinceFilter = document.getElementById("provincefilter");
-const priceFilter = document.getElementById("pricefilter");
+// const priceFilter = document.getElementById("pricefilter");
 
 const bowlingCheckbox = document.getElementById("Bowling");
 const GokartCheckbox = document.getElementById("Gokart");
@@ -74,12 +74,12 @@ function filterActivities() {
   //   });
   // }
 
-  const priceValue = priceFilter.value;
-  if (priceValue !== "Alla") {
-    filtered = filtered.filter((activity) => {
-      return activity.price_range === priceValue;
-    });
-  }
+  // const priceValue = priceFilter.value;
+  // if (priceValue !== "Alla") {
+  //   filtered = filtered.filter((activity) => {
+  //     return activity.price_range === priceValue;
+  //   });
+  // }
   const selectedDescriptions = getSelectedDescriptions();
 
   //  const selectedDescriptions = [];
@@ -154,7 +154,7 @@ function filterActivities() {
 
 export function listenerEvents() {
   // provinceFilter.addEventListener("change", filterActivities);
-  priceFilter.addEventListener("change", filterActivities);
+  // priceFilter.addEventListener("change", filterActivities);
 
   bowlingCheckbox.addEventListener("change", filterFromSmapi);
   GokartCheckbox.addEventListener("change", filterFromSmapi);
