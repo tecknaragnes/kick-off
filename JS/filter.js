@@ -106,7 +106,7 @@ function filterActivities() {
   //     return activity.price_range === priceValue;
   //   });
   // }
-  const selectedDescriptions = getSelectedDescriptions();
+  // const selectedDescriptions = getSelectedDescriptions();
 
   //  const selectedDescriptions = [];
 
@@ -150,11 +150,11 @@ function filterActivities() {
   //   selectedDescriptions.push("Biograf");
   // }
 
-  if (selectedDescriptions.length > 0) {
-    filtered = filtered.filter((activity) => {
-      return selectedDescriptions.includes(activity.description);
-    });
-  }
+  // if (selectedDescriptions.length > 0) {
+  //   filtered = filtered.filter((activity) => {
+  //     return selectedDescriptions.includes(activity.description);
+  //   });
+  // }
 
   const searchText = search.value.trim().toLowerCase();
 
