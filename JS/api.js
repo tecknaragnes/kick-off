@@ -10,17 +10,12 @@ export async function fetchActivities(filters) {
     filters = {};
   }
 
-  const types = ["activity"];
-  // const descriptions = ["Bowlinghall", "Gokart", "Golfbana", "Nöjespark", "Temapark", "Zipline", "Nöjescenter", "Paintballcenter", "Hälsocenter", "Biograf"];
-  const provinces = ["Småland", "Öland"]
   const params = new URLSearchParams({
     controller: "establishment",
     method: "getall",
     api_key: window.APIKEY,
-    types: types.join(","),
+    types: "activity",
 
-    // descriptions: descriptions.join(","),
-    provinces: provinces.join(","),
 
   });
 
@@ -90,19 +85,4 @@ console.log("URL som skickas:", `https://smapi.lnu.se/api/?${params}`);
   return response.json();
 }
 
-
-///ta med review oxå
-
-
-// try {
-//   const data = await fetchActivities ()
-//   console.log(data.payload);
-//   allActivities = data.payload;
-//   renderActivities(allActivities)
-//   console.log(data.payload[0])
-
-// } catch(error) {
-//   console.error(error);
-//   results.innerHTML = `<p>${error.message}</p>`
-// }
 

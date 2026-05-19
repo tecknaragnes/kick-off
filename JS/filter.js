@@ -26,13 +26,27 @@ const sortFilter = document.getElementById("sortfilter");
 const outdoorFilter = document.getElementById("outdoorfilter");
 
 
+const allowedDescriptions = [
+  "Bowlinghall",
+  "Gokart",
+  "Golfbana",
+  "Nöjespark",
+  "Temapark",
+  "Zipline",
+  "Nöjescenter",
+  "Paintballcenter",
+  "Hälsocenter",
+  "Biograf"
+];
 
 export async function filterFromSmapi() {
   try {
+
+
     const data = await fetchActivities({
       sort: sortFilter.value,
       outdoors: outdoorFilter.value,
-      descriptions: getSelectedDescriptions(),
+      descriptions: getDescriptionsForSmapi(),
     });
 
     console.log(data.payload);
@@ -61,6 +75,18 @@ function getSelectedDescriptions() {
   }
 
   return selectedDescriptions;
+}
+
+//kollar om checkbox är vald, om inte skicka alloweddesc som är array listan
+function getDescriptionsForSmapi() {
+  const selectedDescriptions = getSelectedDescriptions();
+
+  if (selectedDescriptions.length > 0) {
+    return selectedDescriptions;
+  } else {
+    return allowedDescriptions;
+  }
+  
 }
 
 function filterActivities() {

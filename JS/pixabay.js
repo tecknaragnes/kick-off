@@ -8,7 +8,7 @@ export const getImageForActivity = async (activity) => {
 
     try {
         const params = new URLSearchParams({ //skapa sökväg för pixabay
-            key: pixakey,
+            key: window.pixakey,
             q: activity.description,
             image_type: "photo",
             orientation: "vertical",
@@ -38,7 +38,7 @@ export const getImageForActivity = async (activity) => {
         return null; // ingen bild hittades
     } catch (error) {
         console.error("Fel vid hämtning från Pixabay:", error);
-        console.log("url:", `https://pixabay.com/api/?${params}`);
+        //console.log("url:", `https://pixabay.com/api/?${params}`);
         return null;
     }
 };
