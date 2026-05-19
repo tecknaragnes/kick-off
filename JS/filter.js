@@ -7,7 +7,7 @@ let allActivities = [];
 
 const results = document.querySelector(".results");
 const search = document.querySelector(".search");
-const provinceFilter = document.getElementById("provincefilter");
+// const provinceFilter = document.getElementById("provincefilter");
 const priceFilter = document.getElementById("pricefilter");
 
 const bowlingCheckbox = document.getElementById("Bowling");
@@ -47,7 +47,7 @@ export async function filterFromSmapi() {
     console.error(error);
     results.innerHTML = `<p>${error.message}</p>`;
   }
-  
+
 }
 //läser value på checkboxen från html
 function getSelectedDescriptions() {
@@ -67,12 +67,12 @@ function filterActivities() {
 
   let filtered = allActivities;
 
-  const provinceValue = provinceFilter.value;
-  if (provinceValue !== "Alla") {
-    filtered = filtered.filter((activity) => {
-      return activity.province === provinceValue;
-    });
-  }
+  // const provinceValue = provinceFilter.value;
+  // if (provinceValue !== "Alla") {
+  //   filtered = filtered.filter((activity) => {
+  //     return activity.province === provinceValue;
+  //   });
+  // }
 
   const priceValue = priceFilter.value;
   if (priceValue !== "Alla") {
@@ -80,7 +80,7 @@ function filterActivities() {
       return activity.price_range === priceValue;
     });
   }
-const selectedDescriptions = getSelectedDescriptions();
+  const selectedDescriptions = getSelectedDescriptions();
 
   //  const selectedDescriptions = [];
 
@@ -130,9 +130,9 @@ const selectedDescriptions = getSelectedDescriptions();
     });
   }
 
-  const searchText =search.value.trim().toLowerCase();
+  const searchText = search.value.trim().toLowerCase();
 
-   if (searchText !== "") {
+  if (searchText !== "") {
     filtered = filtered.filter((activity) => {
       const name = (activity.name ?? "").toLowerCase();
       const description = (activity.description ?? "").toLowerCase();
@@ -148,41 +148,41 @@ const selectedDescriptions = getSelectedDescriptions();
 
   renderActivities(filtered);
 
-  
- 
+
+
 }
 
-export function listenerEvents () {
-provinceFilter.addEventListener("change", filterActivities);
-priceFilter.addEventListener("change", filterActivities);
+export function listenerEvents() {
+  // provinceFilter.addEventListener("change", filterActivities);
+  priceFilter.addEventListener("change", filterActivities);
 
-bowlingCheckbox.addEventListener("change", filterFromSmapi);
-GokartCheckbox.addEventListener("change", filterFromSmapi);
-GolfCheckbox.addEventListener("change", filterFromSmapi);
-entertainmentparkCheckbox.addEventListener("change", filterFromSmapi);
-themeparkCheckbox.addEventListener("change", filterFromSmapi);
-ziplineCheckbox.addEventListener("change", filterFromSmapi);
-entertainmentcenterCheckbox.addEventListener("change", filterFromSmapi);
-paintballCheckbox.addEventListener("change", filterFromSmapi);
-healthCheckbox.addEventListener("change", filterFromSmapi);
-cinemaCheckbox.addEventListener("change", filterFromSmapi);
-
-
-search.addEventListener("input", filterActivities);
-
-searchBtn.addEventListener("click", (e)=> {
-  e.preventDefault();
-  filterActivities();
-})
+  bowlingCheckbox.addEventListener("change", filterFromSmapi);
+  GokartCheckbox.addEventListener("change", filterFromSmapi);
+  GolfCheckbox.addEventListener("change", filterFromSmapi);
+  entertainmentparkCheckbox.addEventListener("change", filterFromSmapi);
+  themeparkCheckbox.addEventListener("change", filterFromSmapi);
+  ziplineCheckbox.addEventListener("change", filterFromSmapi);
+  entertainmentcenterCheckbox.addEventListener("change", filterFromSmapi);
+  paintballCheckbox.addEventListener("change", filterFromSmapi);
+  healthCheckbox.addEventListener("change", filterFromSmapi);
+  cinemaCheckbox.addEventListener("change", filterFromSmapi);
 
 
-sortFilter.addEventListener("change", () => {
-  filterFromSmapi();
-});
+  search.addEventListener("input", filterActivities);
 
-outdoorFilter.addEventListener("change", () => {
-  filterFromSmapi();
-});
+  searchBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    filterActivities();
+  })
+
+
+  sortFilter.addEventListener("change", () => {
+    filterFromSmapi();
+  });
+
+  outdoorFilter.addEventListener("change", () => {
+    filterFromSmapi();
+  });
 
 
 }
