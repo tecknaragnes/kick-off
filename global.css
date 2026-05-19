@@ -150,6 +150,7 @@ a.spec-event {
 #filter-fold-section {
     color: #000;
     background-color: var(--accentColor2);
+    /* fastställ bredd ca 600px */
 }
 
 #top-fold-sec {
@@ -191,7 +192,7 @@ a.spec-event {
 
 #bottom-fold-sec {
     padding: 0.5em;
-    display: flex;
+    display: none;
     flex-flow: column wrap;
 }
 
@@ -381,7 +382,7 @@ footer {
     main {
         display: grid;
         grid-template-columns: auto 600px auto;
-        grid-template-rows: 10em min-content;
+        grid-template-rows: min-content min-content;
         grid-template-areas:
             ". filter ."
             ". results .";
@@ -395,5 +396,32 @@ footer {
     #examples,
     .results {
         grid-area: results;
+    }
+}
+
+@media screen and (min-width: 650px) {
+    .activity-card {
+        margin: 1em 0;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    main {
+        display: grid;
+        grid-template-columns: auto minmax(400px, 600px) 1em minmax(500px, 600px) auto;
+        grid-template-rows: auto;
+        grid-template-areas:
+            ". results . filter .";
+    }
+
+    #filters {
+        justify-content: start;
+        position: sticky;
+        top: 1em;
+        /* den vill inte vara sticky... Tänker att man vill att den förljer med när man skrollar */
+    }
+
+    #bottom-fold-sec {
+        display: flex;
     }
 }
