@@ -1,14 +1,12 @@
 import { renderActivities } from "./render.js";
 import { fetchActivities } from "./api.js";
 
-console.log("Helloooo");
-
 let allActivities = [];
 
 const results = document.querySelector(".results");
 const search = document.querySelector(".search");
 // const provinceFilter = document.getElementById("provincefilter");
-// const priceFilter = document.getElementById("pricefilter");
+const priceFilter = document.getElementById("max-price");
 
 const bowlingCheckbox = document.getElementById("Bowling");
 const GokartCheckbox = document.getElementById("Gokart");
@@ -20,10 +18,22 @@ const entertainmentcenterCheckbox = document.getElementById("Nöjescenter");
 const paintballCheckbox = document.getElementById("Paintballcenter");
 const healthCheckbox = document.getElementById("Hälsocenter");
 const cinemaCheckbox = document.getElementById("Biograf");
-const activityContainer = document.getElementById("selectActivity");
+
 const searchBtn = document.querySelector(".search-btn");
 const sortFilter = document.getElementById("sortfilter");
 const outdoorFilter = document.getElementById("outdoorfilter");
+const physicalFilter = document.getElementById("physical");
+const timeFilter = document.getElementById("time");
+const timeArray = ["Kort", "Timmar", "Heldag"];
+
+// I spökhuset har jag för scareIndex "let index;" på toppnivå
+// sen "let scareIndex = index ?? 0;" i filter-funktionen som lyssnarna kallar på
+// och "scareSlider.addEventListener("input", () => {
+//     index = Number(scareSlider.value) - 1;
+//     scareValue.textContent = scareArray[index];
+//     filterResult();
+// });" i funktionen med alla lyssnare
+// Går detta att använda sig av i pris, tid, och fysisk-filterna??
 
 
 const allowedDescriptions = [
@@ -39,10 +49,9 @@ const allowedDescriptions = [
   "Biograf"
 ];
 
+
 export async function filterFromSmapi() {
   try {
-
-
     const data = await fetchActivities({
       sort: sortFilter.value,
       outdoors: outdoorFilter.value,
@@ -53,8 +62,6 @@ export async function filterFromSmapi() {
 
     allActivities = data.payload ?? [];
 
-    console.log("Första aktiviteten:", allActivities[0]);
-
     filterActivities();
 
   } catch (error) {
@@ -63,6 +70,8 @@ export async function filterFromSmapi() {
   }
 
 }
+
+
 //läser value på checkboxen från html
 function getSelectedDescriptions() {
   const checkboxes = document.querySelectorAll(`input[name="aktiviteter"]`);
@@ -77,6 +86,7 @@ function getSelectedDescriptions() {
   return selectedDescriptions;
 }
 
+
 //kollar om checkbox är vald, om inte skicka alloweddesc som är array listan
 function getDescriptionsForSmapi() {
   const selectedDescriptions = getSelectedDescriptions();
@@ -86,8 +96,9 @@ function getDescriptionsForSmapi() {
   } else {
     return allowedDescriptions;
   }
-  
+
 }
+
 
 function filterActivities() {
 
@@ -100,8 +111,8 @@ function filterActivities() {
   //   });
   // }
 
-  // const priceValue = priceFilter.value;
-  // if (priceValue !== "Alla") {
+  // const maxPriceValue = priceFilter.value;
+  // if (maxPriceValue !== "Alla") {
   //   filtered = filtered.filter((activity) => {
   //     return activity.price_range === priceValue;
   //   });
@@ -173,14 +184,16 @@ function filterActivities() {
   }
 
   renderActivities(filtered);
-
-
-
 }
+
+
 
 export function listenerEvents() {
   // provinceFilter.addEventListener("change", filterActivities);
-  // priceFilter.addEventListener("change", filterActivities);
+  priceFilter.addEventListener("change", filterActivities);
+  physicalFilter.addEventListener("change", () => {
+    index
+  });
 
   bowlingCheckbox.addEventListener("change", filterFromSmapi);
   GokartCheckbox.addEventListener("change", filterFromSmapi);
@@ -201,7 +214,6 @@ export function listenerEvents() {
     filterActivities();
   })
 
-
   sortFilter.addEventListener("change", () => {
     filterFromSmapi();
   });
@@ -209,11 +221,4 @@ export function listenerEvents() {
   outdoorFilter.addEventListener("change", () => {
     filterFromSmapi();
   });
-
-
-}
-
-
-
-// listenerEvents()
-// filterFromSmapi();
+};

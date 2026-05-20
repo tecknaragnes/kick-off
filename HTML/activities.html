@@ -59,16 +59,35 @@
                         <input type="range" id="max-price" min="0" max="10" value="10"><span id="price-span">Ej satt</span>
                     </span>
                     <span id="fold-btn">
-                        <p>Fäll ut</p>
-                        <img src="../SVG/hamburger.svg" alt="Hamburgarmeny">
+                        <p id="fold-text">Fäll ut</p>
+                        <img src="../SVG/foldout.svg" alt="Fäll ut fler filter">
                     </span>
                 </div>
 
                 <div id="bottom-fold-sec" class="visible">
 
                     <span>
-                        <label for="physical">Max fysisk ansträngning</label>
+                        <label for="physical">Max fysisk ansträngning:</label>
                         <input type="range" id="physical" min="1" max="3" value="3"><span id="physical-span"><img src="../SVG/physical.svg" alt="Hög fysisk nivå"></span>
+                    </span>
+
+                    <span>
+                        <label for="time">Minst tidsåtgång:</label>
+                        <input type="range" id="time" min="0" max="2" value="0"><span id="time-span"></span>
+                    </span>
+
+                    <span>
+                        <label for="distance">Närhet:</label>
+                        <input type="range" id="distance" min="0" max="10" value="10"><span id="distance-span">Ej satt</span>
+                    </span>
+
+                    <span>
+                        <label for="outdoorfilter">Utomhus:</label>
+                        <select id="outdoorfilter">
+                            <option value="Alla">Ej specificerat</option>
+                            <option value="Y">Utomhus</option>
+                            <option value="N">Inomhus</option>
+                        </select>
                     </span>
 
                     <!-- <span> ska vi byta denna till några större städer?
@@ -79,23 +98,7 @@
                             <option value="Öland">Öland</option>
                         </select>
                     </span> -->
-                    <!-- <span>
-                        <label for="pricefilter">Pris</label>
-                        <select id="pricefilter">
-                            <option value="Alla">Alla</option>
-                            <option value="100-250">100-250 kr</option>
-                            <option value="250-500">250-500 kr</option>
-                            <option value="500-1000">500-1000 kr</option>
-                        </select>
-                    </span> -->
-                    <span>
-                        <label for="outdoorfilter">Utomhus</label>
-                        <select id="outdoorfilter">
-                            <option value="Alla">Inomhus/utomhus</option>
-                            <option value="Y">Utomhus</option>
-                            <option value="N">Inomhus</option>
-                        </select>
-                    </span>
+
                     <fieldset>
                         <legend>Aktiviteter</legend>
 
