@@ -52,3 +52,31 @@ export async function fetchActivities(filters) {
 
   return response.json();
 }
+
+
+// En annan controller (activity)
+export async function fetchActivitiesConAct(filters) {
+
+  if (!filters) {
+    filters = {};
+  }
+
+  const params = new URLSearchParams({
+    controller: "activity",
+    method: "getall",
+    api_key: window.APIKEY
+  });
+
+  //physical_effort, disability_support, estimated_duration
+
+  console.log("visar full URL,", `https://smapi.lnu.se/api/?${params}`);
+
+  console.log("URL som skickas:", `https://smapi.lnu.se/api/?${params}`);
+  const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
+
+  if (!response.ok) {
+    throw new Error("Sökningen misslyckades");
+  }
+
+  return response.json();
+}

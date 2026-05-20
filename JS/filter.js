@@ -33,15 +33,6 @@ const timeArray = ["Snabbis", "Halvdag", "Heldag"]; //snabbis??? vad ska man skr
 const distanceFilter = document.getElementById("distance");
 const distanceSpan = document.getElementById("distance-span");
 
-// I spökhuset har jag för scareIndex "let index;" på toppnivå
-// sen "let scareIndex = index ?? 0;" i filter-funktionen som lyssnarna kallar på
-// och "scareSlider.addEventListener("input", () => {
-//     index = Number(scareSlider.value) - 1;
-//     scareValue.textContent = scareArray[index];
-//     filterResult();
-// });" i funktionen med alla lyssnare
-// Går detta att använda sig av i pris, tid, och fysisk-filterna??
-
 
 const allowedDescriptions = [
   "Bowlinghall",
@@ -57,7 +48,7 @@ const allowedDescriptions = [
 ];
 
 
-export async function filterFromSmapi() {
+export async function filterFromSmapi() { // för controller establishment
   try {
     const data = await fetchActivities({
       sort: sortFilter.value,
@@ -66,16 +57,32 @@ export async function filterFromSmapi() {
     });
 
     console.log(data.payload);
-
     allActivities = data.payload ?? [];
-
     filterActivities();
 
   } catch (error) {
     console.error(error);
     results.innerHTML = `<p>${error.message}</p>`;
   }
+}
 
+export async function filterFromSmapiConAct() {
+  // För controller activity
+  try {
+    const data = await fetchActivitiesConAct({
+      physical_effort: physicalFilter.value,
+      estimated_duration: timeFilter.value,
+      // disability_support: ,
+    }); // hur sätter man in den? 
+
+    console.log(data.payload);
+    allActivities = data.payload ?? [];
+    filterActivities();
+
+  } catch (error) {
+    console.error(error);
+    results.innerHTML = `<p>${error.message}</p>`;
+  }
 }
 
 

@@ -1,7 +1,6 @@
 //renderingen, filtrering imortera det
 import { listenerEvents, filterFromSmapi } from "./filter.js"
 
-
 listenerEvents()
 filterFromSmapi();
 
