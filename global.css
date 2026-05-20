@@ -164,7 +164,7 @@ a.spec-event {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     gap: 1em;
     box-sizing: border-box;
 }
@@ -198,7 +198,7 @@ a.spec-event {
 
 #bottom-fold-sec {
     padding: 0.5em;
-    display: none;
+    /* display: none; */
     flex-flow: column wrap;
     gap: 0.4em;
 }
@@ -425,9 +425,9 @@ footer {
 
 
 /* ---------- responsiv från mobil till desktop ---------- */
-@media screen and (min-width: 420px) {
+@media screen and (min-width: 390px) {
     #bottom-fold-sec>span {
-        width: 25em;
+        width: 23em;
         flex-flow: row wrap;
     }
 }

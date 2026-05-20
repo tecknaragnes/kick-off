@@ -36,7 +36,6 @@ export async function renderActivities(activities) {
                 <div class="act-symbols">
                     <div>pris</div>
                     <div>tid</div>
-                    <div>antal pers</div>
                     <div class="icon act-card"></div>
                     <a href="details.html?id=${activity.id}">Läs mer</a>
                 </div>
