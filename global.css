@@ -155,7 +155,7 @@ a.spec-event {
 #filter-fold-section {
     color: #000;
     background-color: var(--accentColor2);
-    /* fastställ bredd ca 600px */
+    width: 100%;
 }
 
 #top-fold-sec {
@@ -167,8 +167,6 @@ a.spec-event {
     justify-content: center;
     gap: 1em;
     box-sizing: border-box;
-    width: 100%;
-    /* När den är infälld är den smalare än när den är utfälld. Vet inte om jag får till det */
 }
 
 #top-fold-sec span {
@@ -203,6 +201,26 @@ a.spec-event {
     display: none;
     flex-flow: column wrap;
     gap: 0.4em;
+}
+
+#bottom-fold-sec>span {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: start;
+    align-items: start;
+}
+
+#bottom-fold-sec>span label {
+    margin-right: auto;
+}
+
+#bottom-fold-sec>span select {
+    margin-right: 5em;
+}
+
+#bottom-fold-sec>span>span {
+    display: inline-block;
+    width: 4em;
 }
 
 #bottom-fold-sec img {
@@ -313,9 +331,6 @@ body[data-page="favoritespage"] main {
     padding: 0.1em;
 }
 
-/* #favorites */
-
-
 
 
 /* ---------- detaljsida ---------- */
@@ -410,6 +425,13 @@ footer {
 
 
 /* ---------- responsiv från mobil till desktop ---------- */
+@media screen and (min-width: 420px) {
+    #bottom-fold-sec>span {
+        width: 25em;
+        flex-flow: row wrap;
+    }
+}
+
 @media screen and (min-width: 600px) {
     main {
         display: grid;
