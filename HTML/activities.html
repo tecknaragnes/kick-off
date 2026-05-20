@@ -55,8 +55,8 @@
                         <img src="../SVG/sort.svg" alt="Byt ordning på sortering" id="sorting">
                     </span>
                     <span>
-                        <label for="max-price">Maxpris</label>
-                        <input type="range" id="max-price" min="0" max="10" value="10"><span id="price-span">Ej satt</span>
+                        <label for="max-price">Maxpris:</label>
+                        <input type="range" id="max-price" min="0" max="6" value="6"><span id="price-span">Ej satt</span>
                     </span>
                     <span id="fold-btn">
                         <p id="fold-text">Fäll ut</p>
@@ -68,16 +68,16 @@
 
                     <span>
                         <label for="physical">Max fysisk ansträngning:</label>
-                        <input type="range" id="physical" min="1" max="3" value="3"><span id="physical-span"><img src="../SVG/physical.svg" alt="Hög fysisk nivå"></span>
+                        <input type="range" id="physical" min="1" max="3" value="3"><span id="physical-span">Ej satt</span>
                     </span>
 
                     <span>
                         <label for="time">Minst tidsåtgång:</label>
-                        <input type="range" id="time" min="0" max="2" value="0"><span id="time-span"></span>
+                        <input type="range" id="time" min="0" max="2" value="0"><span id="time-span">Ej satt</span>
                     </span>
 
                     <span>
-                        <label for="distance">Närhet:</label>
+                        <label for="distance">Maxdistans:</label>
                         <input type="range" id="distance" min="0" max="10" value="10"><span id="distance-span">Ej satt</span>
                     </span>
 
@@ -90,14 +90,23 @@
                         </select>
                     </span>
 
-                    <!-- <span> ska vi byta denna till några större städer?
-                        <label for="provincefilter">Landskap</label>
-                        <select id="provincefilter">
+                    <span>
+                        <label for="cityFilter">Stad:</label>
+                        <select id="cityFilter">
                             <option value="Alla">Alla</option>
-                            <option value="Småland">Småland</option>
-                            <option value="Öland">Öland</option>
+                            <option value="Jönköping">Jönköping</option>
+                            <option value="Växjö">Växjö</option>
+                            <option value="Kalmar">Kalmar</option>
+                            <option value="Västervik">Västervik</option>
+                            <option value="Värnamo">Värnamo</option>
+                            <option value="Oskarshamn">Oskarshamn</option>
+                            <option value="Nässjö">Nässjö</option>
+                            <option value="Ljungby">Ljungby</option>
+                            <option value="Borgholm">Borgholm</option>
+                            <option value="Färjestaden">Färjestaden</option>
                         </select>
-                    </span> -->
+                        <!-- Lägga in ngn text att man kan fritextsöka på fler orter -->
+                    </span>
 
                     <fieldset>
                         <legend>Aktiviteter</legend>
@@ -160,12 +169,6 @@
 
         <div class="results">
             <p>Aktiviteter laddas in</p>
-            <div class="activity">
-                <h3>Aktivitet</h3>
-                <p>Stad, Landskap</p>
-                <p>Pris</p>
-                <button>Läs mer</button>
-            </div>
         </div>
     </main>
 

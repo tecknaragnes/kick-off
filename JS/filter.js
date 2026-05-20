@@ -5,8 +5,10 @@ let allActivities = [];
 
 const results = document.querySelector(".results");
 const search = document.querySelector(".search");
-// const provinceFilter = document.getElementById("provincefilter");
+const cityFilter = document.getElementById("cityFilter");
 const priceFilter = document.getElementById("max-price");
+const priceSpan = document.getElementById("price-span");
+const priceArray = ["50", "100", "250", "500", "1000", "2000", "5000"];
 
 const bowlingCheckbox = document.getElementById("Bowling");
 const GokartCheckbox = document.getElementById("Gokart");
@@ -22,9 +24,14 @@ const cinemaCheckbox = document.getElementById("Biograf");
 const searchBtn = document.querySelector(".search-btn");
 const sortFilter = document.getElementById("sortfilter");
 const outdoorFilter = document.getElementById("outdoorfilter");
+
 const physicalFilter = document.getElementById("physical");
+const physicalSpan = document.getElementById("physical-span");
 const timeFilter = document.getElementById("time");
-const timeArray = ["Kort", "Timmar", "Heldag"];
+const timeSpan = document.getElementById("time-span");
+const timeArray = ["Snabbis", "Halvdag", "Heldag"]; //snabbis??? vad ska man skriva?
+const distanceFilter = document.getElementById("distance");
+const distanceSpan = document.getElementById("distance-span");
 
 // I spökhuset har jag för scareIndex "let index;" på toppnivå
 // sen "let scareIndex = index ?? 0;" i filter-funktionen som lyssnarna kallar på
@@ -121,46 +128,6 @@ function filterActivities() {
 
   //  const selectedDescriptions = [];
 
-  // if (bowlingCheckbox.checked) {
-  //   selectedDescriptions.push("Bowlinghall");
-  // }
-
-  // if (GokartCheckbox.checked) {
-  //   selectedDescriptions.push("Gokart");
-  // }
-
-  // if (GolfCheckbox.checked) {
-  //   selectedDescriptions.push("Golfbana");
-  // }
-
-  // // if (entertainmentparkCheckbox.checked) {
-  // //   selectedDescriptions.push("Nöjescenter");
-  // // }
-
-  // if (themeparkCheckbox.checked) {
-  //   selectedDescriptions.push("Temapark");
-  // }
-
-  // if (ziplineCheckbox.checked) {
-  //   selectedDescriptions.push("Zipline");
-  // }
-
-  // if (entertainmentcenterCheckbox.checked) {
-  //   selectedDescriptions.push("Nöjescenter");
-  // }
-
-  // if (paintballCheckbox.checked) {
-  //   selectedDescriptions.push("Paintballcenter");
-  // }
-
-  // if (healthCheckbox.checked) {
-  //   selectedDescriptions.push("Hälsocenter");
-  // }
-
-  // if (cinemaCheckbox.checked) {
-  //   selectedDescriptions.push("Biograf");
-  // }
-
   // if (selectedDescriptions.length > 0) {
   //   filtered = filtered.filter((activity) => {
   //     return selectedDescriptions.includes(activity.description);
@@ -189,10 +156,40 @@ function filterActivities() {
 
 
 export function listenerEvents() {
-  // provinceFilter.addEventListener("change", filterActivities);
-  priceFilter.addEventListener("change", filterActivities);
-  physicalFilter.addEventListener("change", () => {
-    index
+  cityFilter.addEventListener("change", () => {
+    console.log(cityFilter.value);
+    // filterFromSmapi()
+  });
+
+  priceFilter.addEventListener("change", () => { //sortera pris och ändra text bredvid slidern
+    console.log(priceFilter.value);
+    let priceIndex = priceFilter.value;
+    priceSpan.textContent = `>=${priceArray[priceIndex]} kr/pers`; //hur ska man skriva detta kort och tydligt?
+    // filterFromSmapi(); //sorterar inte på riktigt än
+  });
+
+  physicalFilter.addEventListener("change", () => { // sortera physisk ansträngning och ändra bild bredvid slidern
+    console.log(physicalFilter.value);
+    let physicalIndex = physicalFilter.value;
+    physicalSpan.innerHTML = "";
+    for (let i = 0; i < physicalIndex; i++) {
+      physicalSpan.innerHTML += `<img src="../SVG/physical.svg" alt="nivå ${i + 1}">`;
+    }
+    // filterFromSmapi(); //sorterar inte på riktigt än
+  });
+
+  timeFilter.addEventListener("change", () => { // sortera tidsåtgång och ändra text/symbol bredvid slidern
+    console.log(timeFilter.value);
+    let timeIndex = timeFilter.value;
+    timeSpan.textContent = `${timeArray[timeIndex]}`;
+    // filterFromSmapi(); //sorterar inte på riktigt än
+  });
+
+  distanceFilter.addEventListener("change", () => { // sortera avstånd och ändra text bredvid slidern
+    console.log(distanceFilter.value);
+    let distanceIndex = distanceFilter.value;
+    distanceSpan.textContent = `<=${distanceIndex} km`;
+    // filterFromSmapi(); //sorterar inte på riktigt än
   });
 
   bowlingCheckbox.addEventListener("change", filterFromSmapi);
