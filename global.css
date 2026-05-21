@@ -129,6 +129,10 @@ main {
     background-color: var(--accentColor3);
 }
 
+.spec-event.on {
+    background-color: var(--accentColor3);
+}
+
 a.spec-event {
     color: #000;
     text-decoration: none;
@@ -198,7 +202,7 @@ a.spec-event {
 
 #bottom-fold-sec {
     padding: 0.5em;
-    /* display: none; */
+    display: none;
     flex-flow: column wrap;
     gap: 0.4em;
 }
