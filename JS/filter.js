@@ -118,29 +118,6 @@ function filterActivities() {
 
   let filtered = allActivities;
 
-  // const provinceValue = provinceFilter.value;
-  // if (provinceValue !== "Alla") {
-  //   filtered = filtered.filter((activity) => {
-  //     return activity.province === provinceValue;
-  //   });
-  // }
-
-  // const maxPriceValue = priceFilter.value;
-  // if (maxPriceValue !== "Alla") {
-  //   filtered = filtered.filter((activity) => {
-  //     return activity.price_range === priceValue;
-  //   });
-  // }
-  // const selectedDescriptions = getSelectedDescriptions();
-
-  //  const selectedDescriptions = [];
-
-  // if (selectedDescriptions.length > 0) {
-  //   filtered = filtered.filter((activity) => {
-  //     return selectedDescriptions.includes(activity.description);
-  //   });
-  // }
-
   const searchText = search.value.trim().toLowerCase();
 
   if (searchText !== "") {
@@ -226,3 +203,131 @@ export function listenerEvents() {
     filterFromSmapi();
   });
 };
+
+
+
+// justera filter för de specifika evenemangen
+const stagnightBtn = document.getElementById("stag");
+const awBtn = document.getElementById("aw");
+const teamBtn = document.getElementById("team");
+export const eventFiltering = () => { //denna funkar inte riktigt, hände inget när jag trycker på knappen
+  if (stagnightBtn.classList.contains("on")) { // Om svensexa är på
+    priceFilter.value = "6";
+
+    physicalFilter.value = "3";
+    physicalSpan.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+      physicalSpan.innerHTML += `<img src="../SVG/physical.svg" alt="nivå ${i + 1}">`;
+    }
+
+    timeFilter.value = "2";
+    timeSpan.textContent = `${timeArray[2]}`;
+
+    distanceFilter.value = "10";
+
+    outdoorFilter.value = "Alla";
+
+    bowlingCheckbox.checked = false;
+    GokartCheckbox.checked = true;
+    GolfCheckbox.checked = false;
+    entertainmentparkCheckbox.checked = true;
+    themeparkCheckbox.checked = true;
+    ziplineCheckbox.checked = true;
+    entertainmentcenterCheckbox.checked = true;
+    paintballCheckbox.checked = true;
+    healthCheckbox.checked = true;
+    cinemaCheckbox.checked = false;
+
+    filterFromSmapi(); // så att det faktiskt filtreras
+  }
+
+  else if (awBtn.classList.contains("on")) { //Om AW är tänd
+    priceFilter.value = "3";
+
+    physicalFilter.value = "2";
+    physicalSpan.innerHTML = "";
+    for (let i = 0; i < 2; i++) {
+      physicalSpan.innerHTML += `<img src="../SVG/physical.svg" alt="nivå ${i + 1}">`;
+    }
+
+    timeFilter.value = "1";
+    timeSpan.textContent = `${timeArray[1]}`;
+
+    distanceFilter.value = "3";
+
+    outdoorFilter.value = "N";
+
+    bowlingCheckbox.checked = true;
+    GokartCheckbox.checked = true;
+    GolfCheckbox.checked = false;
+    entertainmentparkCheckbox.checked = false;
+    themeparkCheckbox.checked = false;
+    ziplineCheckbox.checked = false;
+    entertainmentcenterCheckbox.checked = true;
+    paintballCheckbox.checked = false;
+    healthCheckbox.checked = false;
+    cinemaCheckbox.checked = true;
+
+    filterFromSmapi(); // så att det faktiskt filtreras
+  }
+
+  else if (teamBtn.classList.contains("on")) { //Om AW är tänd
+    priceFilter.value = "6";
+
+    physicalFilter.value = "3";
+    physicalSpan.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+      physicalSpan.innerHTML += `<img src="../SVG/physical.svg" alt="nivå ${i + 1}">`;
+    }
+
+    timeFilter.value = "2";
+    timeSpan.textContent = `${timeArray[2]}`;
+
+    distanceFilter.value = "6";
+
+    outdoorFilter.value = "Alla";
+
+    bowlingCheckbox.checked = false;
+    GokartCheckbox.checked = true;
+    GolfCheckbox.checked = true;
+    entertainmentparkCheckbox.checked = true;
+    themeparkCheckbox.checked = true;
+    ziplineCheckbox.checked = true;
+    entertainmentcenterCheckbox.checked = true;
+    paintballCheckbox.checked = true;
+    healthCheckbox.checked = true;
+    cinemaCheckbox.checked = false;
+
+    filterFromSmapi(); // så att det faktiskt filtreras
+  }
+
+  else { //Om ingen är tänd
+    priceFilter.value = "10";
+
+    physicalFilter.value = "3";
+    physicalSpan.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+      physicalSpan.innerHTML += `<img src="../SVG/physical.svg" alt="nivå ${i + 1}">`;
+    }
+
+    timeFilter.value = "0";
+    timeSpan.textContent = `${timeArray[0]}`;
+
+    distanceFilter.value = "10";
+
+    outdoorFilter.value = "Alla";
+
+    bowlingCheckbox.checked = false;
+    GokartCheckbox.checked = false;
+    GolfCheckbox.checked = false;
+    entertainmentparkCheckbox.checked = false;
+    themeparkCheckbox.checked = false;
+    ziplineCheckbox.checked = false;
+    entertainmentcenterCheckbox.checked = false;
+    paintballCheckbox.checked = false;
+    healthCheckbox.checked = false;
+    cinemaCheckbox.checked = false;
+
+    filterFromSmapi(); // så att det faktiskt filtreras
+  }
+}

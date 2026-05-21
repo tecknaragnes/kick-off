@@ -25,6 +25,10 @@ export const getImageForActivity = async (activity) => {
         if (activity.description === "Hälsocenter") {
             params.set("q", "dragkamp+män");
         }
+        if (activity.description === "Biograf") {
+            params.set("q", "cinema+popcorn");
+            params.set("lang", "en");
+        }
 
         const response = await fetch(`https://pixabay.com/api/?${params}`);
         const pixaPics = await response.json();
@@ -38,7 +42,7 @@ export const getImageForActivity = async (activity) => {
         return null; // ingen bild hittades
     } catch (error) {
         console.error("Fel vid hämtning från Pixabay:", error);
-        //console.log("url:", `https://pixabay.com/api/?${params}`);
+        console.log("Felande url:", `https://pixabay.com/api/?${params}`);
         return null;
     }
 };

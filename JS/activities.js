@@ -1,8 +1,5 @@
 //renderingen, filtrering imortera det
-import { listenerEvents, filterFromSmapi } from "./filter.js"
-
-listenerEvents()
-filterFromSmapi();
+import { listenerEvents, filterFromSmapi, eventFiltering } from "./filter.js"
 
 //Fälla in och ut mer sortering och filter
 const foldSection = document.querySelector("#bottom-fold-sec");
@@ -28,31 +25,87 @@ foldBtn.addEventListener("click", () => { //går det att fixa så att den visas 
 
 
 // för att visa rätt filter för de olika evenemangen (svensexa, etc)
+const stagnightBtn = document.getElementById("stag");
+const awBtn = document.getElementById("aw");
+const teamBtn = document.getElementById("team");
+
 try { // Använd try/catch
     const urlParams = new URLSearchParams(window.location.search);
     let eventType = urlParams.get("type"); // evenemangstyp skall läsas av från URL:en.
-    // eventType = houses.find(e => e.id == urlType);
     if (eventType === "sven") { // visa svensexa-filter
-        console.log("Visar svensexa-filter");
-        const eventBtn = document.querySelector(".spec-event");
-        console.log(eventBtn);
-        eventBtn.classList.add("on"); // tänd knappen
-        // ta bort filterna
-        // går det att ta bort type i url? Eller ska man inte använda url alls?
+        stagnightBtn.classList.replace("off", "on"); // tänd knappen
+        eventFiltering();
     } else if (eventType === "aw") { // visa aw-filter
-        console.log("Visar AW-filter");
-        const eventBtn = document.querySelectorAll(".spec-event")[1];
-        console.log(eventBtn);
-        eventBtn.classList.add("on"); // tänd knappen
+        awBtn.classList.replace("off", "on"); // tänd knappen
+        eventFiltering();
     } else if (eventType === "kick") { // visa kick-off-filter
-        console.log("Visar kick-off-filter");
-        const eventBtn = document.querySelectorAll(".spec-event")[2];
-        console.log(eventBtn);
-        eventBtn.classList.add("on"); // tänd knappen
+        teamBtn.classList.replace("off", "on"); // tänd knappen
+        eventFiltering();
     } else {
         // visa alla filter normalt
-        // släck ev knappar
+        stagnightBtn.classList.replace("on", "off");
+        awBtn.classList.replace("on", "off");
+        teamBtn.classList.replace("on", "off"); // släck ev knappar
+
     }
 } catch (err) {
     console.error("Fel vid hämtning av evenemangstyp från URL:", err);
 }
+
+stagnightBtn.addEventListener("click", () => {
+    if (stagnightBtn.classList.contains("off")) {
+        stagnightBtn.classList.replace("off", "on");
+        console.log("Stag night-filter på");
+        awBtn.classList.replace("on", "off");
+        teamBtn.classList.replace("on", "off"); //stännga av de andra knapparna
+        foldSection.classList.replace("hidden", "visible");
+        foldSection.style.display = "flex";
+        foldTxt.textContent = "Fäll in";
+        foldIcon.style.transform = "rotate(180deg)";
+        eventFiltering();
+    } else {
+        console.log("Stag night-filter av");
+        stagnightBtn.classList.replace("on", "off");
+        eventFiltering();
+    }
+})
+
+awBtn.addEventListener("click", () => {
+    if (awBtn.classList.contains("off")) {
+        awBtn.classList.replace("off", "on");
+        console.log("aw-filter på");
+        stagnightBtn.classList.replace("on", "off");
+        teamBtn.classList.replace("on", "off"); //stännga av de andra knapparna
+        foldSection.classList.replace("hidden", "visible");
+        foldSection.style.display = "flex";
+        foldTxt.textContent = "Fäll in";
+        foldIcon.style.transform = "rotate(180deg)";
+        eventFiltering();
+    } else {
+        console.log("aw-filter av");
+        awBtn.classList.replace("on", "off");
+        eventFiltering();
+    }
+})
+
+teamBtn.addEventListener("click", () => {
+    if (teamBtn.classList.contains("off")) {
+        teamBtn.classList.replace("off", "on");
+        console.log("team-filter på");
+        stagnightBtn.classList.replace("on", "off");
+        awBtn.classList.replace("on", "off"); //stännga av de andra knapparna
+        foldSection.classList.replace("hidden", "visible");
+        foldSection.style.display = "flex";
+        foldTxt.textContent = "Fäll in";
+        foldIcon.style.transform = "rotate(180deg)";
+        eventFiltering();
+    } else {
+        console.log("team-filter av");
+        teamBtn.classList.replace("on", "off");
+        eventFiltering();
+    }
+})
+
+
+listenerEvents()
+filterFromSmapi();
