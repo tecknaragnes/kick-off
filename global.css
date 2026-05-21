@@ -129,6 +129,10 @@ main {
     background-color: var(--accentColor3);
 }
 
+.spec-event.on {
+    background-color: var(--accentColor3);
+}
+
 a.spec-event {
     color: #000;
     text-decoration: none;
@@ -164,7 +168,7 @@ a.spec-event {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     gap: 1em;
     box-sizing: border-box;
 }
@@ -425,9 +429,9 @@ footer {
 
 
 /* ---------- responsiv från mobil till desktop ---------- */
-@media screen and (min-width: 420px) {
+@media screen and (min-width: 390px) {
     #bottom-fold-sec>span {
-        width: 25em;
+        width: 23em;
         flex-flow: row wrap;
     }
 }
