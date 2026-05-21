@@ -114,6 +114,7 @@ main {
 }
 
 .spec-event {
+    color: #000;
     background-color: var(--accentColor2);
     box-shadow: 6px 6px 5px black;
     display: inline-block;
@@ -123,10 +124,6 @@ main {
     font-family: "Federo", Roboto, sans-serif;
     font-size: 1.1em;
     transition: background-color 0.3s;
-}
-
-.spec-event:hover {
-    background-color: var(--accentColor3);
 }
 
 .spec-event.on {
@@ -495,5 +492,9 @@ footer {
 
     #bottom-fold-sec {
         display: flex;
+    }
+
+    .spec-event:hover {
+        background-color: var(--accentColor3);
     }
 }
