@@ -87,6 +87,18 @@ nav li#current-page a {
     align-self: center;
 }
 
+#hero a {
+    color: #fff;
+    background-color: var(--backgroundColor);
+    text-decoration: none;
+    font-family: "Federo", Roboto, sans-serif;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    box-shadow: 6px 6px 5px black;
+    align-self: center;
+    transition: background-color 0.3s;
+}
+
 
 /* ---------- main ---------- */
 main {
@@ -133,6 +145,17 @@ main {
 a.spec-event {
     color: #000;
     text-decoration: none;
+}
+
+#categories>a {
+    color: #000;
+    background-color: var(--accentColor2);
+    text-decoration: none;
+    font-family: "Federo", Roboto, sans-serif;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    box-shadow: 6px 6px 5px black;
+    transition: background-color 0.3s;
 }
 
 #examples h2 {
@@ -494,7 +517,12 @@ footer {
         display: flex;
     }
 
-    .spec-event:hover {
+    .spec-event:hover,
+    #categories>a:hover {
         background-color: var(--accentColor3);
+    }
+
+    #hero a:hover {
+        background-color: var(--accentColor4);
     }
 }
