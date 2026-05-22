@@ -1,5 +1,5 @@
 import { renderActivities } from "./render.js";
-import { fetchActivities } from "./api.js";
+import { fetchActivities, fetchActivitiesConAct } from "./api.js";
 
 let allActivities = [];
 
@@ -8,7 +8,7 @@ const search = document.querySelector(".search");
 const cityFilter = document.getElementById("cityFilter");
 const priceFilter = document.getElementById("max-price");
 const priceSpan = document.getElementById("price-span");
-const priceArray = ["50", "100", "250", "500", "1000", "2000", "5000"];
+const priceArray = ["100", "250", "500", "1000", "2000", "5000"];
 
 const bowlingCheckbox = document.getElementById("Bowling");
 const GokartCheckbox = document.getElementById("Gokart");
@@ -32,6 +32,7 @@ const timeSpan = document.getElementById("time-span");
 const timeArray = ["Snabbis", "Halvdag", "Heldag"]; //snabbis??? vad ska man skriva?
 const distanceFilter = document.getElementById("distance");
 const distanceSpan = document.getElementById("distance-span");
+const accesabilityFilter = document.getElementById("accesability");
 
 
 const allowedDescriptions = [
@@ -53,6 +54,8 @@ export async function filterFromSmapi() { // för controller establishment
     const data = await fetchActivities({
       sort: sortFilter.value,
       outdoors: outdoorFilter.value,
+      cities: cityFilter.value,
+      price_ranges: priceFilter.value,
       descriptions: getDescriptionsForSmapi(),
     });
 
@@ -70,10 +73,10 @@ export async function filterFromSmapiConAct() {
   // För controller activity
   try {
     const data = await fetchActivitiesConAct({
-      physical_effort: physicalFilter.value,
-      estimated_duration: timeFilter.value,
-      // disability_support: ,
-    }); // hur sätter man in den? 
+      physical_efforts: physicalFilter.value,
+      estimated_durations: timeFilter.value,
+      disability_support: accesabilityFilter.value,
+    });
 
     console.log(data.payload);
     allActivities = data.payload ?? [];
@@ -141,15 +144,13 @@ function filterActivities() {
 
 export function listenerEvents() {
   cityFilter.addEventListener("change", () => {
-    console.log(cityFilter.value);
-    // filterFromSmapi()
+    filterFromSmapi();
   });
 
   priceFilter.addEventListener("change", () => { //sortera pris och ändra text bredvid slidern
-    console.log(priceFilter.value);
     let priceIndex = priceFilter.value;
     priceSpan.textContent = `>=${priceArray[priceIndex]} kr/pers`; //hur ska man skriva detta kort och tydligt?
-    // filterFromSmapi(); //sorterar inte på riktigt än
+    filterFromSmapi(); //sorterar inte på riktigt än
   });
 
   physicalFilter.addEventListener("change", () => { // sortera physisk ansträngning och ändra bild bredvid slidern
@@ -159,14 +160,14 @@ export function listenerEvents() {
     for (let i = 0; i < physicalIndex; i++) {
       physicalSpan.innerHTML += `<img src="../SVG/physical.svg" alt="nivå ${i + 1}">`;
     }
-    // filterFromSmapi(); //sorterar inte på riktigt än
+    // filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
   timeFilter.addEventListener("change", () => { // sortera tidsåtgång och ändra text/symbol bredvid slidern
     console.log(timeFilter.value);
     let timeIndex = timeFilter.value;
     timeSpan.textContent = `${timeArray[timeIndex]}`;
-    // filterFromSmapi(); //sorterar inte på riktigt än
+    // filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
   distanceFilter.addEventListener("change", () => { // sortera avstånd och ändra text bredvid slidern
@@ -174,6 +175,11 @@ export function listenerEvents() {
     let distanceIndex = distanceFilter.value;
     distanceSpan.textContent = `<=${distanceIndex} km`;
     // filterFromSmapi(); //sorterar inte på riktigt än
+  });
+
+  accesabilityFilter.addEventListener("change", () => { // sortera tillgänglighet
+    console.log(accesabilityFilter.checked);
+    filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
   bowlingCheckbox.addEventListener("change", filterFromSmapi);
