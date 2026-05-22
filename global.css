@@ -87,6 +87,18 @@ nav li#current-page a {
     align-self: center;
 }
 
+#hero a {
+    color: #fff;
+    background-color: var(--backgroundColor);
+    text-decoration: none;
+    font-family: "Federo", Roboto, sans-serif;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    box-shadow: 6px 6px 5px black;
+    align-self: center;
+    transition: background-color 0.3s;
+}
+
 
 /* ---------- main ---------- */
 main {
@@ -133,6 +145,17 @@ main {
 a.spec-event {
     color: #000;
     text-decoration: none;
+}
+
+#categories>a {
+    color: #000;
+    background-color: var(--accentColor2);
+    text-decoration: none;
+    font-family: "Federo", Roboto, sans-serif;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    box-shadow: 6px 6px 5px black;
+    transition: background-color 0.3s;
 }
 
 #examples h2 {
@@ -292,6 +315,10 @@ a.spec-event {
     margin: 0.5em 0.5em auto auto;
 }
 
+.activity-card .act-flex-card button img {
+    height: 2em;
+}
+
 .favorite-btn {
     background-color: white;
     color: black;
@@ -301,7 +328,6 @@ a.spec-event {
 
 .favorite-btn.favorite-active {
     background-color: rgb(232, 117, 136);
-    color: white;
     border-color: rgb(232, 117, 136);
 }
 
@@ -375,6 +401,10 @@ body[data-page="favoritespage"] main {
     margin: 1em;
 }
 
+#map {
+    height: 180px;
+}
+
 /* ---------- recensioner ---------- */
 .review-card {
     background-color: var(--accentColor1);
@@ -410,6 +440,21 @@ body[data-page="favoritespage"] main {
 
 
 
+/* ---------- quiz ---------- */
+#quiz {
+    padding: 0.5em;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1em;
+}
+
+#quiz h2,
+#quiz h3 {
+    margin-bottom: 0;
+}
+
+
+
 /* ---------- footer ---------- */
 footer {
     margin: 0;
@@ -417,10 +462,6 @@ footer {
     color: #000;
     background-color: var(--accentColor2);
     flex-shrink: 0;
-}
-
-#map {
-    height: 180px;
 }
 
 
@@ -494,7 +535,12 @@ footer {
         display: flex;
     }
 
-    .spec-event:hover {
+    .spec-event:hover,
+    #categories>a:hover {
         background-color: var(--accentColor3);
+    }
+
+    #hero a:hover {
+        background-color: var(--accentColor4);
     }
 }
