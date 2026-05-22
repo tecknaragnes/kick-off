@@ -13,6 +13,15 @@ export async function fetchActivities(filters) {
     types: "activity",
   });
 
+  //om användaren har valt ett maxavstånd skickas pos och radie med, 
+  // då använder vi getfromlatlng istället för getall, alltså vi ändrar metoden
+  if (filters.lat != null && filters.lng != null && filters.radius) {
+    params.set("method", "getfromlatlng");
+    params.set("lat", filters.lat);
+    params.set("lng", filters.lng);
+    params.set("radius", filters.radius);
+  }
+
   if (filters.descriptions && filters.descriptions.length > 0) {
     params.set("descriptions", filters.descriptions.join(","))
   };
