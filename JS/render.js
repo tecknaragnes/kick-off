@@ -23,6 +23,10 @@ export async function renderActivities(activities) {
 
         const imageUrl = await getImageForActivity(activity);
 
+        if (activity.description === "Hälsocenter") {
+            activity.description = "Nöjescenter";
+        }
+
         activityCard.innerHTML = `
                 <div class="act-flex-card">
                     <img class="act-img" src="${imageUrl}" alt="">

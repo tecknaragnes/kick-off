@@ -50,9 +50,9 @@ export async function fetchActivities(filters) {
   if (filters.price_ranges === "0") {
     params.set("price_ranges", "25-100");
   } else if (filters.price_ranges === "1") {
-    params.set("price_ranges", "100-250");
+    params.set("price_ranges", "25-100,100-250");
   } else if (filters.price_ranges === "2" || filters.price_ranges === "3" || filters.price_ranges === "4") {
-    params.set("price_ranges", "250-500");
+    params.set("price_ranges", "25-100,100-250,250-500");
   } else {
     params.delete("price_ranges"); //om pris är satt till högre än 2000 har vi bara en extra aktivitet, så vi tar bort pris_ranges helt från sökningen och visar alla
   }
@@ -126,11 +126,11 @@ export async function fetchActivitiesConAct(filters) {
   console.log("visar full URL,", `https://smapi.lnu.se/api/?${params}`);
 
   console.log("URL som skickas:", `https://smapi.lnu.se/api/?${params}`);
-  const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
+  // const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
 
-  if (!response.ok) {
-    throw new Error("Sökningen misslyckades");
-  }
+  // if (!response.ok) {
+  //   throw new Error("Sökningen misslyckades");
+  // }
 
-  return response.json();
+  // return response.json();
 }
