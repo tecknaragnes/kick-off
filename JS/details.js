@@ -1,5 +1,7 @@
 //Details.js, för detaljsidan ska oxå importeras länka med htmlen, mycket importer
 import { renderDetailsPage, renderReviews } from "./render.js";
+import { getImageForActivity } from "./pixabay.js";
+
 
 const urlParams = new URLSearchParams(window.location.search);
 const activityId = urlParams.get("id");

@@ -71,13 +71,15 @@ export async function renderActivities(activities) {
 
 
 // detaljsidan ----------------------------------
-export const renderDetailsPage = (activity) => {
+export const renderDetailsPage = async (activity) => {
     const main = document.querySelector("main");
     const header = document.querySelector("header");
     const h2 = document.createElement("h2");
 
     h2.textContent = activity.name;
     header.append(h2);
+
+    const imageUrl = await getImageForActivity(activity);
 
     main.innerHTML = "";
     const detailsPage = document.createElement("div");
@@ -91,19 +93,18 @@ export const renderDetailsPage = (activity) => {
         <p>${activity.abstract}</p>
         <div class="details-flex-symbols">
             <span id="icon-rating"><p>Betyg: ${rating}</p></span>
-            <span id="icon-price"><p>${activity.price_range}</p></span>
+            <span id="icon-price"><p>${activity.price_range} Kr</p></span>
             <span id="icon-time"><p>tid</p></span>
             <span id="icon-ppl"><p>antal pers</p></span>
-            <span id="icon-food"><img src="../SVG/food.svg" alt="Mat finns"><p>Mat</p></span>
-            <span id="icon-drink"><img src="../SVG/drink.svg" alt="Dryck finns"><p>Dryck</p></span>
+            <span id="icon-accesability"><img src="../SVG/wheelchair.svg" alt="Tillgänglighet"><p>Ja</p></span>
+            <span id="icon-food"><img src="../SVG/food.svg" alt="Mat"><p>Ja</p></span>
+            <span id="icon-drink"><img src="../SVG/drink.svg" alt="Dryck"><p>Nej</p></span>
         </div>
-        <div class="det-img"></div>
+        <img class="det-img" src="${imageUrl}" alt="">
         <section id="contact-section">
             <h3>Kontakt:</h3>
             <p class="li-icon phone"><img src="../SVG/phone.svg" alt="">Telefon: ${activity.phone_number ?? "saknas"}</p>
-            <p class="li-icon email">Email: (finns inte i smapi)</p>
             <p class="li-icon web">Webbplats: <a href="${activity.website ?? "saknas"}">${activity.website}</a></p>
-            <p>Öppettider: (finns inga i smapi)</p>
             <p class="li-icon adress"><img src="../SVG/location.svg" alt="">Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</p>
             <a href="booking">Boka nu</a>
         </section>
