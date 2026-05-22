@@ -191,7 +191,7 @@ export function listenerEvents() {
   ziplineCheckbox.addEventListener("change", filterFromSmapi);
   entertainmentcenterCheckbox.addEventListener("change", filterFromSmapi);
   paintballCheckbox.addEventListener("change", filterFromSmapi);
-  healthCheckbox.addEventListener("change", filterFromSmapi);
+  // healthCheckbox.addEventListener("change", filterFromSmapi);
   cinemaCheckbox.addEventListener("change", filterFromSmapi);
 
 

@@ -126,11 +126,11 @@ export async function fetchActivitiesConAct(filters) {
   console.log("visar full URL,", `https://smapi.lnu.se/api/?${params}`);
 
   console.log("URL som skickas:", `https://smapi.lnu.se/api/?${params}`);
-  const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
+  // const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
 
-  if (!response.ok) {
-    throw new Error("Sökningen misslyckades");
-  }
+  // if (!response.ok) {
+  //   throw new Error("Sökningen misslyckades");
+  // }
 
-  return response.json();
+  // return response.json();
 }
