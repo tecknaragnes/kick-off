@@ -76,6 +76,7 @@ export async function filterFromSmapiConAct() {
       physical_efforts: physicalFilter.value,
       estimated_durations: timeFilter.value,
       disability_support: accesabilityFilter.value,
+      descriptions: getDescriptionsForSmapi()
     });
 
     console.log(data.payload);
@@ -147,27 +148,27 @@ export function listenerEvents() {
     filterFromSmapi();
   });
 
-  priceFilter.addEventListener("change", () => { //sortera pris och ändra text bredvid slidern
+  priceFilter.addEventListener("input", () => { //sortera pris och ändra text bredvid slidern
     let priceIndex = priceFilter.value;
     priceSpan.textContent = `>=${priceArray[priceIndex]} kr/pers`; //hur ska man skriva detta kort och tydligt?
     filterFromSmapi(); //sorterar inte på riktigt än
   });
 
-  physicalFilter.addEventListener("change", () => { // sortera physisk ansträngning och ändra bild bredvid slidern
+  physicalFilter.addEventListener("input", () => { // sortera physisk ansträngning och ändra bild bredvid slidern
     console.log(physicalFilter.value);
     let physicalIndex = physicalFilter.value;
     physicalSpan.innerHTML = "";
     for (let i = 0; i < physicalIndex; i++) {
       physicalSpan.innerHTML += `<img src="../SVG/physical.svg" alt="nivå ${i + 1}">`;
     }
-    // filterFromSmapiConAct(); //sorterar inte på riktigt än
+    filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
   timeFilter.addEventListener("change", () => { // sortera tidsåtgång och ändra text/symbol bredvid slidern
     console.log(timeFilter.value);
     let timeIndex = timeFilter.value;
     timeSpan.textContent = `${timeArray[timeIndex]}`;
-    // filterFromSmapiConAct(); //sorterar inte på riktigt än
+    filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
   distanceFilter.addEventListener("change", () => { // sortera avstånd och ändra text bredvid slidern

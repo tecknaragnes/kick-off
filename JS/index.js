@@ -27,10 +27,9 @@ async function loadPopularActivities() {
     const data = await fetchActivities({
         sort: "rating-high",
         descriptions: allowedDescriptions2,
-    })
+    });
 
     // console.log(data.payload);
-
     const activities = data.payload ?? [];
     const popularList = activities.slice(0, 5);//vi tar de 5 högst rankade endast
     await renderPopActivities(popularList); //skickar topp 5 in i renderfunktionen

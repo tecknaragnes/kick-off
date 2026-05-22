@@ -51,14 +51,14 @@ export async function renderActivities(activities) {
             activityCard.querySelector(".icon.act-card").append(starIcon);
         }
         // Om det finns en decimal del i rating, lägg till en halv stjärna
-        if (rating - Math.floor(rating) >= 0.5) {
+        if (rating - Math.floor(rating) > 0.1) {
             const halfStarIcon = document.createElement("img");
             halfStarIcon.src = "../SVG/half-star.svg";
             halfStarIcon.alt = "";
             activityCard.querySelector(".icon.act-card").append(halfStarIcon);
         }
         // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
-        if (rating < 5) {
+        if (rating <= 4.1) { //vissa som har fel antal stjärnor???
             for (let i = 0; i < 5 - Math.ceil(rating); i++) {
                 const emptyStarIcon = document.createElement("img");
                 emptyStarIcon.src = "../SVG/empty-star.svg";
