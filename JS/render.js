@@ -94,12 +94,11 @@ export const renderDetailsPage = async (activity) => {
         <div class="details-flex-symbols">
             <span id="icon-rating"><p>Betyg: ${rating}</p></span>
             <span id="icon-price"><p>${activity.price_range} Kr</p></span>
-            <span id="icon-time"><p>tid</p></span>
-            <span id="icon-ppl"><p>antal pers</p></span>
-            <span id="icon-accesability"><img src="../SVG/wheelchair.svg" alt="Tillgänglighet"><p>Ja</p></span>
+            <span id="icon-ppl"><img src="../SVG/person.svg" alt="Personer"><p>2-5</p></span>
+            <span id="icon-time"><img src="../SVG/clock.svg" alt="Tid"><p>Halvdag</p></span>
             <span id="icon-food"><img src="../SVG/food.svg" alt="Mat"><p>Ja</p></span>
             <span id="icon-drink"><img src="../SVG/drink.svg" alt="Dryck"><p>Nej</p></span>
-        </div>
+            <span id="icon-accesability"><img src="../SVG/wheelchair.svg" alt="Tillgänglighet"><p>Ja</p></span>        </div>
         <img class="det-img" src="${imageUrl}" alt="">
         <section id="contact-section">
             <h3>Kontakt:</h3>
