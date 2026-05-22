@@ -136,6 +136,7 @@ main {
     font-family: "Federo", Roboto, sans-serif;
     font-size: 1.1em;
     transition: background-color 0.3s;
+    cursor: pointer;
 }
 
 .spec-event.on {
