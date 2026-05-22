@@ -2,16 +2,11 @@ import { fetchActivities } from "./api.js";
 import { getImageForActivity } from "./pixabay.js";
 import { listenToFavoriteClick } from "./favorite.js";
 
-
-
 ///Visa rekommenderade aktiviteter på startsidan (mest poppis)
 /// återanvända renderActivoties eller skapa en ny för bara main, 
 //återanvända api.js hämtning
 
-//let allActivities = [];
-
-
-const popularActivities = document.getElementById("popular-activities")
+const popularActivities = document.getElementById("popular-activities");
 
 const allowedDescriptions2 = [
     "Bowlinghall",
@@ -34,17 +29,13 @@ async function loadPopularActivities() {
         descriptions: allowedDescriptions2,
     })
 
-    console.log(data.payload)
+    // console.log(data.payload);
 
     const activities = data.payload ?? [];
     const popularList = activities.slice(0, 5);//vi tar de 5 högst rankade endast
-    await renderPopActivities(popularList) //skickar topp 5 in i renderfunktionen
+    await renderPopActivities(popularList); //skickar topp 5 in i renderfunktionen
 
-    console.log(popularList)
-
-
-
-
+    console.log(popularList);
 }
 
 loadPopularActivities();
@@ -60,41 +51,38 @@ async function renderPopActivities(popularList) {
         activityCard.classList.add("activity-card");
 
         const imageUrl = await getImageForActivity(activity);
-                let rating = Number.parseFloat(activity.rating).toFixed(1);
+        let rating = Number.parseFloat(activity.rating).toFixed(1);
 
 
         activityCard.innerHTML = `
-        <div class="act-flex-card">
-        <img class="act-img" src="${imageUrl}" alt="">
+            <div class="act-flex-card">
+                <img class="act-img" src="${imageUrl}" alt="">
 
-          <div class="act-flex-info">
-            <h3>${activity.name}</h3>
-            <p>(${activity.description})</p>
-            <p>
-              <img src="SVG/location.svg" alt="">
-              ${activity.city}, ${activity.province}
-            </p>
-          <p>${activity.price_range ?? "Pris saknas"} kr</p>
-          </div>
-        <button class="favorite-btn">Spara favorit</button>
-
-        </div>
-
-        <div class="act-symbols">
-         <div>pris</div>
-         <div>tid</div>
-         <div class="icon act-card"></div>
-        <a href="HTML/details.html?id=${activity.id}">Läs mer</a>
-        </div>
-    
-    `;
+                <div class="act-flex-info">
+                    <h3>${activity.name}</h3>
+                    <p>(${activity.description})</p>
+                    <p>
+                    <img src="SVG/location.svg" alt="">
+                    ${activity.city}, ${activity.province}
+                    </p>
+                <p>${activity.price_range ?? "Pris saknas"} kr</p>
+                </div>
+                <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
+            </div>
+            <div class="act-symbols">
+                <div>pris</div>
+                <div>tid</div>
+                <div class="icon act-card"></div>
+                <a href="HTML/details.html?id=${activity.id}">Läs mer</a>
+            </div>
+        `;
 
         popularActivities.append(activityCard);
 
         const favoriteButton = activityCard.querySelector(".favorite-btn");
         listenToFavoriteClick(favoriteButton, activity);
 
-         for (let i = 0; i < Math.floor(rating); i++) {
+        for (let i = 0; i < Math.floor(rating); i++) {
             const starIcon = document.createElement("img");
             starIcon.src = "SVG/star.svg";
             starIcon.alt = "";
@@ -117,9 +105,7 @@ async function renderPopActivities(popularList) {
             }
         }
     }
-
-   
-    }
+}
 
 
 
