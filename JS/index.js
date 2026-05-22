@@ -1,5 +1,7 @@
 import { fetchActivities } from "./api.js";
 import { getImageForActivity } from "./pixabay.js";
+import { listenToFavoriteClick } from "./favorite.js";
+
 
 
 ///Visa rekommenderade aktiviteter på startsidan (mest poppis)
@@ -12,19 +14,21 @@ import { getImageForActivity } from "./pixabay.js";
 const popularActivities = document.getElementById("popular-activities")
 
 const allowedDescriptions2 = [
-  "Bowlinghall",
-  "Gokart",
-  "Golfbana",
-  "Nöjespark",
-  "Temapark",
-  "Zipline",
-  "Nöjescenter",
-  "Paintballcenter",
-  "Hälsocenter",
-  "Biograf"
+    "Bowlinghall",
+    "Gokart",
+    "Golfbana",
+    "Nöjespark",
+    "Temapark",
+    "Zipline",
+    "Nöjescenter",
+    "Paintballcenter",
+    "Hälsocenter",
+    "Biograf"
 ];
 
+//Hämta populära aktiviteter från SMAPI, samma som på filter.js
 async function loadPopularActivities() {
+    //api.js gör om detta till order by rating, high i detta fall, desc blir vår array ovanför
     const data = await fetchActivities({
         sort: "rating-high",
         descriptions: allowedDescriptions2,
@@ -33,8 +37,8 @@ async function loadPopularActivities() {
     console.log(data.payload)
 
     const activities = data.payload ?? [];
-    const popularList= activities.slice(0,5);
-    renderPopActivities (popularList)
+    const popularList = activities.slice(0, 5);//vi tar de 5 högst rankade endast
+    await renderPopActivities(popularList) //skickar topp 5 in i renderfunktionen
 
     console.log(popularList)
 
@@ -45,14 +49,23 @@ async function loadPopularActivities() {
 
 loadPopularActivities();
 
-function renderPopActivities (popularList) {
+
+//renderar aktivitetskorten på startsdian, återanvänt 99% från renderActivities
+async function renderPopActivities(popularList) {
     popularActivities.innerHTML = "";
 
-  for (const activity of popularList) {
-    popularActivities.innerHTML += `
-      <div class="activity-card">
+    for (const activity of popularList) {
+
+        const activityCard = document.createElement("div");
+        activityCard.classList.add("activity-card");
+
+        const imageUrl = await getImageForActivity(activity);
+                let rating = Number.parseFloat(activity.rating).toFixed(1);
+
+
+        activityCard.innerHTML = `
         <div class="act-flex-card">
-          <div class="act-img"></div>
+        <img class="act-img" src="${imageUrl}" alt="">
 
           <div class="act-flex-info">
             <h3>${activity.name}</h3>
@@ -61,18 +74,55 @@ function renderPopActivities (popularList) {
               <img src="SVG/location.svg" alt="">
               ${activity.city}, ${activity.province}
             </p>
-            <p>${activity.price_range} kr</p>
-            <p>Betyg: ${activity.rating}</p>
+          <p>${activity.price_range ?? "Pris saknas"} kr</p>
           </div>
+        <button class="favorite-btn">Spara favorit</button>
+
         </div>
 
         <div class="act-symbols">
-          <a href="HTML/details.html?id=${activity.id}">Läs mer</a>
+         <div>pris</div>
+         <div>tid</div>
+         <div class="icon act-card"></div>
+        <a href="HTML/details.html?id=${activity.id}">Läs mer</a>
         </div>
-      </div>
+    
     `;
-  }
 
-}
+        popularActivities.append(activityCard);
 
-//renderPopActivities()
+        const favoriteButton = activityCard.querySelector(".favorite-btn");
+        listenToFavoriteClick(favoriteButton, activity);
+
+         for (let i = 0; i < Math.floor(rating); i++) {
+            const starIcon = document.createElement("img");
+            starIcon.src = "SVG/star.svg";
+            starIcon.alt = "";
+            activityCard.querySelector(".icon.act-card").append(starIcon);
+        }
+        // Om det finns en decimal del i rating, lägg till en halv stjärna
+        if (rating - Math.floor(rating) >= 0.5) {
+            const halfStarIcon = document.createElement("img");
+            halfStarIcon.src = "SVG/half-star.svg";
+            halfStarIcon.alt = "";
+            activityCard.querySelector(".icon.act-card").append(halfStarIcon);
+        }
+        // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
+        if (rating < 5) {
+            for (let i = 0; i < 5 - Math.ceil(rating); i++) {
+                const emptyStarIcon = document.createElement("img");
+                emptyStarIcon.src = "SVG/empty-star.svg";
+                emptyStarIcon.alt = "";
+                activityCard.querySelector(".icon.act-card").append(emptyStarIcon);
+            }
+        }
+    }
+
+   
+    }
+
+
+
+
+
+
