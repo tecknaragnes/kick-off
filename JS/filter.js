@@ -150,7 +150,7 @@ export function listenerEvents() {
 
   priceFilter.addEventListener("input", () => { //sortera pris och ändra text bredvid slidern
     let priceIndex = priceFilter.value;
-    priceSpan.textContent = `>=${priceArray[priceIndex]} kr/pers`; //hur ska man skriva detta kort och tydligt?
+    priceSpan.textContent = `${priceArray[priceIndex]} kr/pers`; //hur ska man skriva detta kort och tydligt?
     filterFromSmapi(); //sorterar inte på riktigt än
   });
 
