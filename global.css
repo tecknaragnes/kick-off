@@ -401,6 +401,10 @@ body[data-page="favoritespage"] main {
     margin: 1em;
 }
 
+#map {
+    height: 180px;
+}
+
 /* ---------- recensioner ---------- */
 .review-card {
     background-color: var(--accentColor1);
@@ -436,6 +440,21 @@ body[data-page="favoritespage"] main {
 
 
 
+/* ---------- quiz ---------- */
+#quiz {
+    padding: 0.5em;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1em;
+}
+
+#quiz h2,
+#quiz h3 {
+    margin-bottom: 0;
+}
+
+
+
 /* ---------- footer ---------- */
 footer {
     margin: 0;
@@ -443,10 +462,6 @@ footer {
     color: #000;
     background-color: var(--accentColor2);
     flex-shrink: 0;
-}
-
-#map {
-    height: 180px;
 }
 
 
