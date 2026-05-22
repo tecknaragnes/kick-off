@@ -4,6 +4,7 @@ const quiz = document.getElementById("quiz");
 const foodCheckbox = document.getElementById("food");
 const drinkCheckbox = document.getElementById("alcohol");
 
+import { fetchActivities, fetchActivitiesConAct } from "./api.js";
 
 quiz.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -40,3 +41,4 @@ quiz.addEventListener("submit", function(event) {
     let answers = [answer1.value, answer2.value, answer3.value, answer4.value, answer5.value, foodCheckbox.checked, drinkCheckbox.checked];
     console.log(answers);
 });
+

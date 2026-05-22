@@ -388,8 +388,13 @@ body[data-page="favoritespage"] main {
     padding: 0.5em;
 }
 
+#icon-rating img {
+    border: none;
+}
+
 .details-flex-symbols img {
     height: 2em;
+        border: 0.1em solid black;
 }
 
 #contact-section img {
@@ -399,8 +404,8 @@ body[data-page="favoritespage"] main {
 
 .det-img {
     background-color: wheat;
-    height: 15em;
     margin: 1em;
+    border-radius: 2rem;
 }
 
 #map {

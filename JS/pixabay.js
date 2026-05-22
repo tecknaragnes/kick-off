@@ -6,6 +6,8 @@ export const getImageForActivity = async (activity) => {
         return imageCache.get(activity.id);
     }
 
+    let page = window.location.href;
+
     try {
         const params = new URLSearchParams({ //skapa sökväg för pixabay
             key: window.pixakey,
@@ -28,6 +30,10 @@ export const getImageForActivity = async (activity) => {
         if (activity.description === "Biograf") {
             params.set("q", "cinema+popcorn");
             params.set("lang", "en");
+        }
+
+        if (page.includes("details")) {
+            params.set("orientation", "horizontal");
         }
 
         const response = await fetch(`https://pixabay.com/api/?${params}`);
