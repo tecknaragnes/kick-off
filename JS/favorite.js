@@ -52,18 +52,18 @@ function removeFavorite(activity) {
     const favorites = getFavoritesFromLs();
     const updatedFavorites = [];
 
-        for (const favorite of favorites) {
-            if (favorite.id !== activity.id) {
-                updatedFavorites.push(favorite);
-            }
+    for (const favorite of favorites) {
+        if (favorite.id !== activity.id) {
+            updatedFavorites.push(favorite);
         }
+    }
 
-        saveFavoritesToLs(updatedFavorites);
-        console.log("tog bort favorit,", activity.name);
+    saveFavoritesToLs(updatedFavorites);
+    console.log("tog bort favorit,", activity.name);
 
-        if (currentPage === "favoritespage") {
-            renderActivities(updatedFavorites)
-        }
+    if (currentPage === "favoritespage") {
+        renderActivities(updatedFavorites)
+    }
 }
 
 function toggleFav(activity) {
@@ -80,16 +80,20 @@ function toggleFav(activity) {
 export function listenToFavoriteClick(favoriteButton, activity) {
     if (isActivityFavorite((activity))) {
         favoriteButton.classList.add("favorite-active");
+        favoriteButton.innerHTML = `<img src="../SVG/save.svg" alt="Ta bort från favoriter">`;
     } else {
         favoriteButton.classList.remove("favorite-active");
+        favoriteButton.innerHTML = `<img src="../SVG/empty-save.svg" alt="Spara aktivitet">`;
     }
     favoriteButton.addEventListener("click", () => {
         toggleFav(activity)
 
         if (isActivityFavorite(activity)) {
-            favoriteButton.classList.add("favorite-active")
-        } else{
+            favoriteButton.classList.add("favorite-active");
+            favoriteButton.innerHTML = `<img src="../SVG/save.svg" alt="Ta bort från favoriter">`;
+        } else {
             favoriteButton.classList.remove("favorite-active");
+            favoriteButton.innerHTML = `<img src="../SVG/empty-save.svg" alt="Spara aktivitet">`;
         }
     })
 

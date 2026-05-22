@@ -31,7 +31,7 @@ export async function renderActivities(activities) {
                         <p><img src="../SVG/location.svg" alt="">${activity.city}, ${activity.province}</p>
                         <p>${activity.price_range ?? "Pris saknas"} kr</p>
                     </div>
-                    <button class="favorite-btn">Spara favorit</button>
+                    <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
                 </div>
                 <div class="act-symbols">
                     <div>pris</div>

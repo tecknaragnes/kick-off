@@ -315,6 +315,10 @@ a.spec-event {
     margin: 0.5em 0.5em auto auto;
 }
 
+.activity-card .act-flex-card button img {
+    height: 2em;
+}
+
 .favorite-btn {
     background-color: white;
     color: black;
@@ -324,7 +328,6 @@ a.spec-event {
 
 .favorite-btn.favorite-active {
     background-color: rgb(232, 117, 136);
-    color: white;
     border-color: rgb(232, 117, 136);
 }
 
