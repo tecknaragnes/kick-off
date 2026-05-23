@@ -103,7 +103,7 @@ export const renderDetailsPage = async (activity) => {
         <section id="contact-section">
             <h3>Kontakt:</h3>
             <p class="li-icon phone"><img src="../SVG/phone.svg" alt="">Telefon: ${activity.phone_number ?? "saknas"}</p>
-            <p class="li-icon web">Webbplats: <a href="${activity.website ?? "saknas"}">${activity.website}</a></p>
+            <p class="li-icon web"><img src="../SVG/globe.svg" alt="">Webbplats: <a href="${activity.website ?? "saknas"}">${activity.website}</a></p>
             <p class="li-icon adress"><img src="../SVG/location.svg" alt="">Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</p>
             <a href="booking">Boka nu</a>
         </section>

@@ -424,7 +424,8 @@ body[data-page="favoritespage"] main {
 }
 
 #map {
-    height: 180px;
+    height: 32em;
+    border-radius: 0.8em;
 }
 
 /* ---------- recensioner ---------- */
