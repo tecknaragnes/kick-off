@@ -20,6 +20,7 @@ foldBtn.addEventListener("click", () => { //går det att fixa så att den visas 
         foldSection.classList.replace("visible", "hidden");
         foldSection.style.display = "none";
         foldTxt.textContent = "Fäll ut";
+        foldIcon.style.transform = "rotate(0deg)";
     }
 });
 
