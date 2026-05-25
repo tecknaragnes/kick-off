@@ -382,7 +382,7 @@ body[data-page="favoritespage"] main {
     display: flex;
     flex-flow: column wrap;
     align-items: center;
-    background-color: burlywood;
+    background-color: var(--accentColor2);
     padding: 0.5em;
 }
 
@@ -390,12 +390,18 @@ body[data-page="favoritespage"] main {
     align-self: flex-start;
 }
 
-.details-page {
+#details-header img {
+    height: 1.5em;
+}
+
+.details-grid-left,
+.details-grid-right {
     padding: 0.3em;
 }
 
 .details-flex-symbols {
-    background-color: cadetblue;
+    color: #000;
+    background-color: var(--accentColor2);
     border-radius: 0.5em;
     display: flex;
     flex-flow: row wrap;
@@ -414,8 +420,14 @@ body[data-page="favoritespage"] main {
     border: 0.1em solid black;
 }
 
+.det-img {
+    margin: 0.5em 0;
+    width: 100%;
+}
+
 #contact-section {
-    background-color: cadetblue;
+    color: #000;
+    background-color: var(--accentColor2);
     border-radius: 0.5em;
     margin-bottom: 1em;
     padding: 1em;
@@ -424,7 +436,8 @@ body[data-page="favoritespage"] main {
 }
 
 #food-section {
-    background-color: cadetblue;
+    color: #000;
+    background-color: var(--accentColor2);
     border-radius: 0.5em;
     margin-top: 1em;
     padding: 1em;
@@ -456,12 +469,6 @@ body[data-page="favoritespage"] main {
     padding: 0 0.25em;
 }
 
-.det-img {
-    background-color: wheat;
-    margin: 1em;
-    border-radius: 2rem;
-}
-
 #map {
     height: 32em;
     border-radius: 0.8em;
@@ -482,6 +489,7 @@ body[data-page="favoritespage"] main {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    color: #000;
     background-color: var(--accentColor2);
     border-radius: 0.3em 0.3em 0 0;
     padding: 0.5em;
@@ -547,12 +555,14 @@ footer {
     }
 
     #categories,
-    #filters {
+    #filters,
+    .details-grid-right {
         grid-area: filter;
     }
 
     #examples,
-    .results {
+    .results,
+    .details-grid-left {
         grid-area: results;
     }
 
@@ -578,6 +588,10 @@ footer {
     nav ul li:last-child {
         display: none;
     }
+
+    .details-grid-left .review-card {
+        margin: 0.75em 0;
+    }
 }
 
 @media screen and (min-width: 650px) {
@@ -593,6 +607,14 @@ footer {
         grid-template-rows: auto;
         grid-template-areas:
             ". results . filter .";
+    }
+
+    .details-grid-right {
+        grid-area: results;
+    }
+
+    .details-grid-left {
+        grid-area: filter;
     }
 
     #filters,
