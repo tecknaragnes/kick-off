@@ -46,11 +46,6 @@ nav li {
     padding: 0.75em;
 }
 
-nav li:hover {
-    background-color: var(--accentColor1);
-    transition: background-color 0.3s
-}
-
 nav a {
     text-decoration: none;
     color: #fff;
@@ -67,6 +62,22 @@ nav li#current-page {
 
 nav li#current-page a {
     color: #000;
+}
+
+nav ul li:last-child {
+    padding: 0.5em;
+    margin-left: auto;
+}
+
+nav li img {
+    height: 1.5em;
+}
+
+nav ul li:nth-child(1),
+nav ul li:nth-child(2),
+nav ul li:nth-child(3),
+nav ul li:nth-child(4) {
+    display: none;
 }
 
 
@@ -266,11 +277,14 @@ a.spec-event {
 
 
 /* ---------- activity card ---------- */
-.activity-card {
+a.activity-card {
     background-color: var(--accentColor1);
     margin: 1em;
     border-radius: 0.5em;
     box-shadow: 6px 6px 5px black;
+    display: block;
+    color: #fff;
+    text-decoration: none;
 }
 
 .activity-card .act-flex-card {
@@ -549,5 +563,21 @@ footer {
 
     #hero a:hover {
         background-color: var(--accentColor4);
+    }
+
+    nav li:hover {
+        background-color: var(--accentColor1);
+        transition: background-color 0.3s
+    }
+
+    nav ul li:nth-child(1),
+    nav ul li:nth-child(2),
+    nav ul li:nth-child(3),
+    nav ul li:nth-child(4) {
+        display: list-item;
+    }
+
+    nav ul li:last-child {
+        display: none;
     }
 }

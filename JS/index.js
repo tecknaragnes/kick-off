@@ -28,8 +28,6 @@ async function loadPopularActivities() {
         sort: "rating-high",
         descriptions: allowedDescriptions2,
     });
-
-    // console.log(data.payload);
     const activities = data.payload ?? [];
     const popularList = activities.slice(0, 5);//vi tar de 5 högst rankade endast
     await renderPopActivities(popularList); //skickar topp 5 in i renderfunktionen
@@ -46,8 +44,9 @@ async function renderPopActivities(popularList) {
 
     for (const activity of popularList) {
 
-        const activityCard = document.createElement("div");
+        const activityCard = document.createElement("a");
         activityCard.classList.add("activity-card");
+        activityCard.href = `HTML/details.html?id=${activity.id}`;
 
         const imageUrl = await getImageForActivity(activity);
         let rating = Number.parseFloat(activity.rating).toFixed(1);
@@ -104,8 +103,21 @@ async function renderPopActivities(popularList) {
     }
 }
 
+const navUl = document.querySelector("nav ul");
+const navToggle = document.querySelector("nav ul #nav-toggle");
 
+export const showHideNav = () => {
+    const liToggle = document.querySelectorAll("nav li.toggle-li");
+}
 
-
-
-
+navToggle.addEventListener("click", () => {
+    console.log("klickad");
+    showHideNav();
+    if (navUl.classList.contains("hidden")) {
+        navUl.classList.replace("hidden", "visible");
+        liToggle.forEach(li => li.style.display = "list-item");
+    } else {
+        navUl.classList.replace("visible", "hidden");
+        liToggle.forEach(li => li.style.display = "none");
+    }
+})

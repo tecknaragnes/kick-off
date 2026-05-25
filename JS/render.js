@@ -16,8 +16,9 @@ export async function renderActivities(activities) {
     }
 
     for (const activity of activities) {
-        const activityCard = document.createElement("div");
+        const activityCard = document.createElement("a");
         activityCard.classList.add("activity-card");
+        activityCard.href = `details.html?id=${activity.id}`;
 
         let rating = Number.parseFloat(activity.rating).toFixed(1);
 
@@ -153,40 +154,44 @@ export const renderDetailsPage = async (activity) => {
 export const renderReviews = (reviews) => {
     const reviewSection = document.querySelector("#review-section");
 
-    for (const review of reviews) {
-        let rating = Number.parseFloat(review.rating).toFixed(1);
-        const reviewCard = document.createElement("div");
-        reviewCard.classList.add("review-card");
-        reviewCard.innerHTML = `
+    if (!reviews || reviews.length === 0) {
+        reviewSection.innerHTML += "<p>Inga recensioner hittades</p>";
+    } else {
+        for (const review of reviews) {
+            let rating = Number.parseFloat(review.rating).toFixed(1);
+            const reviewCard = document.createElement("div");
+            reviewCard.classList.add("review-card");
+            reviewCard.innerHTML = `
             <div class="rev-flex-header">
                 <h4>${review.name}</h4>
                 <div class="rev-rating"></div>
             </div>
             <p>${review.comment}</p>
             <p>${review.timestamp}</p>
-        `;
-        reviewSection.append(reviewCard);
+            `;
+            reviewSection.append(reviewCard);
 
-        for (let i = 0; i < Math.floor(rating); i++) {
-            const starIcon = document.createElement("img");
-            starIcon.src = "../SVG/star.svg";
-            starIcon.alt = "";
-            reviewCard.querySelector(".rev-rating").append(starIcon);
-        }
-        // Om det finns en decimal del i rating, lägg till en halv stjärna
-        if (rating - Math.floor(rating) >= 0.5) {
-            const halfStarIcon = document.createElement("img");
-            halfStarIcon.src = "../SVG/half-star.svg";
-            halfStarIcon.alt = "";
-            reviewCard.querySelector(".rev-rating").append(halfStarIcon);
-        }
-        // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
-        if (rating < 5) {
-            for (let i = 0; i < 5 - Math.ceil(rating); i++) {
-                const emptyStarIcon = document.createElement("img");
-                emptyStarIcon.src = "../SVG/empty-star.svg";
-                emptyStarIcon.alt = "";
-                reviewCard.querySelector(".rev-rating").append(emptyStarIcon);
+            for (let i = 0; i < Math.floor(rating); i++) {
+                const starIcon = document.createElement("img");
+                starIcon.src = "../SVG/star.svg";
+                starIcon.alt = "";
+                reviewCard.querySelector(".rev-rating").append(starIcon);
+            }
+            // Om det finns en decimal del i rating, lägg till en halv stjärna
+            if (rating - Math.floor(rating) >= 0.5) {
+                const halfStarIcon = document.createElement("img");
+                halfStarIcon.src = "../SVG/half-star.svg";
+                halfStarIcon.alt = "";
+                reviewCard.querySelector(".rev-rating").append(halfStarIcon);
+            }
+            // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
+            if (rating < 5) {
+                for (let i = 0; i < 5 - Math.ceil(rating); i++) {
+                    const emptyStarIcon = document.createElement("img");
+                    emptyStarIcon.src = "../SVG/empty-star.svg";
+                    emptyStarIcon.alt = "";
+                    reviewCard.querySelector(".rev-rating").append(emptyStarIcon);
+                }
             }
         }
     }
