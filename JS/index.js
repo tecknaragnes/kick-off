@@ -103,16 +103,12 @@ async function renderPopActivities(popularList) {
     }
 }
 
-const navUl = document.querySelector("nav ul");
 const navToggle = document.querySelector("nav ul #nav-toggle");
 
 export const showHideNav = () => {
+    const navUl = document.querySelector("nav ul");
     const liToggle = document.querySelectorAll("nav li.toggle-li");
-}
 
-navToggle.addEventListener("click", () => {
-    console.log("klickad");
-    showHideNav();
     if (navUl.classList.contains("hidden")) {
         navUl.classList.replace("hidden", "visible");
         liToggle.forEach(li => li.style.display = "list-item");
@@ -120,4 +116,8 @@ navToggle.addEventListener("click", () => {
         navUl.classList.replace("visible", "hidden");
         liToggle.forEach(li => li.style.display = "none");
     }
+}
+
+navToggle.addEventListener("click", () => {
+    showHideNav();
 })

@@ -86,7 +86,7 @@ async function loadActivityDetails() {
                 foodText.textContent = food.name + " | " + food.distance_in_km.toFixed(2) + " Km från " + selectedActivity.name;
                 foodCard.classList.add("foodCard");
                 foodIcon.classList.add("foodIcon");
-                L.marker([food.lat, food.lng], {icon: foodMarker})
+                L.marker([food.lat, food.lng], { icon: foodMarker })
                     .addTo(map)
                     .bindPopup(food.name + " | " + food.distance_in_km.toFixed(2) + " Km från " + selectedActivity.name);
             }
@@ -128,3 +128,22 @@ async function loadReviews() {
 
 }
 
+
+const navToggle = document.querySelector("nav ul #nav-toggle");
+
+const showHideNav = () => {
+    const navUl = document.querySelector("nav ul");
+    const liToggle = document.querySelectorAll("nav li.toggle-li");
+
+    if (navUl.classList.contains("hidden")) {
+        navUl.classList.replace("hidden", "visible");
+        liToggle.forEach(li => li.style.display = "list-item");
+    } else {
+        navUl.classList.replace("visible", "hidden");
+        liToggle.forEach(li => li.style.display = "none");
+    }
+}
+
+navToggle.addEventListener("click", () => {
+    showHideNav();
+})

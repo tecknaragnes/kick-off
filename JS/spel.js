@@ -6,7 +6,7 @@ const drinkCheckbox = document.getElementById("alcohol");
 
 import { fetchActivities, fetchActivitiesConAct } from "./api.js";
 
-quiz.addEventListener("submit", function(event) {
+quiz.addEventListener("submit", function (event) {
     event.preventDefault();
     const answer1 = document.querySelector(`input[name="fråga 1"]:checked`);
     if (!answer1) {
@@ -14,25 +14,25 @@ quiz.addEventListener("submit", function(event) {
         return;
     }
 
-        const answer2 = document.querySelector(`input[name="fråga 2"]:checked`);
+    const answer2 = document.querySelector(`input[name="fråga 2"]:checked`);
     if (!answer2) {
         console.log("error");
         return;
     }
 
-        const answer3 = document.querySelector(`input[name="fråga 3"]:checked`);
+    const answer3 = document.querySelector(`input[name="fråga 3"]:checked`);
     if (!answer3) {
         console.log("error");
         return;
     }
 
-        const answer4 = document.querySelector(`input[name="fråga 4"]:checked`);
+    const answer4 = document.querySelector(`input[name="fråga 4"]:checked`);
     if (!answer4) {
         console.log("error");
         return;
     }
 
-        const answer5 = document.querySelector(`input[name="fråga 5"]:checked`);
+    const answer5 = document.querySelector(`input[name="fråga 5"]:checked`);
     if (!answer5) {
         console.log("error");
         return;
@@ -42,3 +42,22 @@ quiz.addEventListener("submit", function(event) {
     console.log(answers);
 });
 
+
+const navToggle = document.querySelector("nav ul #nav-toggle");
+
+const showHideNav = () => {
+    const navUl = document.querySelector("nav ul");
+    const liToggle = document.querySelectorAll("nav li.toggle-li");
+
+    if (navUl.classList.contains("hidden")) {
+        navUl.classList.replace("hidden", "visible");
+        liToggle.forEach(li => li.style.display = "list-item");
+    } else {
+        navUl.classList.replace("visible", "hidden");
+        liToggle.forEach(li => li.style.display = "none");
+    }
+}
+
+navToggle.addEventListener("click", () => {
+    showHideNav();
+})

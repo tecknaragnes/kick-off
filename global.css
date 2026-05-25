@@ -566,6 +566,17 @@ footer {
     body[data-page="favoritespage"] .results {
         grid-area: results;
     }
+
+    nav ul li:nth-child(1),
+    nav ul li:nth-child(2),
+    nav ul li:nth-child(3),
+    nav ul li:nth-child(4) {
+        display: list-item;
+    }
+
+    nav ul li:last-child {
+        display: none;
+    }
 }
 
 @media screen and (min-width: 650px) {
@@ -608,16 +619,5 @@ footer {
     nav li:hover {
         background-color: var(--accentColor1);
         transition: background-color 0.3s
-    }
-
-    nav ul li:nth-child(1),
-    nav ul li:nth-child(2),
-    nav ul li:nth-child(3),
-    nav ul li:nth-child(4) {
-        display: list-item;
-    }
-
-    nav ul li:last-child {
-        display: none;
     }
 }
