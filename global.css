@@ -407,6 +407,29 @@ body[data-page="favoritespage"] main {
     padding-bottom: 0.8em;
 }
 
+#food-section {
+    background-color: cadetblue;
+    border-radius: 0.5em;
+    margin-top: 1em;
+    padding: 1em;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+}
+
+.foodCard {
+    border: white solid 0.2em;
+    border-radius: 0.5em;
+    margin: 0.5em;
+    padding: 0.4em;
+}
+
+.foodIcon {
+    width: 1em;
+    border: 0.1em solid black;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+}
+
 #contact-section h3 {
     padding-top: 0.5em;
 }
