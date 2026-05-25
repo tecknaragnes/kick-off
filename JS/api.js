@@ -13,6 +13,10 @@ export async function fetchActivities(filters) {
     types: "activity",
   });
 
+  if (filters.ids && filters.ids.length > 0) {
+    params.set("ids", filters.ids.join(","));
+  }
+
   //om användaren har valt ett maxavstånd skickas pos och radie med, 
   // då använder vi getfromlatlng istället för getall, alltså vi ändrar metoden
   if (filters.lat != null && filters.lng != null && filters.radius) {
@@ -107,11 +111,11 @@ export async function fetchActivitiesConAct(filters) {
     params.delete("physical_efforts");
   }
 
-  if (filters.estimated_durations === "0") {
+  if (filters.estimated_duration === "0") {
     params.set("estimated_durations", "MINUTES");
-  } else if (filters.estimated_durations === "1") {
+  } else if (filters.estimated_duration === "1") {
     params.set("estimated_durations", "HOURS");
-  } else if (filters.estimated_durations === "2") {
+  } else if (filters.estimated_duration === "2") {
     params.set("estimated_durations", "DAYS");
   } else {
     params.delete("estimated_durations");
@@ -128,18 +132,18 @@ export async function fetchActivitiesConAct(filters) {
   }
 
   if (filters.disability_support === true) {
-    params.set("disability_support", filters.disability_support);
+    params.set("disability_support", "Y");//vill visa de som är "N" också?
   };
 
   console.log("nu har vi sökt på controllern activity");
   console.log("visar full URL,", `https://smapi.lnu.se/api/?${params}`);
 
   console.log("URL som skickas:", `https://smapi.lnu.se/api/?${params}`);
-  // const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
+  const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
 
-  // if (!response.ok) {
-  //   throw new Error("Sökningen misslyckades");
-  // }
+  if (!response.ok) {
+    throw new Error("Sökningen misslyckades");
+  }
 
   return response.json();
 }
