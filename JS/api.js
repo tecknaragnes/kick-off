@@ -141,5 +141,25 @@ export async function fetchActivitiesConAct(filters) {
   //   throw new Error("Sökningen misslyckades");
   // }
 
-  // return response.json();
+  return response.json();
+}
+
+export async function fetchFood(Alat, Alng) {
+
+  const params = new URLSearchParams({
+    controller: "food",
+    method: "getfromlatlng",
+    api_key: window.APIKEY,
+    lat: Alat,
+    lng: Alng
+  });
+
+  console.log("URL som skickas:", `https://smapi.lnu.se/api/?${params}`);
+  const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
+
+  if (!response.ok) {
+    throw new Error("Sökningen misslyckades");
+  }
+
+  return response.json();
 }
