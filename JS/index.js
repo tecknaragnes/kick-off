@@ -23,13 +23,12 @@ const allowedDescriptions2 = [
 
 //Hämta populära aktiviteter från SMAPI, samma som på filter.js
 async function loadPopularActivities() {
+    popularActivities.innerHTML = "<div class='skeleton-loader'></div>";
     //api.js gör om detta till order by rating, high i detta fall, desc blir vår array ovanför
     const data = await fetchActivities({
         sort: "rating-high",
         descriptions: allowedDescriptions2,
     });
-
-    // console.log(data.payload);
     const activities = data.payload ?? [];
     const popularList = activities.slice(0, 5);//vi tar de 5 högst rankade endast
     await renderPopActivities(popularList); //skickar topp 5 in i renderfunktionen
@@ -46,8 +45,9 @@ async function renderPopActivities(popularList) {
 
     for (const activity of popularList) {
 
-        const activityCard = document.createElement("div");
+        const activityCard = document.createElement("a");
         activityCard.classList.add("activity-card");
+        activityCard.href = `HTML/details.html?id=${activity.id}`;
 
         const imageUrl = await getImageForActivity(activity);
         let rating = Number.parseFloat(activity.rating).toFixed(1);
@@ -104,8 +104,23 @@ async function renderPopActivities(popularList) {
     }
 }
 
+// const navToggle = document.querySelector("nav ul #nav-toggle");
 
+// const showHideNav = () => {
+//     const navUl = document.querySelector("nav ul");
+//     const liToggle = document.querySelectorAll("nav li.li-hidden");
 
+//     if (navUl.classList.contains("hidden")) {
+//         console.log("nav gömd, ska visa");
+//         navUl.classList.replace("hidden", "visible");
+//         liToggle.forEach(li => li.classList.replace("li-hidden", "li-visible"));
+//     } else {
+//         console.log("nav synlig, ska gömma");
+//         navUl.classList.replace("visible", "hidden");
+//         liToggle.forEach(li => li.classList.replace("li-visible", "li-hidden"));
+//     }
+// }
 
-
-
+// navToggle.addEventListener("click", () => {
+//     showHideNav();
+// })

@@ -20,7 +20,7 @@ const themeparkCheckbox = document.getElementById("Temapark");
 const ziplineCheckbox = document.getElementById("Zipline");
 const entertainmentcenterCheckbox = document.getElementById("Nöjescenter");
 const paintballCheckbox = document.getElementById("Paintballcenter");
-const healthCheckbox = document.getElementById("Hälsocenter");
+//const healthCheckbox = document.getElementById("Hälsocenter");
 const cinemaCheckbox = document.getElementById("Biograf");
 
 const searchBtn = document.querySelector(".search-btn");
@@ -52,8 +52,10 @@ const allowedDescriptions = [
 
 
 export async function filterFromSmapi() { // för controller establishment
+  results.innerHTML = "<div class='skeleton-loader'></div>"
   try {
-    const data = await fetchActivities({
+
+    const filters = {
       sort: sortFilter.value,
       outdoors: outdoorFilter.value,
       cities: cityFilter.value,
@@ -62,7 +64,9 @@ export async function filterFromSmapi() { // för controller establishment
       lat: userLatitude,
       lng: userLongitude,
       radius: distanceFilter.value,
-    });
+    };
+
+    const data = await fetchActivities(filters);
 
     console.log(data.payload);
     allActivities = data.payload ?? [];
@@ -77,17 +81,46 @@ export async function filterFromSmapi() { // för controller establishment
 export async function filterFromSmapiConAct() {
   // För controller activity
   try {
-    const data = await fetchActivitiesConAct({
-      physical_efforts: physicalFilter.value,
-      estimated_durations: timeFilter.value,
-      disability_support: accesabilityFilter.value,
+    const activityFilters = {
+      physical_effort: physicalFilter.value,
+      estimated_duration: timeFilter.value,
+      disability_support: accesabilityFilter.checked,
       descriptions: getDescriptionsForSmapi()
-    });
+    };
+    //hämtar activitydatan som matchar obj ovanför, hitta rätt id
+    const activityData = await fetchActivitiesConAct(activityFilters)
+    // tom array för att spara id
+    const activityIds = [];
+    //loppa payloaden från smapi
+    for (const activity of activityData.payload ?? []) {
+      activityIds.push(activity.id)
+    }
 
-    console.log(data.payload);
-    allActivities = data.payload ?? [];
+    // om activity sökningen inte gav några ids, visa inget
+    if (activityIds.length === 0) {
+      allActivities = [];
+      renderActivities([]);
+      return;
+    }
+    //nu använder vi idn för att hämta kortdat från est
+    const establishmentFilters = {
+      sort: sortFilter.value,
+      outdoors: outdoorFilter.value,
+      cities: cityFilter.value,
+      price_ranges: priceFilter.value,
+      descriptions: getDescriptionsForSmapi(),
+      lat: userLatitude,
+      lng: userLongitude,
+      radius: distanceFilter.value,
+      ids: activityIds,
+    };
+
+    // Vi hämtar establishment-data för de id:n vi fick från activity-sökningen
+    const establishmentData = await fetchActivities(establishmentFilters);
+    //Spara establishment payloaden i allActivities, denna data som renderactivities visar
+    allActivities = establishmentData.payload ?? [];
+
     filterActivities();
-
   } catch (error) {
     console.error(error);
     results.innerHTML = `<p>${error.message}</p>`;
@@ -130,19 +163,18 @@ function getUserLocation() {
 function saveUserLocation(position) {
 
   //vi sparar användarens lat och long i vår globala variablar
-  userLatitude = position.coords.latitude
-  userLongitude = position.coords.longitude
+  userLatitude = position.coords.latitude;
+  userLongitude = position.coords.longitude;
 
   console.log("Användarens latitud:", userLatitude);
   console.log("Användarens longitud:", userLongitude);
 
-  filterFromSmapi()
+  filterFromSmapi();
 }
 
 //körs endast om användaren nekar plats eller om webbläsaren inte kan hämta position
 function showLocationError(error) {
-  console.log("kunde nt hämta plats", error.message)
-
+  console.log("kunde inte hämta plats", error.message);
 }
 
 function filterActivities() {
@@ -182,7 +214,6 @@ export function listenerEvents() {
   });
 
   physicalFilter.addEventListener("input", () => { // sortera physisk ansträngning och ändra bild bredvid slidern
-    console.log(physicalFilter.value);
     let physicalIndex = physicalFilter.value;
     physicalSpan.innerHTML = "";
     for (let i = 0; i < physicalIndex; i++) {
@@ -191,26 +222,18 @@ export function listenerEvents() {
     filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
-  timeFilter.addEventListener("change", () => { // sortera tidsåtgång och ändra text/symbol bredvid slidern
-    console.log(timeFilter.value);
+  timeFilter.addEventListener("input", () => { // sortera tidsåtgång och ändra text/symbol bredvid slidern
     let timeIndex = timeFilter.value;
     timeSpan.textContent = `${timeArray[timeIndex]}`;
     filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
-  // distanceFilter.addEventListener("change", () => { // sortera avstånd och ändra text bredvid slidern
-  //   console.log(distanceFilter.value);
-  //   let distanceIndex = distanceFilter.value;
-  //   distanceSpan.textContent = `<=${distanceIndex} km`;
-  //   // filterFromSmapi(); //sorterar inte på riktigt än
-  // });
-
-  distanceFilter.addEventListener("change", () => {
+  distanceFilter.addEventListener("input", () => {
     const distanceIndex = distanceFilter.value;
-//om användaren inte filtrerat på avstånd och slidern står på max/auto läge
+    //om användaren inte filtrerat på avstånd och slidern står på max/auto läge
     if (distanceIndex === distanceFilter.max) {
       distanceSpan.textContent = "Alla avstånd";
-// Då är positionen null, så api.js använder getall istället för getfromlatlng.
+      // Då är positionen null, så api.js använder getall istället för getfromlatlng.
       userLatitude = null;
       userLongitude = null;
       //hämta aktiviteter igen, eftersom position är null använder vi getall
@@ -219,19 +242,16 @@ export function listenerEvents() {
       return;
     }
     //om användaren har valt mindre än max så visar vi valt km
-    distanceSpan.textContent = `<=${distanceIndex} km`;
-// om vi inte har användarens plats fråga först
+    distanceSpan.textContent = `${distanceIndex} km`;
+    // om vi inte har användarens plats fråga först
     if (userLatitude === null || userLongitude === null) {
-      getUserLocation()
-
+      getUserLocation();
     } else {//hämta aktiviteter igen, eftersom position inte är null använder vi getfrpmlatlng
-
       filterFromSmapi();
     }
   });
 
   accesabilityFilter.addEventListener("change", () => { // sortera tillgänglighet
-    console.log(accesabilityFilter.checked);
     filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
@@ -243,7 +263,6 @@ export function listenerEvents() {
   ziplineCheckbox.addEventListener("change", filterFromSmapi);
   entertainmentcenterCheckbox.addEventListener("change", filterFromSmapi);
   paintballCheckbox.addEventListener("change", filterFromSmapi);
-  // healthCheckbox.addEventListener("change", filterFromSmapi);
   cinemaCheckbox.addEventListener("change", filterFromSmapi);
 
 
@@ -271,7 +290,7 @@ const awBtn = document.getElementById("aw");
 const teamBtn = document.getElementById("team");
 export const eventFiltering = () => { //denna funkar inte riktigt, hände inget när jag trycker på knappen
   if (stagnightBtn.classList.contains("on")) { // Om svensexa är på
-    priceFilter.value = "6";
+    priceFilter.value = "5";
 
     physicalFilter.value = "3";
     physicalSpan.innerHTML = "";
@@ -294,10 +313,9 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     ziplineCheckbox.checked = true;
     entertainmentcenterCheckbox.checked = true;
     paintballCheckbox.checked = true;
-    healthCheckbox.checked = true;
     cinemaCheckbox.checked = false;
 
-    filterFromSmapi(); // så att det faktiskt filtreras
+    filterFromSmapiConAct(); // så att det faktiskt filtreras
   }
 
   else if (awBtn.classList.contains("on")) { //Om AW är tänd
@@ -324,14 +342,13 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     ziplineCheckbox.checked = false;
     entertainmentcenterCheckbox.checked = true;
     paintballCheckbox.checked = false;
-    healthCheckbox.checked = false;
     cinemaCheckbox.checked = true;
 
-    filterFromSmapi(); // så att det faktiskt filtreras
+    filterFromSmapiConAct(); // så att det faktiskt filtreras
   }
 
   else if (teamBtn.classList.contains("on")) { //Om AW är tänd
-    priceFilter.value = "6";
+    priceFilter.value = "5";
 
     physicalFilter.value = "3";
     physicalSpan.innerHTML = "";
@@ -354,14 +371,13 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     ziplineCheckbox.checked = true;
     entertainmentcenterCheckbox.checked = true;
     paintballCheckbox.checked = true;
-    healthCheckbox.checked = true;
     cinemaCheckbox.checked = false;
 
-    filterFromSmapi(); // så att det faktiskt filtreras
+    filterFromSmapiConAct(); // så att det faktiskt filtreras
   }
 
   else { //Om ingen är tänd
-    priceFilter.value = "10";
+    priceFilter.value = "5";
 
     physicalFilter.value = "3";
     physicalSpan.innerHTML = "";
@@ -372,7 +388,7 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     timeFilter.value = "0";
     timeSpan.textContent = `${timeArray[0]}`;
 
-    distanceFilter.value = "10";
+    distanceFilter.value = "100";
 
     outdoorFilter.value = "Alla";
 
@@ -384,7 +400,7 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     ziplineCheckbox.checked = false;
     entertainmentcenterCheckbox.checked = false;
     paintballCheckbox.checked = false;
-    healthCheckbox.checked = false;
+    //healthCheckbox.checked = false;
     cinemaCheckbox.checked = false;
 
     filterFromSmapi(); // så att det faktiskt filtreras
