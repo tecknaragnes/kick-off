@@ -21,7 +21,7 @@ async function loadActivityDetails() {
 
         const response = await fetch(`https://smapi.lnu.se/api/?${params}`);
         if (!response.ok) {
-            throw new Error("kkunde inte hitta/hämta aktivitet");
+            throw new Error("Kunde inte hitta/hämta aktivitet");
         }
 
         const data = await response.json();
@@ -34,7 +34,7 @@ async function loadActivityDetails() {
         });
 
         if (!selectedActivity) {
-            console.log("ingen aktivitet hittades")
+            console.log("Ingen aktivitet hittades")
             return;
 
         }
@@ -65,7 +65,7 @@ async function loadActivityDetails() {
             .bindPopup(selectedActivity.name);
 
         if (!foodData) {
-            console.log("inga Matförslag hittades")
+            console.log("Inga matförslag hittades")
         }
         else {
             for (let food of foodData.payload) {
@@ -91,16 +91,12 @@ async function loadActivityDetails() {
                     .bindPopup(food.name + " | " + food.distance_in_km.toFixed(2) + " Km från " + selectedActivity.name);
             }
         }
-
     } catch (error) {
         console.error(error);
-
     }
-
-
 }
 
-loadActivityDetails()
+loadActivityDetails();
 
 
 
@@ -129,21 +125,21 @@ async function loadReviews() {
 }
 
 
-const navToggle = document.querySelector("nav ul #nav-toggle");
+// const navToggle = document.querySelector("nav ul #nav-toggle");
 
-const showHideNav = () => {
-    const navUl = document.querySelector("nav ul");
-    const liToggle = document.querySelectorAll("nav li.toggle-li");
+// const showHideNav = () => {
+//     const navUl = document.querySelector("nav ul");
+//     const liToggle = document.querySelectorAll("nav li.toggle-li");
 
-    if (navUl.classList.contains("hidden")) {
-        navUl.classList.replace("hidden", "visible");
-        liToggle.forEach(li => li.style.display = "list-item");
-    } else {
-        navUl.classList.replace("visible", "hidden");
-        liToggle.forEach(li => li.style.display = "none");
-    }
-}
+//     if (navUl.classList.contains("hidden")) {
+//         navUl.classList.replace("hidden", "visible");
+//         liToggle.forEach(li => li.style.display = "list-item");
+//     } else {
+//         navUl.classList.replace("visible", "hidden");
+//         liToggle.forEach(li => li.style.display = "none");
+//     }
+// }
 
-navToggle.addEventListener("click", () => {
-    showHideNav();
-})
+// navToggle.addEventListener("click", () => {
+//     showHideNav();
+// })

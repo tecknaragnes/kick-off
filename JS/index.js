@@ -103,24 +103,23 @@ async function renderPopActivities(popularList) {
     }
 }
 
-const navToggle = document.querySelector("nav ul #nav-toggle");
+// const navToggle = document.querySelector("nav ul #nav-toggle");
 
-const showHideNav = () => {
-    const navUl = document.querySelector("nav ul");
-    const liToggle = document.querySelectorAll("nav li.li-hidden");
+// const showHideNav = () => {
+//     const navUl = document.querySelector("nav ul");
+//     const liToggle = document.querySelectorAll("nav li.li-hidden");
 
-    if (navUl.classList.contains("hidden")) {
-        console.log("nav gömd, ska visa");
-        navUl.classList.replace("hidden", "visible");
-        liToggle.forEach(li => li.classList.replace("li-hidden", "li-visible"));
-    } else {
-        console.log("nav synlig, ska gömma");
-        navUl.classList.replace("visible", "hidden");
-        liToggle.forEach(li => li.classList.replace("li-visible", "li-hidden"));
-    }
-}
+//     if (navUl.classList.contains("hidden")) {
+//         console.log("nav gömd, ska visa");
+//         navUl.classList.replace("hidden", "visible");
+//         liToggle.forEach(li => li.classList.replace("li-hidden", "li-visible"));
+//     } else {
+//         console.log("nav synlig, ska gömma");
+//         navUl.classList.replace("visible", "hidden");
+//         liToggle.forEach(li => li.classList.replace("li-visible", "li-hidden"));
+//     }
+// }
 
-navToggle.addEventListener("click", () => {
-    console.log("klickad");
-    showHideNav();
-})
+// navToggle.addEventListener("click", () => {
+//     showHideNav();
+// })
