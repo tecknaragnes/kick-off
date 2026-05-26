@@ -20,7 +20,7 @@ const themeparkCheckbox = document.getElementById("Temapark");
 const ziplineCheckbox = document.getElementById("Zipline");
 const entertainmentcenterCheckbox = document.getElementById("Nöjescenter");
 const paintballCheckbox = document.getElementById("Paintballcenter");
-const healthCheckbox = document.getElementById("Hälsocenter");
+//const healthCheckbox = document.getElementById("Hälsocenter");
 const cinemaCheckbox = document.getElementById("Biograf");
 
 const searchBtn = document.querySelector(".search-btn");
@@ -289,7 +289,7 @@ const awBtn = document.getElementById("aw");
 const teamBtn = document.getElementById("team");
 export const eventFiltering = () => { //denna funkar inte riktigt, hände inget när jag trycker på knappen
   if (stagnightBtn.classList.contains("on")) { // Om svensexa är på
-    priceFilter.value = "6";
+    priceFilter.value = "5";
 
     physicalFilter.value = "3";
     physicalSpan.innerHTML = "";
@@ -314,7 +314,7 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     paintballCheckbox.checked = true;
     cinemaCheckbox.checked = false;
 
-    filterFromSmapi(); // så att det faktiskt filtreras
+    filterFromSmapiConAct(); // så att det faktiskt filtreras
   }
 
   else if (awBtn.classList.contains("on")) { //Om AW är tänd
@@ -343,11 +343,11 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     paintballCheckbox.checked = false;
     cinemaCheckbox.checked = true;
 
-    filterFromSmapi(); // så att det faktiskt filtreras
+    filterFromSmapiConAct(); // så att det faktiskt filtreras
   }
 
   else if (teamBtn.classList.contains("on")) { //Om AW är tänd
-    priceFilter.value = "6";
+    priceFilter.value = "5";
 
     physicalFilter.value = "3";
     physicalSpan.innerHTML = "";
@@ -372,11 +372,11 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     paintballCheckbox.checked = true;
     cinemaCheckbox.checked = false;
 
-    filterFromSmapi(); // så att det faktiskt filtreras
+    filterFromSmapiConAct(); // så att det faktiskt filtreras
   }
 
   else { //Om ingen är tänd
-    priceFilter.value = "10";
+    priceFilter.value = "5";
 
     physicalFilter.value = "3";
     physicalSpan.innerHTML = "";
@@ -387,7 +387,7 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     timeFilter.value = "0";
     timeSpan.textContent = `${timeArray[0]}`;
 
-    distanceFilter.value = "10";
+    distanceFilter.value = "100";
 
     outdoorFilter.value = "Alla";
 
@@ -399,7 +399,7 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     ziplineCheckbox.checked = false;
     entertainmentcenterCheckbox.checked = false;
     paintballCheckbox.checked = false;
-    healthCheckbox.checked = false;
+    //healthCheckbox.checked = false;
     cinemaCheckbox.checked = false;
 
     filterFromSmapi(); // så att det faktiskt filtreras
