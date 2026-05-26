@@ -213,7 +213,6 @@ export function listenerEvents() {
   });
 
   physicalFilter.addEventListener("input", () => { // sortera physisk ansträngning och ändra bild bredvid slidern
-    console.log(physicalFilter.value);
     let physicalIndex = physicalFilter.value;
     physicalSpan.innerHTML = "";
     for (let i = 0; i < physicalIndex; i++) {
@@ -223,7 +222,6 @@ export function listenerEvents() {
   });
 
   timeFilter.addEventListener("input", () => { // sortera tidsåtgång och ändra text/symbol bredvid slidern
-    console.log(timeFilter.value);
     let timeIndex = timeFilter.value;
     timeSpan.textContent = `${timeArray[timeIndex]}`;
     filterFromSmapiConAct(); //sorterar inte på riktigt än
@@ -253,7 +251,6 @@ export function listenerEvents() {
   });
 
   accesabilityFilter.addEventListener("change", () => { // sortera tillgänglighet
-    console.log(accesabilityFilter.checked);
     filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 

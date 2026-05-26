@@ -111,20 +111,17 @@ listenerEvents();
 filterFromSmapi();
 
 const navToggle = document.querySelector("nav ul #nav-toggle");
+const navUl = document.querySelector("nav ul");
+const liToggle = document.querySelectorAll("nav li.toggle-li");
 
-const showHideNav = () => {
-    const navUl = document.querySelector("nav ul");
-    const liToggle = document.querySelectorAll("nav li.toggle-li");
-
-    if (navUl.classList.contains("hidden")) {
-        navUl.classList.replace("hidden", "visible");
-        liToggle.forEach(li => li.style.display = "list-item");
-    } else {
-        navUl.classList.replace("visible", "hidden");
-        liToggle.forEach(li => li.style.display = "none");
-    }
-}
-
-navToggle.addEventListener("click", () => {
-    showHideNav();
-})
+//assåd en här facking funkar inte...
+// navToggle.addEventListener("click", () => { //när man trycker på hamburgermenyn för att visa/dölja nav
+//     if (navUl.classList == "hidden") {
+//         navUl.classList.replace("hidden", "visible");
+//         liToggle.forEach(li => li.classList.replace("li-hidden", "li-visible"));
+//     }
+//     else {
+//         navUl.classList.replace("visible", "hidden");
+//         liToggle.forEach(li => li.classList.replace("li-visible"));
+//     }
+// });
