@@ -53,7 +53,8 @@ const allowedDescriptions = [
 
 export async function filterFromSmapi() { // för controller establishment
   try {
-    const data = await fetchActivities({
+
+    const filters = {
       sort: sortFilter.value,
       outdoors: outdoorFilter.value,
       cities: cityFilter.value,
@@ -62,7 +63,9 @@ export async function filterFromSmapi() { // för controller establishment
       lat: userLatitude,
       lng: userLongitude,
       radius: distanceFilter.value,
-    });
+    };
+
+    const data = await fetchActivities(filters);
 
     console.log(data.payload);
     allActivities = data.payload ?? [];
@@ -77,17 +80,46 @@ export async function filterFromSmapi() { // för controller establishment
 export async function filterFromSmapiConAct() {
   // För controller activity
   try {
-    const data = await fetchActivitiesConAct({
-      physical_efforts: physicalFilter.value,
-      estimated_durations: timeFilter.value,
-      disability_support: accesabilityFilter.value,
+    const activityFilters = {
+      physical_effort: physicalFilter.value,
+      estimated_duration: timeFilter.value,
+      disability_support: accesabilityFilter.checked,
       descriptions: getDescriptionsForSmapi()
-    });
+    };
+    //hämtar activitydatan som matchar obj ovanför, hitta rätt id
+    const activityData = await fetchActivitiesConAct(activityFilters)
+    // tom array för att spara id
+    const activityIds = [];
+    //loppa payloaden från smapi
+    for (const activity of activityData.payload ?? []) {
+      activityIds.push(activity.id)
+    }
 
-    console.log(data.payload);
-    allActivities = data.payload ?? [];
+    // om activity sökningen inte gav några ids, visa inget
+    if (activityIds.length === 0) {
+      allActivities = [];
+      renderActivities([]);
+      return;
+    }
+    //nu använder vi idn för att hämta kortdat från est
+    const establishmentFilters = {
+      sort: sortFilter.value,
+      outdoors: outdoorFilter.value,
+      cities: cityFilter.value,
+      price_ranges: priceFilter.value,
+      descriptions: getDescriptionsForSmapi(),
+      lat: userLatitude,
+      lng: userLongitude,
+      radius: distanceFilter.value,
+      ids: activityIds,
+    };
+
+    // Vi hämtar establishment-data för de id:n vi fick från activity-sökningen
+    const establishmentData = await fetchActivities(establishmentFilters);
+    //Spara establishment payloaden i allActivities, denna data som renderactivities visar
+    allActivities = establishmentData.payload ?? [];
+
     filterActivities();
-
   } catch (error) {
     console.error(error);
     results.innerHTML = `<p>${error.message}</p>`;
