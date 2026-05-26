@@ -98,13 +98,33 @@ export const renderDetailsPage = async (activity) => {
             <p>${activity.text}</p>
             <p>${activity.abstract}</p>
             <div class="details-flex-symbols">
-                <span id="icon-rating"><p>Betyg: ${rating}</p></span>
-                <span id="icon-price"><p>${activity.price_range} Kr</p></span>
-                <span id="icon-ppl"><img src="../SVG/person.svg" alt="Personer"><p>2-5</p></span>
-                <span id="icon-time"><img src="../SVG/clock.svg" alt="Tid"><p>Halvdag</p></span>
-                <span id="icon-food"><img src="../SVG/food.svg" alt="Mat"><p>Ja</p></span>
-                <span id="icon-drink"><img src="../SVG/drink.svg" alt="Dryck"><p>Nej</p></span>
-                <span id="icon-accesability"><img src="../SVG/wheelchair.svg" alt="Tillgänglighet"><p>Ja</p></span>        </div>
+                <span id="icon-rating">
+                    <p>Betyg: ${rating}</p>
+                </span>
+                <span id="icon-price">
+                    <p>${activity.price_range} Kr</p>
+                </span>
+                <span id="icon-ppl">
+                    <img src="../SVG/person.svg" alt="Personer">
+                    <p>2-5</p>
+                </span>
+                <span id="icon-time">
+                    <img src="../SVG/clock.svg" alt="Tid">
+                    <p>Halvdag</p>
+                </span>
+                <span id="icon-food">
+                    <img src="../SVG/food.svg" alt="Mat">
+                    <p>Ja</p>
+                </span>
+                <span id="icon-drink">
+                    <img src="../SVG/drink.svg" alt="Dryck">
+                    <p>Nej</p>
+                </span>
+                <span id="icon-accesability">
+                    <img src="../SVG/wheelchair.svg" alt="Tillgänglighet">
+                    <p>Ja</p>
+                </span>
+            </div>
             <img class="det-img" src="${imageUrl}" alt="">
             <section id="contact-section">
                 <h3>Kontakt:</h3>
@@ -128,28 +148,29 @@ export const renderDetailsPage = async (activity) => {
     `;
     // main.append(detailsPage);
 
-    for (let i = 0; i < Math.floor(rating); i++) {
-        const starIcon = document.createElement("img");
-        starIcon.src = "../SVG/star.svg";
-        starIcon.alt = "";
-        main.querySelector("#icon-rating").append(starIcon);
-    }
-    // Om det finns en decimal del i rating, lägg till en halv stjärna
-    if (rating - Math.floor(rating) >= 0.5) {
-        const halfStarIcon = document.createElement("img");
-        halfStarIcon.src = "../SVG/half-star.svg";
-        halfStarIcon.alt = "";
-        main.querySelector("#icon-rating").append(halfStarIcon);
-    }
     // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
     if (rating < 5) {
         for (let i = 0; i < 5 - Math.ceil(rating); i++) {
             const emptyStarIcon = document.createElement("img");
             emptyStarIcon.src = "../SVG/empty-star.svg";
             emptyStarIcon.alt = "";
-            main.querySelector("#icon-rating").append(emptyStarIcon);
+            main.querySelector("#icon-rating").prepend(emptyStarIcon);
         }
     }
+    // Om det finns en decimal del i rating, lägg till en halv stjärna
+    if (rating - Math.floor(rating) >= 0.5) {
+        const halfStarIcon = document.createElement("img");
+        halfStarIcon.src = "../SVG/half-star.svg";
+        halfStarIcon.alt = "";
+        main.querySelector("#icon-rating").prepend(halfStarIcon);
+    }
+    // lägga till hela stjärnor
+    for (let i = 0; i < Math.floor(rating); i++) {
+        const starIcon = document.createElement("img");
+        starIcon.src = "../SVG/star.svg";
+        starIcon.alt = "";
+        main.querySelector("#icon-rating").prepend(starIcon);
+    } // de är i "fel" ordning för att det ska bli rätt med prepend
 }
 
 // recensioner ----------------------------------

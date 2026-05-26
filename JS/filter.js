@@ -312,7 +312,6 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     ziplineCheckbox.checked = true;
     entertainmentcenterCheckbox.checked = true;
     paintballCheckbox.checked = true;
-    healthCheckbox.checked = true;
     cinemaCheckbox.checked = false;
 
     filterFromSmapi(); // så att det faktiskt filtreras
@@ -342,7 +341,6 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     ziplineCheckbox.checked = false;
     entertainmentcenterCheckbox.checked = true;
     paintballCheckbox.checked = false;
-    healthCheckbox.checked = false;
     cinemaCheckbox.checked = true;
 
     filterFromSmapi(); // så att det faktiskt filtreras
@@ -372,7 +370,6 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     ziplineCheckbox.checked = true;
     entertainmentcenterCheckbox.checked = true;
     paintballCheckbox.checked = true;
-    healthCheckbox.checked = true;
     cinemaCheckbox.checked = false;
 
     filterFromSmapi(); // så att det faktiskt filtreras
