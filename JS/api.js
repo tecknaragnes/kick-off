@@ -104,17 +104,17 @@ export async function fetchActivitiesConAct(filters) {
   if (filters.physical_effort === "1") {
     params.set("physical_efforts", "LOW");
   } else if (filters.physical_effort === "2") {
-    params.set("physical_efforts", "MEDIUM");
+    params.set("physical_efforts", "MEDIUM,LOW");
   } else if (filters.physical_effort === "3") {
-    params.set("physical_efforts", "HIGH");
+    params.set("physical_efforts", "HIGH,MEDIUM,LOW");
   } else {
     params.delete("physical_efforts");
   }
 
   if (filters.estimated_duration === "0") {
-    params.set("estimated_durations", "MINUTES");
+    params.set("estimated_durations", "MINUTES,HOURS,DAYS");
   } else if (filters.estimated_duration === "1") {
-    params.set("estimated_durations", "HOURS");
+    params.set("estimated_durations", "HOURS,DAYS");
   } else if (filters.estimated_duration === "2") {
     params.set("estimated_durations", "DAYS");
   } else {

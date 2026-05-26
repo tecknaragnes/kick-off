@@ -162,19 +162,18 @@ function getUserLocation() {
 function saveUserLocation(position) {
 
   //vi sparar användarens lat och long i vår globala variablar
-  userLatitude = position.coords.latitude
-  userLongitude = position.coords.longitude
+  userLatitude = position.coords.latitude;
+  userLongitude = position.coords.longitude;
 
   console.log("Användarens latitud:", userLatitude);
   console.log("Användarens longitud:", userLongitude);
 
-  filterFromSmapi()
+  filterFromSmapi();
 }
 
 //körs endast om användaren nekar plats eller om webbläsaren inte kan hämta position
 function showLocationError(error) {
-  console.log("kunde nt hämta plats", error.message)
-
+  console.log("kunde inte hämta plats", error.message);
 }
 
 function filterActivities() {
@@ -214,7 +213,6 @@ export function listenerEvents() {
   });
 
   physicalFilter.addEventListener("input", () => { // sortera physisk ansträngning och ändra bild bredvid slidern
-    console.log(physicalFilter.value);
     let physicalIndex = physicalFilter.value;
     physicalSpan.innerHTML = "";
     for (let i = 0; i < physicalIndex; i++) {
@@ -223,21 +221,13 @@ export function listenerEvents() {
     filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
-  timeFilter.addEventListener("change", () => { // sortera tidsåtgång och ändra text/symbol bredvid slidern
-    console.log(timeFilter.value);
+  timeFilter.addEventListener("input", () => { // sortera tidsåtgång och ändra text/symbol bredvid slidern
     let timeIndex = timeFilter.value;
     timeSpan.textContent = `${timeArray[timeIndex]}`;
     filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
-  // distanceFilter.addEventListener("change", () => { // sortera avstånd och ändra text bredvid slidern
-  //   console.log(distanceFilter.value);
-  //   let distanceIndex = distanceFilter.value;
-  //   distanceSpan.textContent = `<=${distanceIndex} km`;
-  //   // filterFromSmapi(); //sorterar inte på riktigt än
-  // });
-
-  distanceFilter.addEventListener("change", () => {
+  distanceFilter.addEventListener("input", () => {
     const distanceIndex = distanceFilter.value;
     //om användaren inte filtrerat på avstånd och slidern står på max/auto läge
     if (distanceIndex === distanceFilter.max) {
@@ -251,19 +241,16 @@ export function listenerEvents() {
       return;
     }
     //om användaren har valt mindre än max så visar vi valt km
-    distanceSpan.textContent = `<=${distanceIndex} km`;
+    distanceSpan.textContent = `${distanceIndex} km`;
     // om vi inte har användarens plats fråga först
     if (userLatitude === null || userLongitude === null) {
-      getUserLocation()
-
+      getUserLocation();
     } else {//hämta aktiviteter igen, eftersom position inte är null använder vi getfrpmlatlng
-
       filterFromSmapi();
     }
   });
 
   accesabilityFilter.addEventListener("change", () => { // sortera tillgänglighet
-    console.log(accesabilityFilter.checked);
     filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
@@ -275,7 +262,6 @@ export function listenerEvents() {
   ziplineCheckbox.addEventListener("change", filterFromSmapi);
   entertainmentcenterCheckbox.addEventListener("change", filterFromSmapi);
   paintballCheckbox.addEventListener("change", filterFromSmapi);
-  // healthCheckbox.addEventListener("change", filterFromSmapi);
   cinemaCheckbox.addEventListener("change", filterFromSmapi);
 
 
