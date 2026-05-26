@@ -2,6 +2,8 @@ import { renderActivities } from "./render.js";
 import { fetchActivities, fetchActivitiesConAct } from "./api.js";
 
 let allActivities = [];
+let userLatitude = null;
+let userLongitude = null;
 
 const results = document.querySelector(".results");
 const search = document.querySelector(".search");
@@ -57,6 +59,9 @@ export async function filterFromSmapi() { // för controller establishment
       cities: cityFilter.value,
       price_ranges: priceFilter.value,
       descriptions: getDescriptionsForSmapi(),
+      lat: userLatitude,
+      lng: userLongitude,
+      radius: distanceFilter.value,
     });
 
     console.log(data.payload);
@@ -117,6 +122,28 @@ function getDescriptionsForSmapi() {
 
 }
 
+//en funktion som frågar webbläsaren efter användarens position
+function getUserLocation() {
+  navigator.geolocation.getCurrentPosition(saveUserLocation, showLocationError);
+}
+
+function saveUserLocation(position) {
+
+  //vi sparar användarens lat och long i vår globala variablar
+  userLatitude = position.coords.latitude
+  userLongitude = position.coords.longitude
+
+  console.log("Användarens latitud:", userLatitude);
+  console.log("Användarens longitud:", userLongitude);
+
+  filterFromSmapi()
+}
+
+//körs endast om användaren nekar plats eller om webbläsaren inte kan hämta position
+function showLocationError(error) {
+  console.log("kunde nt hämta plats", error.message)
+
+}
 
 function filterActivities() {
 
@@ -150,7 +177,7 @@ export function listenerEvents() {
 
   priceFilter.addEventListener("input", () => { //sortera pris och ändra text bredvid slidern
     let priceIndex = priceFilter.value;
-    priceSpan.textContent = `>=${priceArray[priceIndex]} kr/pers`; //hur ska man skriva detta kort och tydligt?
+    priceSpan.textContent = `${priceArray[priceIndex]} kr/pers`; //hur ska man skriva detta kort och tydligt?
     filterFromSmapi(); //sorterar inte på riktigt än
   });
 
@@ -171,11 +198,36 @@ export function listenerEvents() {
     filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 
-  distanceFilter.addEventListener("change", () => { // sortera avstånd och ändra text bredvid slidern
-    console.log(distanceFilter.value);
-    let distanceIndex = distanceFilter.value;
+  // distanceFilter.addEventListener("change", () => { // sortera avstånd och ändra text bredvid slidern
+  //   console.log(distanceFilter.value);
+  //   let distanceIndex = distanceFilter.value;
+  //   distanceSpan.textContent = `<=${distanceIndex} km`;
+  //   // filterFromSmapi(); //sorterar inte på riktigt än
+  // });
+
+  distanceFilter.addEventListener("change", () => {
+    const distanceIndex = distanceFilter.value;
+//om användaren inte filtrerat på avstånd och slidern står på max/auto läge
+    if (distanceIndex === distanceFilter.max) {
+      distanceSpan.textContent = "Alla avstånd";
+// Då är positionen null, så api.js använder getall istället för getfromlatlng.
+      userLatitude = null;
+      userLongitude = null;
+      //hämta aktiviteter igen, eftersom position är null använder vi getall
+      filterFromSmapi();
+
+      return;
+    }
+    //om användaren har valt mindre än max så visar vi valt km
     distanceSpan.textContent = `<=${distanceIndex} km`;
-    // filterFromSmapi(); //sorterar inte på riktigt än
+// om vi inte har användarens plats fråga först
+    if (userLatitude === null || userLongitude === null) {
+      getUserLocation()
+
+    } else {//hämta aktiviteter igen, eftersom position inte är null använder vi getfrpmlatlng
+
+      filterFromSmapi();
+    }
   });
 
   accesabilityFilter.addEventListener("change", () => { // sortera tillgänglighet
@@ -191,7 +243,7 @@ export function listenerEvents() {
   ziplineCheckbox.addEventListener("change", filterFromSmapi);
   entertainmentcenterCheckbox.addEventListener("change", filterFromSmapi);
   paintballCheckbox.addEventListener("change", filterFromSmapi);
-  healthCheckbox.addEventListener("change", filterFromSmapi);
+  // healthCheckbox.addEventListener("change", filterFromSmapi);
   cinemaCheckbox.addEventListener("change", filterFromSmapi);
 
 
@@ -230,7 +282,7 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     timeFilter.value = "2";
     timeSpan.textContent = `${timeArray[2]}`;
 
-    distanceFilter.value = "10";
+    distanceFilter.value = "100";
 
     outdoorFilter.value = "Alla";
 
