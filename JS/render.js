@@ -87,8 +87,6 @@ export const renderDetailsPage = async (activity) => {
     const imageUrl = await getImageForActivity(activity);
 
     main.innerHTML = "";
-    // const detailsPage = document.createElement("div");
-    // detailsPage.classList.add("details-page");
 
     let rating = Number.parseFloat(activity.rating).toFixed(1);
 
@@ -146,7 +144,6 @@ export const renderDetailsPage = async (activity) => {
             </section>
         </div>
     `;
-    // main.append(detailsPage);
 
     // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
     if (rating < 5) {

@@ -23,6 +23,7 @@ const allowedDescriptions2 = [
 
 //Hämta populära aktiviteter från SMAPI, samma som på filter.js
 async function loadPopularActivities() {
+    popularActivities.innerHTML = "<div class='skeleton-loader'></div>";
     //api.js gör om detta till order by rating, high i detta fall, desc blir vår array ovanför
     const data = await fetchActivities({
         sort: "rating-high",

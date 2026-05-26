@@ -52,6 +52,7 @@ const allowedDescriptions = [
 
 
 export async function filterFromSmapi() { // för controller establishment
+  results.innerHTML = "<div class='skeleton-loader'></div>"
   try {
 
     const filters = {
