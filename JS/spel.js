@@ -4,9 +4,10 @@ const quiz = document.getElementById("quiz");
 
 import { getImageForActivity } from "./pixabay.js";
 import { listenToFavoriteClick } from "./favorite.js";
-import { fetchActivitiesConAct } from "./api.js";
+import { fetchActivities, fetchActivitiesConAct } from "./api.js";
 
 const results = document.querySelector(".results");
+const randomBtn = document.getElementById("random");
 
 quiz.addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -36,7 +37,6 @@ quiz.addEventListener("submit", async function (event) {
 
 
     let answers = [answer1.value, answer2.value, answer3.value, answer4.value];
-    console.log(answers);
 
     let filters = {
         outdoors: "",
@@ -193,6 +193,28 @@ async function renderResults(activities) {
         }
     }
 }
+
+const allowedDescriptions = {descriptions: [
+  "Bowlinghall",
+  "Gokart",
+  "Golfbana",
+  "Nöjespark",
+  "Temapark",
+  "Zipline",
+  "Nöjescenter",
+  "Paintballcenter",
+  "Hälsocenter",
+  "Biograf"
+]};
+
+const idData = await fetchActivities(allowedDescriptions);
+const allIds = idData.payload;
+
+randomBtn.addEventListener("click", function () {
+    let rng = Math.floor(Math.random() * allIds.length)
+    let randomId = allIds[rng].id
+    window.location.href = `details.html?id=${randomId}`;
+});
 
 // const navToggle = document.querySelector("nav ul #nav-toggle");
 
