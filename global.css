@@ -16,6 +16,7 @@ body {
     display: flex;
     flex-flow: column nowrap;
     min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h1,
