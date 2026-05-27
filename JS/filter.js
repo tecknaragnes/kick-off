@@ -224,7 +224,10 @@ export function listenerEvents() {
 
   timeFilter.addEventListener("input", () => { // sortera tidsåtgång och ändra text/symbol bredvid slidern
     let timeIndex = timeFilter.value;
-    timeSpan.textContent = `${timeArray[timeIndex]}`;
+    timeSpan.innerHTML = "";
+    for (let i = 0; i < timeIndex; i++) {
+      timeSpan.innerHTML += `<img src="../SVG/clock.svg" alt="nivå ${i + 1}">`;
+    }
     filterFromSmapiConAct(); //sorterar inte på riktigt än
   });
 

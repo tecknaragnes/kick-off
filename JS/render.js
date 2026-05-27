@@ -33,7 +33,7 @@ export async function renderActivities(activities) {
                     <img class="act-img" src="${imageUrl}" alt="">
                     <div class="act-flex-info">
                         <h3>${activity.name}</h3><p>(${activity.description})</p>
-                        <p><img src="../SVG/location.svg" alt="">${activity.city}, ${activity.province}</p>
+                        <p><img src="../SVG/location-alt.svg" alt="">${activity.city}, ${activity.province}</p>
                         <p>${activity.price_range ?? "Pris saknas"} kr</p>
                     </div>
                     <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
@@ -76,13 +76,43 @@ export async function renderActivities(activities) {
 
 
 // detaljsidan ----------------------------------
-export const renderDetailsPage = async (activity) => {
+export const renderDetailsPage = async (activity, conActivity) => {
     const main = document.querySelector("main");
     const header = document.querySelector("header");
     const h2 = document.createElement("h2");
 
     h2.textContent = activity.name;
     header.append(h2);
+
+        let estimate = "";
+        if (conActivity.estimated_duration == "DAYS") {
+            estimate = "Dagar";
+        }
+        else if (conActivity.estimated_duration == "HOURS") {
+            estimate = "En dag";
+        }
+        else {
+            estimate = "En snabbis";
+        }
+        
+        let physical = "";
+        if (conActivity.physical_effort == "HIGH") {
+            physical = "Hög";
+        }
+        else if (conActivity.physical_effort == "MEDIUM") {
+            physical = "Mellan";
+        }
+        else {
+            physical = "Låg";
+        }
+
+        let wheelchair = "";
+        if (conActivity.disability_support == "Y") {
+            wheelchair = "Ja";
+        }
+        else {
+            wheelchair = "Nej";
+        }
 
     const imageUrl = await getImageForActivity(activity);
 
@@ -102,25 +132,19 @@ export const renderDetailsPage = async (activity) => {
                 <span id="icon-price">
                     <p>${activity.price_range} Kr</p>
                 </span>
-                <span id="icon-ppl">
-                    <img src="../SVG/person.svg" alt="Personer">
-                    <p>2-5</p>
                 </span>
                 <span id="icon-time">
                     <img src="../SVG/clock.svg" alt="Tid">
-                    <p>Halvdag</p>
+                    <p>${estimate}</p>
                 </span>
-                <span id="icon-food">
-                    <img src="../SVG/food.svg" alt="Mat">
-                    <p>Ja</p>
+                <span id="icon-physical">
+                    <img src="../SVG/physical.svg" alt="Fysisk utmaning">
+                    <p>${physical}</p>
                 </span>
-                <span id="icon-drink">
-                    <img src="../SVG/drink.svg" alt="Dryck">
-                    <p>Nej</p>
                 </span>
                 <span id="icon-accesability">
                     <img src="../SVG/wheelchair.svg" alt="Tillgänglighet">
-                    <p>Ja</p>
+                    <p>${wheelchair}</p>
                 </span>
             </div>
             <img class="det-img" src="${imageUrl}" alt="">
@@ -140,7 +164,7 @@ export const renderDetailsPage = async (activity) => {
                 <h3>Recensioner:</h3>
             </section>
             <section id="activities-section">
-                <h3>Aktivitetsförslag:</h3>
+                <h3></h3>
             </section>
         </div>
     `;

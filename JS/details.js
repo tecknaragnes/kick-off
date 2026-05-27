@@ -6,7 +6,7 @@ import { fetchFood } from "./api.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const activityId = urlParams.get("id");
-
+let foodmax = 0;
 
 async function loadActivityDetails() {
 
@@ -39,7 +39,21 @@ async function loadActivityDetails() {
 
         }
 
-        renderDetailsPage(selectedActivity);
+        const conActParams  = new URLSearchParams({
+            controller: "activity",
+            method: "getall",
+            api_key: window.APIKEY,
+            ids: activityId,
+        });
+
+        const conActResponse = await fetch(`https://smapi.lnu.se/api/?${conActParams}`);
+        if (!conActResponse.ok) {
+            throw new Error("Kunde inte hitta/hämta aktivitet");
+        }
+        const conActData = await conActResponse.json();
+        const conActivities = conActData.payload[0] ?? [];
+
+        renderDetailsPage(selectedActivity, conActivities);
         await loadReviews();
 
         const lat = selectedActivity.lat;
@@ -69,23 +83,27 @@ async function loadActivityDetails() {
         }
         else {
             for (let food of foodData.payload) {
-                let foodCard = document.createElement("div");
-                let foodText = document.createElement("p");
-                let foodIcon = document.createElement("img");
-                console.log(food.alcohol_licence);
-                foodIcon.src = "../SVG/food.svg";
-                foodCard.append(foodIcon);
-                if (food.alcohol_licence == "Y") {
-                    let drinkIcon = document.createElement("img");
-                    drinkIcon.src = "../SVG/drink.svg";
-                    foodCard.append(drinkIcon);
-                    drinkIcon.classList.add("foodIcon");
+                if (foodmax < 3) {
+                    let foodCard = document.createElement("div");
+                    let foodText = document.createElement("p");
+                    let foodIcon = document.createElement("img");
+                    console.log(food.alcohol_licence);
+                    foodIcon.src = "../SVG/food.svg";
+                    foodCard.append(foodIcon);
+                    if (food.alcohol_licence == "Y") {
+                        let drinkIcon = document.createElement("img");
+                        drinkIcon.src = "../SVG/drink.svg";
+                        foodCard.append(drinkIcon);
+                        drinkIcon.classList.add("foodIcon");
+                    }
+                    foodCard.append(foodText);
+                    foodSect.append(foodCard);
+                    foodText.textContent = food.name + " | " + food.distance_in_km.toFixed(2) + " Km från " + selectedActivity.name;
+                    foodCard.classList.add("foodCard");
+                    foodIcon.classList.add("foodIcon");
+                    console.log(foodmax);
+                    foodmax += 1;
                 }
-                foodCard.append(foodText);
-                foodSect.append(foodCard);
-                foodText.textContent = food.name + " | " + food.distance_in_km.toFixed(2) + " Km från " + selectedActivity.name;
-                foodCard.classList.add("foodCard");
-                foodIcon.classList.add("foodIcon");
                 L.marker([food.lat, food.lng], { icon: foodMarker })
                     .addTo(map)
                     .bindPopup(food.name + " | " + food.distance_in_km.toFixed(2) + " Km från " + selectedActivity.name);
