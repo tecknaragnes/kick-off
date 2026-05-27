@@ -66,22 +66,9 @@ nav ul li:first-child {
     padding: 0 0 0 0.5em;
 }
 
-/* nav ul li:last-child {
-    padding: 0.5em;
-    margin-left: auto;
-} */
-
 nav li img {
     height: 1.5em;
 }
-
-/* li.li-hidden {
-    display: none;
-}
-
-li.li-visible {
-    display: list-item;
-} */
 
 
 
