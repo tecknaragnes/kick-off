@@ -107,6 +107,8 @@ export async function fetchActivitiesConAct(filters) {
     params.set("physical_efforts", "MEDIUM,LOW");
   } else if (filters.physical_effort === "3") {
     params.set("physical_efforts", "HIGH,MEDIUM,LOW");
+  } else if (filters.physical_effort === "4") {
+    params.set("physical_efforts", "HIGH,MEDIUM");
   } else {
     params.delete("physical_efforts");
   }

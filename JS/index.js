@@ -61,7 +61,7 @@ async function renderPopActivities(popularList) {
                     <h3>${activity.name}</h3>
                     <p>(${activity.description})</p>
                     <p>
-                    <img src="SVG/location.svg" alt="">
+                    <img src="SVG/location-alt.svg" alt="">
                     ${activity.city}, ${activity.province}
                     </p>
                 </div>
