@@ -40,7 +40,12 @@ export const getImageForActivity = async (activity) => {
         const pixaPics = await response.json();
 
         if (pixaPics.hits && pixaPics.hits.length > 0) { //om det finns bilder i svaret
-            const imageUrl = pixaPics.hits[activity.id % pixaPics.hits.length].webformatURL;
+            let imageUrl;
+            if (page.includes("details")) {
+                imageUrl = pixaPics.hits[activity.id % pixaPics.hits.length].webformatURL;
+            } else {
+                imageUrl = pixaPics.hits[activity.id % pixaPics.hits.length].previewURL;
+            }
             //lägga in den i cache med aktivitetens id som nyckel
             imageCache.set(activity.id, imageUrl);
             return imageUrl;
