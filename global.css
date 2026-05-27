@@ -16,6 +16,7 @@ body {
     display: flex;
     flex-flow: column nowrap;
     min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h1,
@@ -66,22 +67,9 @@ nav ul li:first-child {
     padding: 0 0 0 0.5em;
 }
 
-/* nav ul li:last-child {
-    padding: 0.5em;
-    margin-left: auto;
-} */
-
 nav li img {
     height: 1.5em;
 }
-
-/* li.li-hidden {
-    display: none;
-}
-
-li.li-visible {
-    display: list-item;
-} */
 
 
 

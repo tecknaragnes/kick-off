@@ -84,35 +84,35 @@ export const renderDetailsPage = async (activity, conActivity) => {
     h2.textContent = activity.name;
     header.append(h2);
 
-        let estimate = "";
-        if (conActivity.estimated_duration == "DAYS") {
-            estimate = "Dagar";
-        }
-        else if (conActivity.estimated_duration == "HOURS") {
-            estimate = "En dag";
-        }
-        else {
-            estimate = "En snabbis";
-        }
-        
-        let physical = "";
-        if (conActivity.physical_effort == "HIGH") {
-            physical = "Hög";
-        }
-        else if (conActivity.physical_effort == "MEDIUM") {
-            physical = "Mellan";
-        }
-        else {
-            physical = "Låg";
-        }
+    let estimate = "";
+    if (conActivity.estimated_duration == "DAYS") {
+        estimate = "Dagar";
+    }
+    else if (conActivity.estimated_duration == "HOURS") {
+        estimate = "En dag";
+    }
+    else {
+        estimate = "En snabbis";
+    }
 
-        let wheelchair = "";
-        if (conActivity.disability_support == "Y") {
-            wheelchair = "Ja";
-        }
-        else {
-            wheelchair = "Nej";
-        }
+    let physical = "";
+    if (conActivity.physical_effort == "HIGH") {
+        physical = "Hög";
+    }
+    else if (conActivity.physical_effort == "MEDIUM") {
+        physical = "Mellan";
+    }
+    else {
+        physical = "Låg";
+    }
+
+    let wheelchair = "";
+    if (conActivity.disability_support == "Y") {
+        wheelchair = "Ja";
+    }
+    else {
+        wheelchair = "Nej";
+    }
 
     const imageUrl = await getImageForActivity(activity);
 
