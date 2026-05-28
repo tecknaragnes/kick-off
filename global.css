@@ -580,9 +580,9 @@ footer {
 
 
 /* ---------- responsiv från mobil till desktop ---------- */
-@media screen and (min-width: 390px) {
+@media screen and (min-width: 400px) {
     #bottom-fold-sec>span {
-        width: 23em;
+        width: 24em;
         flex-flow: row wrap;
     }
 }
@@ -619,17 +619,6 @@ footer {
 
     body[data-page="favoritespage"] .results {
         grid-area: results;
-    }
-
-    nav ul li:nth-child(1),
-    nav ul li:nth-child(2),
-    nav ul li:nth-child(3),
-    nav ul li:nth-child(4) {
-        display: list-item;
-    }
-
-    nav ul li:last-child {
-        display: none;
     }
 
     .details-grid-left .review-card {
