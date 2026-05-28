@@ -623,13 +623,16 @@ body[data-page="favoritespage"] main {
     font-family: "Federo", Roboto, sans-serif;
     padding: 0.5em;
     border-radius: var(--roundCornersBtn);
-    box-shadow: 6px 6px 5px black;
+    box-shadow: var(--shading2)
 }
 
 #quiz button:active {
     background-color: var(--accentColor3);
 }
 
+#quiz+.results h2 {
+    margin-left: 0.5em;
+}
 
 
 
@@ -665,7 +668,8 @@ footer {
 
     #categories,
     #filters,
-    .details-grid-right {
+    .details-grid-right,
+    #quiz {
         grid-area: filter;
     }
 
@@ -707,11 +711,13 @@ footer {
             ". results . filter .";
     }
 
-    .details-grid-right {
+    .details-grid-right,
+    #quiz {
         grid-area: results;
     }
 
-    .details-grid-left {
+    .details-grid-left,
+    #quiz+.results {
         grid-area: filter;
     }
 
