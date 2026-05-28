@@ -39,9 +39,9 @@ export async function renderActivities(activities) {
                     <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
                 </div>
                 <div class="act-symbols">
-                    <div>pris</div>
-                    <div>tid</div>
-                    <div class="icon act-card"></div>
+                    <div class="icon" id="phys-icon"></div>
+                    <div class="icon" id="time-icon"></div>
+                    <div class="icon" id="star-icon"></div>
                     <a href="details.html?id=${activity.id}">Läs mer</a>
                 </div>
         `;
@@ -53,14 +53,14 @@ export async function renderActivities(activities) {
             const starIcon = document.createElement("img");
             starIcon.src = "../SVG/star.svg";
             starIcon.alt = "";
-            activityCard.querySelector(".icon.act-card").append(starIcon);
+            activityCard.querySelector(".icon#star-icon").append(starIcon);
         }
         // Om det finns en decimal del i rating, lägg till en halv stjärna
         if (rating - Math.floor(rating) > 0.1) {
             const halfStarIcon = document.createElement("img");
             halfStarIcon.src = "../SVG/half-star.svg";
             halfStarIcon.alt = "";
-            activityCard.querySelector(".icon.act-card").append(halfStarIcon);
+            activityCard.querySelector(".icon#star-icon").append(halfStarIcon);
         }
         // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
         if (rating <= 4.1) { //vissa som har fel antal stjärnor???
@@ -68,7 +68,7 @@ export async function renderActivities(activities) {
                 const emptyStarIcon = document.createElement("img");
                 emptyStarIcon.src = "../SVG/empty-star.svg";
                 emptyStarIcon.alt = "";
-                activityCard.querySelector(".icon.act-card").append(emptyStarIcon);
+                activityCard.querySelector(".icon#star-icon").append(emptyStarIcon);
             }
         }
     }
@@ -156,9 +156,10 @@ export const renderDetailsPage = async (activity, conActivity) => {
             </section>
         </div>
         <div class="details-grid-left">
-            <div id="map"></div>
+            <div id="map"><div class="skeleton-loader map"></div></div>
             <section id="food-section">
                 <h3>Matförslag:</h3>
+                <div class="skeleton-loader f-card"></div>
             </section>
             <section id="review-section">
                 <h3>Recensioner:</h3>

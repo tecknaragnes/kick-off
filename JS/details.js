@@ -30,16 +30,14 @@ async function loadActivityDetails() {
 
         const selectedActivity = activities.find((a) => {
             return a.id === activityId;
-
         });
 
         if (!selectedActivity) {
             console.log("Ingen aktivitet hittades")
             return;
-
         }
 
-        const conActParams  = new URLSearchParams({
+        const conActParams = new URLSearchParams({
             controller: "activity",
             method: "getall",
             api_key: window.APIKEY,
@@ -78,6 +76,7 @@ async function loadActivityDetails() {
             .addTo(map)
             .bindPopup(selectedActivity.name);
 
+        foodSect.innerHTML = "<h3>Matförslag:</h3>";
         if (!foodData) {
             console.log("Inga matförslag hittades")
         }
@@ -137,27 +136,4 @@ async function loadReviews() {
 
     const reviews = reviewData.payload ?? [];
     renderReviews(reviews)
-
-
-
 }
-
-
-// const navToggle = document.querySelector("nav ul #nav-toggle");
-
-// const showHideNav = () => {
-//     const navUl = document.querySelector("nav ul");
-//     const liToggle = document.querySelectorAll("nav li.toggle-li");
-
-//     if (navUl.classList.contains("hidden")) {
-//         navUl.classList.replace("hidden", "visible");
-//         liToggle.forEach(li => li.style.display = "list-item");
-//     } else {
-//         navUl.classList.replace("visible", "hidden");
-//         liToggle.forEach(li => li.style.display = "none");
-//     }
-// }
-
-// navToggle.addEventListener("click", () => {
-//     showHideNav();
-// })
