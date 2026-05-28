@@ -9,16 +9,14 @@ import { fetchActivities, fetchActivitiesConAct } from "./api.js";
 const results = document.querySelector(".results");
 const randomBtn = document.getElementById("random");
 
+const dayBtn = document.getElementById("daysbox");
+const hourBtn = document.getElementById("hoursbox");
+const minBtn = document.getElementById("minsbox");
+
 quiz.addEventListener("submit", async function (event) {
     event.preventDefault();
     const answer1 = document.querySelector(`input[name="fråga 1"]:checked`);
     if (!answer1) {
-        console.log("error");
-        return;
-    }
-
-    const answer2 = document.querySelector(`input[name="fråga 2"]:checked`);
-    if (!answer2) {
         console.log("error");
         return;
     }
@@ -36,7 +34,7 @@ quiz.addEventListener("submit", async function (event) {
     }
 
 
-    let answers = [answer1.value, answer2.value, answer3.value, answer4.value];
+    let answers = [answer1.value, answer3.value, answer4.value];
 
     let filters = {
         outdoors: "",
@@ -58,14 +56,14 @@ quiz.addEventListener("submit", async function (event) {
         filters.physical_effort = "4";
     }
 
-    if (answers[1] == 1) {
-        filters.estimated_duration = "2"
+    if (dayBtn.checked) {
+        filters.estimated_duration = "2";
     }
-    if (answers[1] == 2) {
-        filters.estimated_duration = "1"
+    if (hourBtn.checked) {
+        filters.estimated_duration = "3";
     }
-    if (answers[1] == 3) {
-        filters.estimated_duration = "0"
+    if (minBtn.checked) {
+        filters.estimated_duration = "4";
     }
 
     if (answers[2] == 1) {

@@ -2,10 +2,11 @@
 import { listenToFavoriteClick } from "./favorite.js"
 import { getImageForActivity } from "./pixabay.js";
 
+
 // aktivitetskort ----------------------------------
 const results = document.querySelector(".results");
 
-export async function renderActivities(activities) {
+export async function renderActivities(activities, conActivities) {
     if (!results) return;
 
     results.innerHTML = "";
@@ -15,6 +16,8 @@ export async function renderActivities(activities) {
         return;
     }
 
+
+    
     for (const activity of activities) {
         const activityCard = document.createElement("a");
         activityCard.classList.add("activity-card");
@@ -39,8 +42,8 @@ export async function renderActivities(activities) {
                     <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
                 </div>
                 <div class="act-symbols">
-                    <div>pris</div>
-                    <div>tid</div>
+                    <div>Fysisk</div>
+                    <div>Tid</div>
                     <div class="icon act-card"></div>
                     <a href="details.html?id=${activity.id}">Läs mer</a>
                 </div>
@@ -86,10 +89,10 @@ export const renderDetailsPage = async (activity, conActivity) => {
 
     let estimate = "";
     if (conActivity.estimated_duration == "DAYS") {
-        estimate = "Dagar";
+        estimate = "En dag";
     }
     else if (conActivity.estimated_duration == "HOURS") {
-        estimate = "En dag";
+        estimate = "Timmar";
     }
     else {
         estimate = "En snabbis";
@@ -126,6 +129,7 @@ export const renderDetailsPage = async (activity, conActivity) => {
             <p>${activity.text}</p>
             <p>${activity.abstract}</p>
             <div class="details-flex-symbols">
+                <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
                 <span id="icon-rating">
                     <p>Betyg: ${rating}</p>
                 </span>
@@ -168,6 +172,9 @@ export const renderDetailsPage = async (activity, conActivity) => {
             </section>
         </div>
     `;
+
+    const favoriteButton = main.querySelector(".favorite-btn");
+    listenToFavoriteClick(favoriteButton, activity);
 
     // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
     if (rating < 5) {

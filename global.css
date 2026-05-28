@@ -435,6 +435,32 @@ body[data-page="favoritespage"] main {
     text-align: center;
 }
 
+.details-flex-symbols .favorite-btn {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    box-shadow: none;
+}
+
+.details-flexsymbols .favorite-btn.favorite-active {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.details-flex-symbols .favorite-btn img {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: var(--roundCornersBtn);
+    box-shadow: var(--shading2);
+    height: 3.6em;
+    margin-bottom: 2.8em;
+    margin-right: 0.9em;
+}
+
+.details-flex-symbols .favorite-btn.favorite-active img {
+    background-color: rgb(232, 117, 136);
+    border-color: rgb(232, 117, 136);
+}
+
 #icon-rating img {
     border: none;
 }
