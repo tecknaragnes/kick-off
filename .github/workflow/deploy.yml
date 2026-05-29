@@ -4,13 +4,16 @@ on:
   push:
     branches:
       - main
-
   workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -28,9 +31,9 @@ jobs:
         env:
           API_KEY: ${{ secrets.API_KEY }}
         run: |
-          mkdir -p JS
-          cat > JS/config.js <<EOF
-          window.APIKEY = "${API_KEY}"
+          mkdir -p js
+          cat > js/config.js <<EOF
+          export const API_KEY = "${API_KEY}";
           EOF
 
       - name: Upload GitHub Pages artifact
