@@ -1,4 +1,4 @@
-name: Deploy static website
+name: Deploy Jekyll with GitHub Pages
 
 on:
   push:
@@ -12,11 +12,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: github-pages
+  group: "pages"
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     environment:
@@ -27,20 +27,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 1. Create the config file BEFORE Jekyll builds the site
       - name: Create config.js from GitHub Secret
         env:
           API_KEY: ${{ secrets.API_KEY }}
         run: |
-          mkdir -p js
-          cat > js/config.js <<EOF
-          export const API_KEY = "${API_KEY}";
+          mkdir -p JS
+          cat > JS/config.js <<EOF
+          window.APIKEY = "${API_KEY}"
           EOF
 
+      # 2. Let Jekyll build the site (it will now include JS/config.js)
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      # 3. Upload the Jekyll output directory (_site)
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ./_site
 
+      # 4. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
