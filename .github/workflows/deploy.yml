@@ -23,13 +23,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create config.js from GitHub Secret
+      - name: Create config.js from GitHub Secrets
         env:
           API_KEY: ${{ secrets.API_KEY }}
+          PIXA_KEY: ${{ secrets.PIXA_KEY }}
         run: |
           mkdir -p js
           cat > js/config.js <<EOF
-          export const API_KEY = "${API_KEY}";
+          window.APIKEY = "${API_KEY}";
+          window.pixakey = "${PIXA_KEY}";
           EOF
 
       - name: Upload GitHub Pages artifact
