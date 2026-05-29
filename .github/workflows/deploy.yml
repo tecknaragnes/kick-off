@@ -34,13 +34,8 @@ jobs:
         run: |
           mkdir -p JS
           cat > JS/config.js <<EOF
-          // Global window properties
           window.APIKEY = "${API_KEY}";
           window.pixakey = "${PIXA_KEY}";
-
-          // Modular exports (in case your other scripts use 'import')
-          export const API_KEY = "${API_KEY}";
-          export const PIXA_KEY = "${PIXA_KEY}";
           EOF
 
       - name: Upload GitHub Pages artifact
