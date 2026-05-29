@@ -11,10 +11,6 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "static-deploy"
-  cancel-in-progress: true  
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -27,23 +23,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 1. Create the config file from your GitHub Secret
       - name: Create config.js from GitHub Secret
         env:
           API_KEY: ${{ secrets.API_KEY }}
         run: |
-          mkdir -p JS
-          cat > JS/config.js <<EOF
-          window.APIKEY = "${API_KEY}"
+          mkdir -p js
+          cat > js/config.js <<EOF
+          export const API_KEY = "${API_KEY}";
           EOF
 
-      # 2. Upload the raw repository directory (including the new JS file)
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
 
-      # 3. Deploy straight to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
