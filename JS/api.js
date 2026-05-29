@@ -100,6 +100,10 @@ export async function fetchActivitiesConAct(filters) {
     params.set("descriptions", filters.descriptions.join(","))
   };
 
+  if (filters.ids && filters.ids.length > 0) {
+    params.set("ids", filters.ids.join(","));
+  }
+
   //physical_effort, disability_support, estimated_duration
   if (filters.physical_effort === "1") {
     params.set("physical_efforts", "LOW");

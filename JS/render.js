@@ -16,8 +16,10 @@ export async function renderActivities(activities, conActivities) {
         return;
     }
 
+    let actNmb = 0;
+    let physRender = "";
+    let timeRender = "";
 
-    
     for (const activity of activities) {
         const activityCard = document.createElement("a");
         activityCard.classList.add("activity-card");
@@ -31,6 +33,44 @@ export async function renderActivities(activities, conActivities) {
             activity.description = "Nöjescenter";
         }
 
+        if (conActivities[actNmb].physical_effort == "HIGH") {
+            physRender = `
+            <img src="../SVG/physical.svg" alt="">
+            <img src="../SVG/physical.svg" alt="">
+            <img src="../SVG/physical.svg" alt="">
+            `
+        }
+        else if (conActivities[actNmb].physical_effort == "MEDIUM") {
+            physRender = `
+            <img src="../SVG/physical.svg" alt="">
+            <img src="../SVG/physical.svg" alt="">
+            `
+        }
+        else {
+            physRender = `
+            <img src="../SVG/physical.svg" alt="">
+            `
+        }
+
+        if (conActivities[actNmb].estimated_duration == "DAYS") {
+            timeRender = `
+            <img src="../SVG/clock.svg" alt="">
+            <img src="../SVG/clock.svg" alt="">
+            <img src="../SVG/clock.svg" alt="">
+            `
+        }
+        else if (conActivities[actNmb].estimated_duration == "HOURS") {
+            timeRender = `
+            <img src="../SVG/clock.svg" alt="">
+            <img src="../SVG/clock.svg" alt="">
+            `
+        }
+        else {
+            timeRender = `
+            <img src="../SVG/clock.svg" alt="">
+            `
+        }
+
         activityCard.innerHTML = `
                 <div class="act-flex-card">
                     <img class="act-img" src="${imageUrl}" alt="">
@@ -42,13 +82,14 @@ export async function renderActivities(activities, conActivities) {
                     <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
                 </div>
                 <div class="act-symbols">
-                    <div>Fysisk</div>
-                    <div>Tid</div>
+                    <div>${physRender ?? "Fysisk data saknas"}</div>
+                    <div>${timeRender ?? " Tidsestimering saknas"}</div>
                     <div class="icon act-card"></div>
                     <a href="details.html?id=${activity.id}">Läs mer</a>
                 </div>
         `;
         results.append(activityCard);
+        actNmb += 1;
         const favoriteButton = activityCard.querySelector(".favorite-btn");
         listenToFavoriteClick(favoriteButton, activity);
 

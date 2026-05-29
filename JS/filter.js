@@ -177,7 +177,7 @@ function showLocationError(error) {
   console.log("kunde inte hämta plats", error.message);
 }
 
-function filterActivities() {
+async function filterActivities() {
 
   let filtered = allActivities;
 
@@ -196,8 +196,19 @@ function filterActivities() {
       );
     });
   }
+  const establishmentIds = [];
+  for (const activity of filtered) {
+    establishmentIds.push(activity.id);
+  }
+  const activityFilters = {
+    ids: establishmentIds
+  }
 
-  renderActivities(filtered);
+  const activityData = await fetchActivitiesConAct(activityFilters);
+  console.log("filtered", filtered)
+  console.log(activityData.payload)
+
+  renderActivities(filtered, activityData.payload);
 }
 
 
