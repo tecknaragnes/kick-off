@@ -97,14 +97,14 @@ export async function renderActivities(activities, conActivities) {
             const starIcon = document.createElement("img");
             starIcon.src = "../SVG/star.svg";
             starIcon.alt = "";
-            activityCard.querySelector(".icon#star-icon").append(starIcon);
+            activityCard.querySelector(".icon.act-card").append(starIcon);
         }
         // Om det finns en decimal del i rating, lägg till en halv stjärna
         if (rating - Math.floor(rating) > 0.1) {
             const halfStarIcon = document.createElement("img");
             halfStarIcon.src = "../SVG/half-star.svg";
             halfStarIcon.alt = "";
-            activityCard.querySelector(".icon#star-icon").append(halfStarIcon);
+            activityCard.querySelector(".icon.act-card").append(halfStarIcon);
         }
         // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
         if (rating <= 4.1) { //vissa som har fel antal stjärnor???
@@ -112,7 +112,7 @@ export async function renderActivities(activities, conActivities) {
                 const emptyStarIcon = document.createElement("img");
                 emptyStarIcon.src = "../SVG/empty-star.svg";
                 emptyStarIcon.alt = "";
-                activityCard.querySelector(".icon#star-icon").append(emptyStarIcon);
+                activityCard.querySelector(".icon.act-card").append(emptyStarIcon);
             }
         }
     }
@@ -201,10 +201,9 @@ export const renderDetailsPage = async (activity, conActivity) => {
             </section>
         </div>
         <div class="details-grid-left">
-            <div id="map"><div class="skeleton-loader map"></div></div>
+            <div id="map"></div>
             <section id="food-section">
                 <h3>Matförslag:</h3>
-                <div class="skeleton-loader f-card"></div>
             </section>
             <section id="review-section">
                 <h3>Recensioner:</h3>

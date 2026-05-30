@@ -4,16 +4,13 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: "static-deploy"
-  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -27,20 +24,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create config.js from GitHub Secrets
+      - name: Create config.js from GitHub Secret
         env:
           API_KEY: ${{ secrets.API_KEY }}
-          PIXA_KEY: ${{ secrets.PIXA_KEY }}
         run: |
           mkdir -p JS
-          node -e '
-            // Automatically strip out accidental outer quotes, hidden line breaks, or whitespace
-            const apiKey = process.env.API_KEY.trim().replace(/^["\x22\x27]|["\x22\x27]$/g, "");
-            const pixaKey = process.env.PIXA_KEY.trim().replace(/^["\x22\x27]|["\x22\x27]$/g, "");
-            
-            const content = `window.APIKEY = "${apiKey}";\nwindow.pixakey = "${pixaKey}";`;
-            require("fs").writeFileSync("JS/config.js", content);
-          '
+          cat > JS/config.js <<EOF
+          window.APIKEY = "${API_KEY}"
+          EOF
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3

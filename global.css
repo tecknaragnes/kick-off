@@ -359,13 +359,13 @@ a.activity-card {
 }
 
 /* ---------- activity card skeleton loader ----- */
-.skeleton-loader.act-card {
+.skeleton-loader {
     position: relative;
     height: 162px;
     margin-top: 1em;
 }
 
-.skeleton-loader.act-card:after {
+.skeleton-loader:after {
     content: '';
     display: block;
     width: 100%;
@@ -383,10 +383,10 @@ a.activity-card {
         linear-gradient(#2a313d 100%, transparent 0);
     background-size: 284px 100%, 201px 25px, 124px 16px, 80px 112px, 100% 100%;
     background-position: 0 0, 97px 13px, 97px 56px, 0px 0px, 0 0;
-    animation: skeleton-animation-act 3400ms infinite;
+    animation: skeleton-animation 3400ms infinite;
 }
 
-@keyframes skeleton-animation-act {
+@keyframes skeleton-animation {
     to {
         background-position: 100% 0, 97px 13px, 97px 56px, 0px 0px, 0 0;
     }
@@ -523,75 +523,9 @@ body[data-page="favoritespage"] main {
 }
 
 #map {
-    height: 25em;
+    height: 32em;
     border-radius: 0.8em;
 }
-
-/* ---------- map skeleton loader ---------- */
-.skeleton-loader.map {
-    position: relative;
-    height: 25em;
-}
-
-.skeleton-loader.map:after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 0.8em;
-    left: 0;
-    top: 0;
-    background-repeat: no-repeat;
-    background-image:
-        linear-gradient(90deg, rgba(29, 28, 28, 0), rgba(29, 28, 28, 0.8) 50%, rgba(29, 28, 28, 0) 100%),
-        linear-gradient(#2a313d 384px, transparent 0),
-        linear-gradient(#1d1c1c 100%, transparent 0);
-    background-size: 295px 100%, 590px 384px, 100% 100%;
-    background-position: 0 0, 0px 0px, 0 0;
-    animation: skeleton-animation-map 3400ms infinite;
-}
-
-@keyframes skeleton-animation-map {
-    to {
-        background-position: 100% 0, 0px 0px, 0 0;
-    }
-}
-
-/* ---------- food card skeleton loader ---------- */
-.skeleton-loader.f-card {
-    position: relative;
-    height: 83px;
-}
-
-.skeleton-loader.f-card:after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 0.5em;
-    left: 0;
-    top: 0;
-    background-repeat: no-repeat;
-    background-image:
-        linear-gradient(90deg, rgba(42, 49, 61, 0), rgba(42, 49, 61, 0.8) 50%, rgba(42, 49, 61, 0) 100%),
-        linear-gradient(#57665f 33px, transparent 0),
-        linear-gradient(#57665f 33px, transparent 0),
-        linear-gradient(#57665f 19px, transparent 0),
-        linear-gradient(#2a313d 100%, transparent 0);
-    background-size: 280px 100%, 34px 33px, 34px 33px, 428px 19px, 100% 100%;
-    background-position: 0 0, 5px 4.5px, 53px 4.5px, 5px 52.5px, 0 0;
-    animation: skeleton-animation-food 3400ms infinite;
-}
-
-@keyframes skeleton-animation-food {
-    to {
-        background-position: 100% 0, 5px 4.5px, 53px 4.5px, 5px 52.5px, 0 0;
-    }
-}
-
-
 
 /* ---------- recensioner ---------- */
 .review-card {
@@ -649,16 +583,13 @@ body[data-page="favoritespage"] main {
     font-family: "Federo", Roboto, sans-serif;
     padding: 0.5em;
     border-radius: var(--roundCornersBtn);
-    box-shadow: var(--shading2)
+    box-shadow: 6px 6px 5px black;
 }
 
 #quiz button:active {
     background-color: var(--accentColor3);
 }
 
-#quiz+.results h2 {
-    margin-left: 0.5em;
-}
 
 
 
@@ -675,9 +606,9 @@ footer {
 
 
 /* ---------- responsiv från mobil till desktop ---------- */
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 390px) {
     #bottom-fold-sec>span {
-        width: 24em;
+        width: 23em;
         flex-flow: row wrap;
     }
 }
@@ -694,8 +625,7 @@ footer {
 
     #categories,
     #filters,
-    .details-grid-right,
-    #quiz {
+    .details-grid-right {
         grid-area: filter;
     }
 
@@ -715,6 +645,17 @@ footer {
 
     body[data-page="favoritespage"] .results {
         grid-area: results;
+    }
+
+    nav ul li:nth-child(1),
+    nav ul li:nth-child(2),
+    nav ul li:nth-child(3),
+    nav ul li:nth-child(4) {
+        display: list-item;
+    }
+
+    nav ul li:last-child {
+        display: none;
     }
 
     .details-grid-left .review-card {
@@ -737,13 +678,11 @@ footer {
             ". results . filter .";
     }
 
-    .details-grid-right,
-    #quiz {
+    .details-grid-right {
         grid-area: results;
     }
 
-    .details-grid-left,
-    #quiz+.results {
+    .details-grid-left {
         grid-area: filter;
     }
 

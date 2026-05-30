@@ -20,6 +20,7 @@ const themeparkCheckbox = document.getElementById("Temapark");
 const ziplineCheckbox = document.getElementById("Zipline");
 const entertainmentcenterCheckbox = document.getElementById("Nöjescenter");
 const paintballCheckbox = document.getElementById("Paintballcenter");
+//const healthCheckbox = document.getElementById("Hälsocenter");
 const cinemaCheckbox = document.getElementById("Biograf");
 
 const searchBtn = document.querySelector(".search-btn");
@@ -51,7 +52,7 @@ const allowedDescriptions = [
 
 
 export async function filterFromSmapi() { // för controller establishment
-  results.innerHTML = "<div class='skeleton-loader act-card'></div>"
+  results.innerHTML = "<div class='skeleton-loader'></div>"
   try {
 
     const filters = {
@@ -413,6 +414,7 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     ziplineCheckbox.checked = false;
     entertainmentcenterCheckbox.checked = false;
     paintballCheckbox.checked = false;
+    //healthCheckbox.checked = false;
     cinemaCheckbox.checked = false;
 
     filterFromSmapi(); // så att det faktiskt filtreras
