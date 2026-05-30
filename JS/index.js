@@ -68,7 +68,6 @@ async function renderPopActivities(popularList) {
                 <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
             </div>
             <div class="act-symbols">
-                <div>pris</div>
                 <div class="icon act-card"></div>
                 <a href="HTML/details.html?id=${activity.id}">Läs mer</a>
             </div>
