@@ -84,7 +84,7 @@ export async function renderActivities(activities, conActivities) {
                 <div class="act-symbols">
                     <div>${physRender ?? "Fysisk data saknas"}</div>
                     <div>${timeRender ?? " Tidsestimering saknas"}</div>
-                    <div class="icon act-card"></div>
+                    <div class="icon" id="star-icon"></div>
                     <a href="details.html?id=${activity.id}">Läs mer</a>
                 </div>
         `;
