@@ -23,17 +23,24 @@ const allowedDescriptions2 = [
 
 //Hämta populära aktiviteter från SMAPI, samma som på filter.js
 async function loadPopularActivities() {
-    popularActivities.innerHTML = "<div class='skeleton-loader'></div>";
-    //api.js gör om detta till order by rating, high i detta fall, desc blir vår array ovanför
-    const data = await fetchActivities({
-        sort: "rating-high",
-        descriptions: allowedDescriptions2,
-    });
-    const activities = data.payload ?? [];
-    const popularList = activities.slice(0, 5);//vi tar de 5 högst rankade endast
-    await renderPopActivities(popularList); //skickar topp 5 in i renderfunktionen
 
-    console.log(popularList);
+    try {
+        popularActivities.innerHTML = "<div class='skeleton-loader'></div>";
+        //api.js gör om detta till order by rating, high i detta fall, desc blir vår array ovanför
+        const data = await fetchActivities({
+            sort: "rating-high",
+            descriptions: allowedDescriptions2,
+        });
+        const activities = data.payload ?? [];
+        const popularList = activities.slice(0, 5);//vi tar de 5 högst rankade endast
+        await renderPopActivities(popularList); //skickar topp 5 in i renderfunktionen
+
+        console.log(popularList);
+    } catch (error) {
+        console.error(error);
+        popularActivities.innerHTML = "<p>Kunde inte hämta populära aktiviteter.</p>";
+    }
+
 }
 
 loadPopularActivities();

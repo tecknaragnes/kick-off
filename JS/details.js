@@ -51,7 +51,7 @@ async function loadActivityDetails() {
         const conActData = await conActResponse.json();
         const conActivities = conActData.payload[0] ?? [];
 
-        renderDetailsPage(selectedActivity, conActivities);
+        await renderDetailsPage(selectedActivity, conActivities);
         await loadReviews();
 
         const lat = selectedActivity.lat;

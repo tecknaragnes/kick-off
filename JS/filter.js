@@ -156,6 +156,10 @@ function getDescriptionsForSmapi() {
 
 //en funktion som frågar webbläsaren efter användarens position
 function getUserLocation() {
+  if (!navigator.geolocation) {
+    console.log("Geolocation finns inte i denna webbläsare");
+    return;
+  }
   navigator.geolocation.getCurrentPosition(saveUserLocation, showLocationError);
 }
 
@@ -187,11 +191,17 @@ async function filterActivities() {
       const name = (activity.name ?? "").toLowerCase();
       const description = (activity.description ?? "").toLowerCase();
       const city = (activity.city ?? "").toLowerCase();
+      const province = (activity.province ?? "").toLowerCase();
+      const address = (activity.address ?? "").toLowerCase();
+      const price = (activity.price_range ?? "").toLowerCase();
 
       return (
         name.includes(searchText) ||
         description.includes(searchText) ||
-        city.includes(searchText)
+        city.includes(searchText) ||
+        province.includes(searchText) ||
+        address.includes(searchText) ||
+        price.includes(searchText)
       );
     });
   }

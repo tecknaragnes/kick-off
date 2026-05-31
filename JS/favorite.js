@@ -14,8 +14,15 @@ export function getFavoritesFromLs() {
     if (!favoritesText) {
         return [];
     }
-    //Göra det array istället för text
-    return JSON.parse(favoritesText);
+
+    try {
+        //Göra det array istället för text
+        return JSON.parse(favoritesText);
+    } catch (error) {
+        console.error("Kunde inte läsa favoriter från localStorage:", error);
+        return [];
+    }
+
 
 }
 
