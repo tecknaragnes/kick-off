@@ -71,7 +71,7 @@ function removeFavorite(activity) {
     console.log("tog bort favorit,", activity.name);
 
     if (currentPage === "favoritespage") {
-        renderActivities(updatedFavorites)
+        renderFavoritePage();
     }
 }
 
