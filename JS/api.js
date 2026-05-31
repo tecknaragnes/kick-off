@@ -127,6 +127,10 @@ export async function fetchActivitiesConAct(filters) {
     params.set("estimated_durations", "HOURS");
   } else if (filters.estimated_duration === "4") {
     params.set("estimated_durations", "MINUTES");
+  } else if (filters.estimated_duration === "5") {
+    params.set("estimated_durations", "MINUTES,HOURS");
+  } else if (filters.estimated_duration === "6") {
+    params.set("estimated_durations", "MINUTES,DAYS");
   } else {
     params.delete("estimated_durations");
   }
