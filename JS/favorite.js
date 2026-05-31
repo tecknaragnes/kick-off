@@ -1,5 +1,7 @@
 // Localstorage, man kan spara sina favorit aktiviteter 
 import { renderActivities } from "./render.js";
+import { fetchActivitiesConAct } from "./api.js";
+
 const currentPage = document.body.dataset.page;
 
 
@@ -109,9 +111,26 @@ export function listenToFavoriteClick(favoriteButton, activity) {
 
 }
 
+async function renderFavoritePage() {
+    const favorites = getFavoritesFromLs();
+
+    const favoriteIds = [];
+
+    for (const favorite of favorites) {
+        favoriteIds.push(favorite.id);
+    }
+
+    const activityData = await fetchActivitiesConAct({
+        ids: favoriteIds
+    });
+
+    renderActivities(favorites, activityData.payload ?? []);
+}
+
+
 
 
 if (currentPage === "favoritespage") {
-    const favorites = getFavoritesFromLs();
-    renderActivities(favorites);
+    renderFavoritePage();
+
 }
