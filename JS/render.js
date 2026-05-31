@@ -33,42 +33,44 @@ export async function renderActivities(activities, conActivities) {
             activity.description = "Nöjescenter";
         }
 
-        if (conActivities[actNmb].physical_effort == "HIGH") {
-            physRender = `
-            <img src="../SVG/physical.svg" alt="">
-            <img src="../SVG/physical.svg" alt="">
-            <img src="../SVG/physical.svg" alt="">
-            `
-        }
-        else if (conActivities[actNmb].physical_effort == "MEDIUM") {
-            physRender = `
-            <img src="../SVG/physical.svg" alt="">
-            <img src="../SVG/physical.svg" alt="">
-            `
-        }
-        else {
-            physRender = `
-            <img src="../SVG/physical.svg" alt="">
-            `
-        }
+        if (conActivities) {
+            if (conActivities[actNmb].physical_effort == "HIGH") {
+                physRender = `
+                <img src="../SVG/physical.svg" alt="">
+                <img src="../SVG/physical.svg" alt="">
+                <img src="../SVG/physical.svg" alt="">
+                `
+            }
+            else if (conActivities[actNmb].physical_effort == "MEDIUM") {
+                physRender = `
+                <img src="../SVG/physical.svg" alt="">
+                <img src="../SVG/physical.svg" alt="">
+                `
+            }
+            else {
+                physRender = `
+                <img src="../SVG/physical.svg" alt="">
+                `
+            }
 
-        if (conActivities[actNmb].estimated_duration == "DAYS") {
-            timeRender = `
-            <img src="../SVG/clock.svg" alt="">
-            <img src="../SVG/clock.svg" alt="">
-            <img src="../SVG/clock.svg" alt="">
-            `
-        }
-        else if (conActivities[actNmb].estimated_duration == "HOURS") {
-            timeRender = `
-            <img src="../SVG/clock.svg" alt="">
-            <img src="../SVG/clock.svg" alt="">
-            `
-        }
-        else {
-            timeRender = `
-            <img src="../SVG/clock.svg" alt="">
-            `
+            if (conActivities[actNmb].estimated_duration == "DAYS") {
+                timeRender = `
+                <img src="../SVG/clock.svg" alt="">
+                <img src="../SVG/clock.svg" alt="">
+                <img src="../SVG/clock.svg" alt="">
+                `
+            }
+            else if (conActivities[actNmb].estimated_duration == "HOURS") {
+                timeRender = `
+                <img src="../SVG/clock.svg" alt="">
+                <img src="../SVG/clock.svg" alt="">
+                `
+            }
+            else {
+                timeRender = `
+                <img src="../SVG/clock.svg" alt="">
+                `
+            }
         }
 
         activityCard.innerHTML = `
