@@ -16,11 +16,13 @@ export async function renderActivities(activities, conActivities) {
         return;
     }
 
-    let actNmb = 0;
     let physRender = "";
     let timeRender = "";
 
     for (const activity of activities) {
+        const conActivity = conActivities.find(
+            (conActivity) => String(conActivity.id) === String(activity.id)
+        );
         const activityCard = document.createElement("a");
         activityCard.classList.add("activity-card");
         activityCard.href = `details.html?id=${activity.id}`;
@@ -33,44 +35,42 @@ export async function renderActivities(activities, conActivities) {
             activity.description = "Nöjescenter";
         }
 
-        if (conActivities) {
-            if (conActivities[actNmb].physical_effort == "HIGH") {
-                physRender = `
-                <img src="../SVG/physical.svg" alt="">
-                <img src="../SVG/physical.svg" alt="">
-                <img src="../SVG/physical.svg" alt="">
-                `
-            }
-            else if (conActivities[actNmb].physical_effort == "MEDIUM") {
-                physRender = `
-                <img src="../SVG/physical.svg" alt="">
-                <img src="../SVG/physical.svg" alt="">
-                `
-            }
-            else {
-                physRender = `
-                <img src="../SVG/physical.svg" alt="">
-                `
-            }
+        if (conActivity?.physical_effort == "HIGH") {
+            physRender = `
+            <img src="../SVG/physical.svg" alt="">
+            <img src="../SVG/physical.svg" alt="">
+            <img src="../SVG/physical.svg" alt="">
+            `
+        }
+        else if (conActivity?.physical_effort == "MEDIUM") {
+            physRender = `
+            <img src="../SVG/physical.svg" alt="">
+            <img src="../SVG/physical.svg" alt="">
+            `
+        }
+        else {
+            physRender = `
+            <img src="../SVG/physical.svg" alt="">
+            `
+        }
 
-            if (conActivities[actNmb].estimated_duration == "DAYS") {
-                timeRender = `
-                <img src="../SVG/clock.svg" alt="">
-                <img src="../SVG/clock.svg" alt="">
-                <img src="../SVG/clock.svg" alt="">
-                `
-            }
-            else if (conActivities[actNmb].estimated_duration == "HOURS") {
-                timeRender = `
-                <img src="../SVG/clock.svg" alt="">
-                <img src="../SVG/clock.svg" alt="">
-                `
-            }
-            else {
-                timeRender = `
-                <img src="../SVG/clock.svg" alt="">
-                `
-            }
+        if (conActivity?.estimated_duration == "DAYS") {
+            timeRender = `
+            <img src="../SVG/clock.svg" alt="">
+            <img src="../SVG/clock.svg" alt="">
+            <img src="../SVG/clock.svg" alt="">
+            `
+        }
+        else if (conActivity?.estimated_duration == "HOURS") {
+            timeRender = `
+            <img src="../SVG/clock.svg" alt="">
+            <img src="../SVG/clock.svg" alt="">
+            `
+        }
+        else {
+            timeRender = `
+            <img src="../SVG/clock.svg" alt="">
+            `
         }
 
         activityCard.innerHTML = `
@@ -91,7 +91,6 @@ export async function renderActivities(activities, conActivities) {
                 </div>
         `;
         results.append(activityCard);
-        actNmb += 1;
         const favoriteButton = activityCard.querySelector(".favorite-btn");
         listenToFavoriteClick(favoriteButton, activity);
 
