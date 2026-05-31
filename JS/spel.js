@@ -35,7 +35,6 @@ quiz.addEventListener("submit", async function (event) {
 
 
     let answers = [answer1.value, answer3.value, answer4.value];
-
     let filters = {
         outdoors: "",
         descriptions: [],
@@ -56,35 +55,50 @@ quiz.addEventListener("submit", async function (event) {
         filters.physical_effort = "4";
     }
 
-    if (dayBtn.checked) {
+    if (dayBtn.checked && !hourBtn.checked && !minBtn.checked) {
         filters.estimated_duration = "2";
     }
-    if (hourBtn.checked) {
+    if (hourBtn.checked && !dayBtn.checked && !minBtn.checked) {
         filters.estimated_duration = "3";
     }
-    if (minBtn.checked) {
+    if (minBtn.checked && !hourBtn.checked && !dayBtn.checked) {
         filters.estimated_duration = "4";
     }
+    if (minBtn.checked && hourBtn.checked && !dayBtn.checked) {
+        filters.estimated_duration = "5";
+    }
+    if (minBtn.checked && !hourBtn.checked && dayBtn.checked) {
+        filters.estimated_duration = "6";
+    }
+    if (hourBtn.checked && dayBtn.checked && !minBtn.checked) {
+        filters.estimated_duration = "1";
+    }
+    if (hourBtn.checked && dayBtn.checked && minBtn.checked) {
+        filters.estimated_duration = "0";
+    }
 
-    if (answers[2] == 1) {
+
+    if (answers[1] == 1) {
         filters.descriptions = ["Gokart", "Nöjespark", "Temapark", "Zipline", "Nöjescenter", "Paintballcenter"];
     }
-    if (answers[2] == 2) {
+    if (answers[1] == 2) {
         filters.descriptions = ["Bowlinghall", "Gokart", "Nöjescenter", "Biograf"];
     }
-    if (answers[2] == 3) {
+    if (answers[1] == 3) {
         filters.descriptions = ["Gokart", "Golfbana", "Nöjespark", "Temapark", "Zipline", "Nöjescenter", "Paintballcenter"];
     }
 
-    if (answers[3] == 1) {
+    if (answers[2] == 1) {
+        filters.outdoors = "N";
+    }
+    if (answers[2] == 3) {
         filters.outdoors = "Y";
     }
-    if (answers[3] == 3) {
-        filters.outdoors = "N"
-    }
-
+    console.log(filters)
+    console.log(dayBtn.checked, minBtn.checked, hourBtn.checked)
     const data = await fetchActivitiesConAct(filters);
     const splicedData = data.payload.slice(0, 4);
+    console.log(splicedData)
 
     renderResults(splicedData);
 });
@@ -122,7 +136,8 @@ async function renderResults(activities) {
         }
         else {
             estimate = `
-            <img src="../SVG/clock.svg" alt="">            `
+            <img src="../SVG/clock.svg" alt="">
+            `
         }
         let physical = "";
         if (activity.physical_effort == "HIGH") {
@@ -140,7 +155,8 @@ async function renderResults(activities) {
         }
         else {
             physical = `
-            <img src="../SVG/physical.svg" alt="">            `
+            <img src="../SVG/physical.svg" alt="">
+            `
         }
         const imageUrl = await getImageForActivity(activity);
 
@@ -192,18 +208,20 @@ async function renderResults(activities) {
     }
 }
 
-const allowedDescriptions = {descriptions: [
-  "Bowlinghall",
-  "Gokart",
-  "Golfbana",
-  "Nöjespark",
-  "Temapark",
-  "Zipline",
-  "Nöjescenter",
-  "Paintballcenter",
-  "Hälsocenter",
-  "Biograf"
-]};
+const allowedDescriptions = {
+    descriptions: [
+        "Bowlinghall",
+        "Gokart",
+        "Golfbana",
+        "Nöjespark",
+        "Temapark",
+        "Zipline",
+        "Nöjescenter",
+        "Paintballcenter",
+        "Hälsocenter",
+        "Biograf"
+    ]
+};
 
 const idData = await fetchActivities(allowedDescriptions);
 const allIds = idData.payload;
