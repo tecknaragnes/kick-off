@@ -200,9 +200,9 @@ export const renderDetailsPage = async (activity, conActivity) => {
                 <p class="li-icon web"><img src="../SVG/globe.svg" alt="">Webbplats: <a href="${activity.website ?? "saknas"}">${activity.website}</a></p>
                 <p class="li-icon adress"><img src="../SVG/location.svg" alt="">Adress: ${activity.address ?? "saknas"}, ${activity.zip_code} ${activity.city}</p>
             </section>
-        </div>
-        <div class="details-grid-left">
             <div id="map"><div class="skeleton-loader map"></div></div>
+            </div>
+        <div class="details-grid-left">
             <section id="food-section">
                 <h3>Matförslag:</h3>
                 <div class="skeleton-loader f-card"></div>
@@ -211,7 +211,10 @@ export const renderDetailsPage = async (activity, conActivity) => {
                 <h3>Recensioner:</h3>
             </section>
             <section id="activities-section">
-                <h3></h3>
+                <h3>Liknande aktiviteter:</h3>
+                    <div class="results">
+            <div class="skeleton-loader act-card"></div>
+                </div>
             </section>
         </div>
     `;

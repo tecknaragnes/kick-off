@@ -1,8 +1,8 @@
 //Details.js, för detaljsidan ska oxå importeras länka med htmlen, mycket importer
 import { renderDetailsPage, renderReviews } from "./render.js";
 import { getImageForActivity } from "./pixabay.js";
-import { fetchFood } from "./api.js";
-
+import { fetchActivities, fetchFood } from "./api.js";
+import { listenToFavoriteClick } from "./favorite.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const activityId = urlParams.get("id");
@@ -136,4 +136,113 @@ async function loadReviews() {
 
     const reviews = reviewData.payload ?? [];
     renderReviews(reviews)
+    renderSimilar()
+}
+
+async function renderSimilar() {
+    const allowedDescriptions = {
+        descriptions: [
+            "Bowlinghall",
+            "Gokart",
+            "Golfbana",
+            "Nöjespark",
+            "Temapark",
+            "Zipline",
+            "Nöjescenter",
+            "Paintballcenter",
+            "Hälsocenter",
+            "Biograf"
+        ]
+    };
+
+    const idData = await fetchActivities(allowedDescriptions);
+    const allIds = idData.payload;
+
+    const similarIds = []
+    let similarActivities = [];
+
+    for (let i = 1; i < 5; i++) {
+        similarIds.push(Number(activityId) + i);
+    }
+    for (let i = 1; i < 5; i++) {
+        similarIds.push(Number(activityId) - i);
+    }
+
+    for (let activity of allIds) {
+        if (similarIds.includes(Number(activity.id))) {
+            similarActivities.push(activity);
+        }
+    }
+    console.log(similarActivities.length);
+    if (similarActivities.length > 4) {
+        let currentActivity = allIds.find(({ id }) => id === activityId);
+        similarActivities = similarActivities.filter((activity) => activity.description === currentActivity.description)
+        similarActivities.splice(0, 3);
+    }
+    console.log(similarActivities.length);
+    renderSimilarActivities(similarActivities);
+}
+
+async function renderSimilarActivities(SimilarList) {
+    const results = document.querySelector(".results");
+    results.innerHTML = "";
+
+    for (const activity of SimilarList) {
+
+        const activityCard = document.createElement("a");
+        activityCard.classList.add("activity-card");
+        activityCard.href = `HTML/details.html?id=${activity.id}`;
+
+        const imageUrl = await getImageForActivity(activity, false);
+        let rating = Number.parseFloat(activity.rating).toFixed(1);
+
+
+        activityCard.innerHTML = `
+            <div class="act-flex-card">
+                <img class="act-img" src="${imageUrl}" alt="">
+
+                <div class="act-flex-info">
+                    <h3>${activity.name}</h3>
+                    <p>(${activity.description})</p>
+                    <p>
+                    <img src="../SVG/location-alt.svg" alt="">
+                    ${activity.city}, ${activity.province}
+                    </p>
+                </div>
+                <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
+            </div>
+            <div class="act-symbols">
+                <div class="icon act-card"></div>
+                <a href="HTML/details.html?id=${activity.id}">Läs mer</a>
+            </div>
+        `;
+
+        results.append(activityCard);
+
+        const favoriteButton = activityCard.querySelector(".favorite-btn");
+        listenToFavoriteClick(favoriteButton, activity);
+
+        for (let i = 0; i < Math.floor(rating); i++) {
+            const starIcon = document.createElement("img");
+            starIcon.src = "../SVG/star.svg";
+            starIcon.alt = "";
+            activityCard.querySelector(".icon.act-card").append(starIcon);
+        }
+        // Om det finns en decimal del i rating, lägg till en halv stjärna
+        if (rating - Math.floor(rating) >= 0.5) {
+            const halfStarIcon = document.createElement("img");
+            halfStarIcon.src = "../SVG/half-star.svg";
+            halfStarIcon.alt = "";
+            activityCard.querySelector(".icon.act-card").append(halfStarIcon);
+        }
+        // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
+        if (rating < 5) {
+            for (let i = 0; i < 5 - Math.ceil(rating); i++) {
+                const emptyStarIcon = document.createElement("img");
+                emptyStarIcon.src = "../SVG/empty-star.svg";
+                emptyStarIcon.alt = "";
+                activityCard.querySelector(".icon.act-card").append(emptyStarIcon);
+            }
+        }
+    }
 }
