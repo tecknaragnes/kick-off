@@ -418,6 +418,16 @@ body[data-page="favoritespage"] main {
     height: 1.5em;
 }
 
+#details-header button {
+    position: absolute;
+    top: 4em;
+    right: 1em;
+}
+
+#details-header button img {
+    height: 2em;
+}
+
 .details-grid-left,
 .details-grid-right {
     padding: 0.3em;
