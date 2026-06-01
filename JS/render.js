@@ -180,6 +180,7 @@ export const renderDetailsPage = async (activity, conActivity) => {
                     <p>Betyg: ${rating}</p>
                 </span>
                 <span id="icon-price">
+                    <img src="../SVG/dollar.svg" alt="Pris">
                     <p>${activity.price_range} Kr</p>
                 </span>
                 </span>
