@@ -126,6 +126,11 @@ export const renderDetailsPage = async (activity, conActivity) => {
     const header = document.querySelector("header");
     const h2 = document.createElement("h2");
 
+    const favoriteBtn = document.createElement("button");
+    favoriteBtn.classList.add("favorite-btn");
+    favoriteBtn.innerHTML = `<img src="../SVG/empty-save.svg" alt="Spara aktivitet">`;
+    header.append(favoriteBtn);
+
     h2.textContent = activity.name;
     header.append(h2);
 
@@ -171,7 +176,6 @@ export const renderDetailsPage = async (activity, conActivity) => {
             <p>${activity.text}</p>
             <p>${activity.abstract}</p>
             <div class="details-flex-symbols">
-                <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
                 <span id="icon-rating">
                     <p>Betyg: ${rating}</p>
                 </span>
@@ -219,7 +223,7 @@ export const renderDetailsPage = async (activity, conActivity) => {
         </div>
     `;
 
-    const favoriteButton = main.querySelector(".favorite-btn");
+    const favoriteButton = header.querySelector(".favorite-btn");
     listenToFavoriteClick(favoriteButton, activity);
 
     // Lägg till tomma stjärnor för att fylla upp till 5 stjärnor
