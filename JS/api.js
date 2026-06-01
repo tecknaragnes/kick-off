@@ -168,6 +168,7 @@ export async function fetchFood(Alat, Alng) {
     controller: "food",
     method: "getfromlatlng",
     api_key: window.APIKEY,
+    order_by: "distance_in_km",
     lat: Alat,
     lng: Alng
   });

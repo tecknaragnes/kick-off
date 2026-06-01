@@ -1,6 +1,6 @@
 const imageCache = new Map();
 
-export const getImageForActivity = async (activity) => {
+export const getImageForActivity = async (activity, wide = true) => {
     //om bilden redan är cachead returneras bilden från cache
     if (imageCache.has(activity.id)) {
         return imageCache.get(activity.id);
@@ -32,7 +32,7 @@ export const getImageForActivity = async (activity) => {
             params.set("lang", "en");
         }
 
-        if (page.includes("details")) {
+        if (page.includes("details") && wide === true) {
             params.set("orientation", "horizontal");
         }
 
@@ -41,7 +41,7 @@ export const getImageForActivity = async (activity) => {
 
         if (pixaPics.hits && pixaPics.hits.length > 0) { //om det finns bilder i svaret
             let imageUrl;
-            if (page.includes("details")) {
+            if (page.includes("details") && wide === true) {
                 imageUrl = pixaPics.hits[activity.id % pixaPics.hits.length].webformatURL;
             } else {
                 imageUrl = pixaPics.hits[activity.id % pixaPics.hits.length].previewURL;

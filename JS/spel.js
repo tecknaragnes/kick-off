@@ -231,22 +231,3 @@ randomBtn.addEventListener("click", function () {
     let randomId = allIds[rng].id
     window.location.href = `details.html?id=${randomId}`;
 });
-
-// const navToggle = document.querySelector("nav ul #nav-toggle");
-
-// const showHideNav = () => {
-//     const navUl = document.querySelector("nav ul");
-//     const liToggle = document.querySelectorAll("nav li.toggle-li");
-
-//     if (navUl.classList.contains("hidden")) {
-//         navUl.classList.replace("hidden", "visible");
-//         liToggle.forEach(li => li.style.display = "list-item");
-//     } else {
-//         navUl.classList.replace("visible", "hidden");
-//         liToggle.forEach(li => li.style.display = "none");
-//     }
-// }
-
-// navToggle.addEventListener("click", () => {
-//     showHideNav();
-// })
