@@ -535,6 +535,7 @@ body[data-page="favoritespage"] main {
 #map {
     height: 25em;
     border-radius: 0.8em;
+    margin-top: 0.5em;
 }
 
 /* ---------- map skeleton loader ---------- */
@@ -762,8 +763,8 @@ footer {
 @media screen and (min-width: 1500px) {
     main {
         display: grid;
-        grid-template-columns: auto minmax(400px, 600px) 1em minmax(500px, 600px) auto;
-        grid-template-rows: auto auto;
+        grid-template-columns: auto minmax(400px, 700px) 1em minmax(400px, 500px) auto;
+        grid-template-rows: auto;
         grid-template-areas:
             ". results . filter .";
     }
@@ -773,14 +774,8 @@ footer {
         grid-area: results;
     }
 
-    .details-grid-left,
-    #quiz+.results,
-    #random-div {
+    .details-grid-left {
         grid-area: filter;
-    }
-
-    #random-div {
-        margin-top: auto;
     }
 
     #filters,
@@ -808,5 +803,25 @@ footer {
     nav li:hover {
         background-color: var(--accentColor1);
         transition: background-color 0.3s
+    }
+
+    body[data-page="quiz-page"] main {
+        display: grid;
+        grid-template-columns: auto minmax(400px, 600px) 1em minmax(400px, 600px) 1em minmax(400px, 600px) auto;
+        grid-template-rows: auto;
+        grid-template-areas:
+            ". quiz . results . random .";
+    }
+
+    #quiz {
+        grid-area: quiz;
+    }
+
+    #quiz+.results {
+        grid-area: results;
+    }
+
+    #random-div {
+        grid-area: random;
     }
 }
