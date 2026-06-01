@@ -72,7 +72,7 @@ async function renderPopActivities(popularList) {
                     ${activity.city}, ${activity.province}
                     </p>
                 </div>
-                <button class="favorite-btn"><img src="../SVG/empty-save.svg" alt="Spara aktivitet"></button>
+                <button class="favorite-btn"><img src="SVG/empty-save.svg" alt="Spara aktivitet"></button>
             </div>
             <div class="act-symbols">
                 <div class="icon act-card"></div>
@@ -109,24 +109,3 @@ async function renderPopActivities(popularList) {
         }
     }
 }
-
-// const navToggle = document.querySelector("nav ul #nav-toggle");
-
-// const showHideNav = () => {
-//     const navUl = document.querySelector("nav ul");
-//     const liToggle = document.querySelectorAll("nav li.li-hidden");
-
-//     if (navUl.classList.contains("hidden")) {
-//         console.log("nav gömd, ska visa");
-//         navUl.classList.replace("hidden", "visible");
-//         liToggle.forEach(li => li.classList.replace("li-hidden", "li-visible"));
-//     } else {
-//         console.log("nav synlig, ska gömma");
-//         navUl.classList.replace("visible", "hidden");
-//         liToggle.forEach(li => li.classList.replace("li-visible", "li-hidden"));
-//     }
-// }
-
-// navToggle.addEventListener("click", () => {
-//     showHideNav();
-// })
