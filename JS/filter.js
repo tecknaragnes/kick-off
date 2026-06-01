@@ -322,7 +322,10 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     }
 
     timeFilter.value = "2";
-    timeSpan.textContent = `${timeArray[2]}`;
+    timeSpan.innerHTML = "";
+    for (let i = 0; i < 2; i++) {
+      timeSpan.innerHTML += `<img src="../SVG/clock.svg" alt="nivå ${i + 1}">`;
+    }
 
     distanceFilter.value = "100";
 
@@ -351,7 +354,8 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     }
 
     timeFilter.value = "1";
-    timeSpan.textContent = `${timeArray[1]}`;
+    timeSpan.innerHTML = "";
+    timeSpan.innerHTML = `<img src="../SVG/clock.svg" alt="nivå 1">`;
 
     distanceFilter.value = "3";
 
@@ -380,7 +384,10 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     }
 
     timeFilter.value = "2";
-    timeSpan.textContent = `${timeArray[2]}`;
+    timeSpan.innerHTML = "";
+    for (let i = 0; i < 2; i++) {
+      timeSpan.innerHTML += `<img src="../SVG/clock.svg" alt="nivå ${i + 1}">`;
+    }
 
     distanceFilter.value = "6";
 
@@ -409,6 +416,7 @@ export const eventFiltering = () => { //denna funkar inte riktigt, hände inget 
     }
 
     timeFilter.value = "0";
+    timeSpan.innerHTML = "";
     timeSpan.textContent = `${timeArray[0]}`;
 
     distanceFilter.value = "100";
