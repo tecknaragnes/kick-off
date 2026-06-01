@@ -191,7 +191,7 @@ async function renderSimilarActivities(SimilarList) {
 
         const activityCard = document.createElement("a");
         activityCard.classList.add("activity-card");
-        activityCard.href = `HTML/details.html?id=${activity.id}`;
+        activityCard.href = `../HTML/details.html?id=${activity.id}`;
 
         const imageUrl = await getImageForActivity(activity, false);
         let rating = Number.parseFloat(activity.rating).toFixed(1);
@@ -213,7 +213,7 @@ async function renderSimilarActivities(SimilarList) {
             </div>
             <div class="act-symbols">
                 <div class="icon act-card"></div>
-                <a href="HTML/details.html?id=${activity.id}">Läs mer</a>
+                <a href="../HTML/details.html?id=${activity.id}">Läs mer</a>
             </div>
         `;
 
