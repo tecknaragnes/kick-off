@@ -643,6 +643,7 @@ body[data-page="favoritespage"] main {
 }
 
 #quiz button {
+    font-size: medium;
     color: #000;
     background-color: var(--accentColor2);
     text-decoration: none;
@@ -658,6 +659,21 @@ body[data-page="favoritespage"] main {
 
 #quiz+.results h2 {
     margin-left: 0.5em;
+}
+
+#random-div {
+    padding: 0.5em;
+}
+
+#random-div button {
+    font-size: medium;
+    color: #000;
+    background-color: var(--accentColor2);
+    text-decoration: none;
+    font-family: "Federo", Roboto, sans-serif;
+    padding: 0.5em;
+    border-radius: var(--roundCornersBtn);
+    box-shadow: var(--shading2)
 }
 
 
@@ -686,10 +702,11 @@ footer {
     main {
         display: grid;
         grid-template-columns: auto 600px auto;
-        grid-template-rows: min-content minmax(1em auto);
+        grid-template-rows: min-content minmax(1em auto) min-content;
         grid-template-areas:
             ". filter ."
-            ". results .";
+            ". results ."
+            ". extra .";
     }
 
     #categories,
@@ -703,6 +720,10 @@ footer {
     .results,
     .details-grid-left {
         grid-area: results;
+    }
+
+    #random-div {
+        grid-area: extra;
     }
 
     body[data-page="favoritespage"] main {
@@ -732,7 +753,7 @@ footer {
     main {
         display: grid;
         grid-template-columns: auto minmax(400px, 600px) 1em minmax(500px, 600px) auto;
-        grid-template-rows: auto;
+        grid-template-rows: auto auto;
         grid-template-areas:
             ". results . filter .";
     }
@@ -743,8 +764,13 @@ footer {
     }
 
     .details-grid-left,
-    #quiz+.results {
+    #quiz+.results,
+    #random-div {
         grid-area: filter;
+    }
+
+    #random-div {
+        margin-top: auto;
     }
 
     #filters,
