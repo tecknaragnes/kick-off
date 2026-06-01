@@ -85,14 +85,26 @@ function toggleFav(activity) {
     }
 }
 
+function getIconPath(iconName) {
+    let iconPath = "SVG/" + iconName;
+
+    if (window.location.pathname.toLowerCase().includes("/html/")) {
+        iconPath = "../SVG/" + iconName;
+    }
+
+    return iconPath;
+}
+
+
+
 
 export function listenToFavoriteClick(favoriteButton, activity) {
     if (isActivityFavorite((activity))) {
         favoriteButton.classList.add("favorite-active");
-        favoriteButton.innerHTML = `<img src="../SVG/save.svg" alt="Ta bort från favoriter">`;
+        favoriteButton.innerHTML = `<img src="${getIconPath("save.svg")}" alt="Ta bort från favoriter">`;
     } else {
         favoriteButton.classList.remove("favorite-active");
-        favoriteButton.innerHTML = `<img src="../SVG/empty-save.svg" alt="Spara aktivitet">`;
+        favoriteButton.innerHTML = `<img src="${getIconPath("empty-save.svg")}" alt="Spara aktivitet">`;
     }
 
     favoriteButton.addEventListener("click", (event) => {
@@ -102,10 +114,10 @@ export function listenToFavoriteClick(favoriteButton, activity) {
 
         if (isActivityFavorite(activity)) {
             favoriteButton.classList.add("favorite-active");
-            favoriteButton.innerHTML = `<img src="../SVG/save.svg" alt="Ta bort från favoriter">`;
+            favoriteButton.innerHTML = `<img src="${getIconPath("save.svg")}" alt="Ta bort från favoriter">`;
         } else {
             favoriteButton.classList.remove("favorite-active");
-            favoriteButton.innerHTML = `<img src="../SVG/empty-save.svg" alt="Spara aktivitet">`;
+            favoriteButton.innerHTML = `<img src="${getIconPath("empty-save.svg")}" alt="Spara aktivitet">`;
         }
     })
 
